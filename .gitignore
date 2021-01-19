@@ -1,0 +1,15 @@
+# Object and archive files
+*.[ao]
+
+# Executables
+a.out
+cub3D
+
+# Debug files
+a.out.dSYM/
+
+# vim temporary files
+*.swp
+
+# Desktop Services Store
+.DS_Store
