@@ -13,3 +13,7 @@ a.out.dSYM/
 
 # Desktop Services Store
 .DS_Store
+
+# Test
+test/
+cub3D_map_tester/

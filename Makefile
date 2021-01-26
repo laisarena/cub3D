@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/01/19 15:36:26 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/01/21 19:46:44 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,11 @@ OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 FLAGS = -Wall -Wextra -Werror
 
 .c.o:
-	gcc $(FLAGS) -I$(PATH_INCLUDE) -c $< -o ${<:.c=.o}
+	gcc $(FLAGS) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -c $< -o ${<:.c=.o}
 
 $(NAME): $(OBJS)
 	make -C $(PATH_LIBFT)
-	gcc $(FLAGC) $(OBJS) -L$(PATH_LIBFT) -lft -o $(NAME)
+	gcc $(FLAGC) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -o $(NAME)
 
 all:	$(NAME)
 
