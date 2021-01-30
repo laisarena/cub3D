@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/01/21 19:46:44 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/01/29 18:55:20 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ PATH_LIBFT = ./libft/
 PATH_SRCS = ./srcs/
 
 SRCS = main.c\
+	   validate_arguments.c\
+	   get_next_line.c\
+	   get_next_line_utils.c\
 
 OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 
