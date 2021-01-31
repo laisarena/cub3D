@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:05:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/01/29 18:45:51 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/01/31 19:20:51 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ void		validate_arguments(int argc, char **argv)
 	if (argc == 3)
 		verify_save_argument(argv[2]);
 }
-

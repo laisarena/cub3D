@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/01/31 16:21:38 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/01/31 17:56:09 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,7 @@ typedef struct
 void				validate_arguments(int argc, char **argv);
 void				ft_error(char *message);
 void				initialize(t_scene_description *s_scene_description);
+void				take_scene_description_parameters(
+						char *scene_description_file,
+						t_scene_description *s_scene_description);
 #endif

@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/01/31 16:22:20 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/01/31 17:53:50 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ PATH_SRCS = ./srcs/
 SRCS = main.c\
 	   validate_arguments.c\
 	   initialize.c\
+	   validate_scene_description.c\
 	   get_next_line.c\
 	   get_next_line_utils.c\
 
