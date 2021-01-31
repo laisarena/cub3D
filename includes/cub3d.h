@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/01/29 19:07:03 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/01/31 16:21:38 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ typedef struct
 	t_texture		sprite;
 	t_color			floor;
 	t_color			ceilling;
-}					t_screne_description;
+}					t_scene_description;
 
 void				validate_arguments(int argc, char **argv);
 void				ft_error(char *message);
-
+void				initialize(t_scene_description *s_scene_description);
 #endif
