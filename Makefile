@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/01/31 17:53:50 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/01/31 21:48:39 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ FLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(OBJS)
 	make -C $(PATH_LIBFT)
-	gcc $(FLAGC) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -o $(NAME)
+	gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -o $(NAME)
 
 all:	$(NAME)
 
@@ -50,6 +50,8 @@ fclean: clean
 
 re: fclean all
 
+sani: $(NAME)
+	gcc -g3 -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -o $(NAME)
 
 .PHONY: all clean fclean re
 

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/01/31 17:56:09 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/01/31 21:36:46 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct
 
 typedef struct
 {
+	unsigned int	counter;
 	t_resolution	resolution;
 	t_texture		north;
 	t_texture		south;
