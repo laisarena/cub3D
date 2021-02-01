@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/01/31 19:22:54 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/01/31 21:05:06 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_validate_number(char *string, unsigned int *parameter)
 	return (0);
 }
 
-static int	resolution(char **split_line, t_resolution *s_resolution)
+static int	ft_resolution(char **split_line, t_resolution *s_resolution)
 {
 	if (ft_validate_number(split_line[1], &s_resolution->x))
 		ft_error("Misconfiguration on resolution x render size\n");
@@ -40,11 +40,45 @@ static int	resolution(char **split_line, t_resolution *s_resolution)
 	return (0);
 }
 
+static int	ft_validate_range(unsigned int color)
+{
+	if (color < 0 && color > 255)
+		return (-1);
+	return (0);
+}
+
+static int	ft_color(char **split_line, t_color *s_color)
+{
+	char	**split_color;
+
+	
+	if (split_line[2])
+		ft_error("Misconfiguration on color\n");
+	split_color = ft_split(split_line[1], ',');
+	if (split_color)
+	{
+		if (ft_validate_number(split_color[0], &s_color->r))
+			ft_error("Misconfiguration on color\n");
+		if (ft_validate_number(split_color[1], &s_color->g))
+			ft_error("Misconfiguration on color\n");
+		if (ft_validate_number(split_color[2], &s_color->b))
+			ft_error("Misconfiguration on color\n");
+		if (split_color[3])
+			ft_error("Misconfiguration on color\n");
+	}
+	if (ft_validate_range(s_color->r) ||
+			ft_validate_range(s_color->g) ||
+			ft_validate_range(s_color->b))
+		ft_error("Misconfiguration on color\n");
+	s_color->identifier = 1;
+	return (0);
+}
+
 static void	validate(char **split_line,
 						t_scene_description *s_scene_description)
 {
 	if (!ft_strncmp(split_line[0], "R", 2))
-		resolution(split_line, &s_scene_description->resolution);
+		ft_resolution(split_line, &s_scene_description->resolution);
 	else if (!ft_strncmp(split_line[0], "NO", 3))
 		printf("texture\n");
 	else if (!ft_strncmp(split_line[0], "SO", 3))
@@ -56,9 +90,9 @@ static void	validate(char **split_line,
 	else if (!ft_strncmp(split_line[0], "S", 2))
 		printf("texture\n");
 	else if (!ft_strncmp(split_line[0], "F", 2))
-		printf("color\n");
+		ft_color(split_line, &s_scene_description->floor);
 	else if (!ft_strncmp(split_line[0], "C", 2))
-		printf("color\n");
+		ft_color(split_line, &s_scene_description->ceilling);
 }
 
 static void	identify_line(char *line, t_scene_description *s_scene_description)
