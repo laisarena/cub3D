@@ -88,7 +88,7 @@ static t_list	*analize_rest(char **rest, t_list *buffer_list, t_aux *aux)
 
 int				get_next_line(int fd, char **line)
 {
-	static char	*rest[OPEN_MAX];
+	static char	*rest[_SC_OPEN_MAX];
 	t_list		*buffer_list;
 	t_aux		aux;
 

@@ -74,7 +74,7 @@ static int	ft_texture(char **split_line, t_texture *s_texture,
 	return (0);
 }
 
-static int	ft_validate_range(unsigned int color)
+static int	ft_validate_range(int color)
 {
 	if (color < 0 && color > 255)
 		return (-1);
