@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/01/31 21:36:46 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/02/03 22:24:11 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ typedef struct
 	t_color			ceilling;
 }					t_scene_description;
 
-void				validate_arguments(int argc, char **argv);
+void				ft_validate_arguments(int argc, char **argv);
 void				ft_error(char *message);
-void				initialize(t_scene_description *s_scene_description);
-void				take_scene_description_parameters(
+void				ft_initialize(t_scene_description *s_scene_description);
+void				ft_scene_description_parameters(
 						char *scene_description_file,
 						t_scene_description *s_scene_description);
 #endif

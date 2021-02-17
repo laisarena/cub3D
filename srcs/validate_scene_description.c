@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/02/03 21:47:59 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/02/03 23:13:49 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ static void	validate(char **split_line,
 									&s_scene_description->counter);
 }
 
-static void	identify_line(char *line, t_scene_description *s_scene_description)
+static void	ft_identify_line(char *line, t_scene_description *s_scene_description)
 {
 	char	**split_line;
 
@@ -146,7 +146,27 @@ static void	identify_line(char *line, t_scene_description *s_scene_description)
 		validate(split_line, s_scene_description);
 }
 
-void		take_scene_description_parameters(char *scene_description_file,
+void		ft_check_parameters(t_scene_description *s_scene_description)
+{
+	if (s_scene_description->resolution.identifier == 0)
+		ft_error("Missing R parameter");
+	if (s_scene_description->north.identifier == 0)
+		ft_error("Missing NO parameter");
+	if (s_scene_description->south.identifier == 0)
+		ft_error("Missing SO Parameter");
+	if (s_scene_description->west.identifier == 0)
+		ft_error("Missing WE parameter");
+	if (s_scene_description->east.identifier == 0)
+		ft_error("Missing EA parameter");
+	if (s_scene_description->sprite.identifier == 0)
+		ft_error("Missing S parameter");
+	if (s_scene_description->floor.identifier == 0)
+		ft_error("Missing F parameter");
+	if (s_scene_description->ceilling.identifier == 0)
+		ft_error("Missing C arameter");
+}
+
+void		ft_scene_description_parameters(char *scene_description_file,
 									t_scene_description *s_scene_description)
 {
 	int		fd;
@@ -154,15 +174,12 @@ void		take_scene_description_parameters(char *scene_description_file,
 
 	fd = open(scene_description_file, O_RDONLY);
 	line = NULL;
-	while (get_next_line(fd, &line) > 0)
-	{
-		if (line && *line && *line != '\n')
-		{
-			identify_line(line, s_scene_description);
-			if (!(ft_is_map_line(line) && s_scene_description->counter == 8))
-				ft_error("Wrong number of parameters");
-		}
-	}
+	while (get_next_line(fd, &line) > 0 && s_scene_description->counter <= 8)
+		if (line && *line)
+			ft_identify_line(line, s_scene_description);
+	ft_check_parameters(s_scene_description);
+	while (get_next_line(fd, &line))
+		ft_is_map_line(line);
 	close(fd);
 	free(line);
 }
