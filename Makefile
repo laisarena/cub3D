@@ -18,6 +18,8 @@ PATH_INCLUDE = ./includes/
 
 PATH_LIBFT = ./libft/
 
+PATH_MLX = ./minilibx-linux/
+
 PATH_SRCS = ./srcs/
 
 SRCS = main.c\
@@ -26,17 +28,19 @@ SRCS = main.c\
 	   validate_scene_description.c\
 	   get_next_line.c\
 	   get_next_line_utils.c\
+	   minilibx.c\
 
 OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 
 FLAGS = -Wall -Wextra -Werror
+FLAGS_MLX = -lm -lX11 -lXext
 
 .c.o:
-	gcc $(FLAGS) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -c $< -o ${<:.c=.o}
+	gcc $(FLAGS) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -I$(PATH_MLX) -c $< -o ${<:.c=.o}
 
 $(NAME): $(OBJS)
 	make -C $(PATH_LIBFT)
-	gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -o $(NAME)
+	gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 
 all:	$(NAME)
 

@@ -33,5 +33,6 @@ int			main(int argc, char **argv)
 	ft_validate_arguments(argc, argv);
 	ft_initialize(&s_scene_description);
 	ft_scene_description_parameters(argv[1], &s_scene_description);
+	ft_minilibx();
 	return (0);
 }

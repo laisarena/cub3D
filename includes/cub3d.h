@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
 # include "get_next_line.h"
 # include <errno.h>
 # include <stdio.h>
@@ -60,4 +61,5 @@ void				ft_initialize(t_scene_description *s_scene_description);
 void				ft_scene_description_parameters(
 						char *scene_description_file,
 						t_scene_description *s_scene_description);
+void	ft_minilibx();
 #endif
