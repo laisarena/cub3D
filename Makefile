@@ -40,7 +40,8 @@ FLAGS_MLX = -lm -lX11 -lXext
 
 $(NAME): $(OBJS)
 	make -C $(PATH_LIBFT)
-	gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
+	gcc  -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
+	#gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 
 all:	$(NAME)
 

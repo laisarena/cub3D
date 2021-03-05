@@ -32,17 +32,31 @@ void	put_pixel_on_image(t_image_data *image, int x, int y, int color)
 	*(unsigned int*)address = color;
 }
 
-void	ft_minilibx()
-{
+typedef struct	s_vars {	
 	void		*mlx;
 	void		*window;
 	t_image_data	image;
+}		t_vars;
 
-	mlx = NULL;
-	window = NULL;
-	ft_initialize_window(&mlx, &window, &image);
-	put_pixel_on_image(&image, 100, 100, 0x00FF0000);	
-	mlx_put_image_to_window(mlx, window, image.image, 0, 0);
+int	ft_close(int keycode, t_vars *vars)
+{
+	(void)keycode;
+	mlx_destroy_image(vars->mlx, vars->image.image);
+	mlx_destroy_window(vars->mlx, vars->window);
+	free(vars->mlx);
+	exit (0);
+	return (1);
+}
 
-	mlx_loop(mlx);
+void	ft_minilibx()
+{
+	t_vars		vars;
+
+	vars.mlx = NULL;
+	vars.window = NULL;
+	ft_initialize_window(&vars.mlx, &vars.window, &vars.image);
+	put_pixel_on_image(&vars.image, 100, 100, 0x00FF0000);	
+	mlx_put_image_to_window(vars.mlx, vars.window, vars.image.image, 0, 0);
+	mlx_hook(vars.window, 2, 1L<<0, ft_close, &vars);
+	mlx_loop(vars.mlx);
 }
