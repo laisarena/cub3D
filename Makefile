@@ -36,11 +36,12 @@ FLAGS = -Wall -Wextra -Werror
 FLAGS_MLX = -lm -lX11 -lXext
 
 .c.o:
-	gcc $(FLAGS) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -I$(PATH_MLX) -c $< -o ${<:.c=.o}
+	gcc -g $(FLAGS) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -I$(PATH_MLX) -c $< -o ${<:.c=.o}
 
 $(NAME): $(OBJS)
 	make -C $(PATH_LIBFT)
-	gcc  -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
+	#gcc  -g -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
+	gcc  -g  $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 	#gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 
 all:	$(NAME)

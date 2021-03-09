@@ -29,13 +29,13 @@ int			main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	/*t_scene_description	s_scene_description;
+	t_scene_description	s_scene_description;
 
 	errno = 0;
 	ft_validate_arguments(argc, argv);
 	ft_initialize(&s_scene_description);
 	ft_scene_description_parameters(argv[1], &s_scene_description);
-	*/
+	
 	ft_minilibx();
 	return (0);
 }
