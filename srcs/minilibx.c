@@ -8,6 +8,14 @@ typedef struct	s_image_data {
 	int	endian;
 }		t_image_data;
 
+typedef struct	s_vars {	
+	void		*mlx;
+	void		*window;
+	t_image_data	image;
+	int		x;
+	int		y;
+}		t_vars;
+
 int	ft_initialize_window(void **mlx, void **window, t_image_data *image)
 {
 	if (!(*mlx = mlx_init()))
@@ -20,7 +28,7 @@ int	ft_initialize_window(void **mlx, void **window, t_image_data *image)
 	return 1;
 }
 
-void	put_pixel_on_image(t_image_data *image, int x, int y, int color)
+void	ft_put_pixel(t_image_data *image, int x, int y, int color)
 {
 	int	offset;
 	int	bytes_per_pixel;
@@ -32,11 +40,19 @@ void	put_pixel_on_image(t_image_data *image, int x, int y, int color)
 	*(unsigned int*)address = color;
 }
 
-typedef struct	s_vars {	
-	void		*mlx;
-	void		*window;
-	t_image_data	image;
-}		t_vars;
+void	rectangle_on_image(t_image_data *image, int x, int y, int width, int heigth, int color)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < heigth)
+	{
+		j = -1;
+		while (++j < width)
+			ft_put_pixel(image, x + j, y + i, color);
+	}
+}
 
 
 int	ft_x(t_vars *vars)
@@ -56,9 +72,7 @@ int	ft_close(int keycode, t_vars *vars)
 
 void	ft_render(t_vars *vars)
 {
-	put_pixel_on_image(&vars->image, 100, 100, 0x00FF0000);	
-//	rectangle_on_image(&vars->image, 100, 100, 30, 50,  0x00FF0000);	
-	
+	rectangle_on_image(&vars->image, 100, 100, 30, 50,  0x00FF0000);	
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
 
@@ -68,16 +82,35 @@ void	ft_hooks(t_vars *vars)
 	mlx_hook(vars->window, 33, 0, ft_x, vars);
 }
 
+void	ft_setup(t_vars *vars)
+{
+	vars->x = 50;
+	vars->y = 50;
+}
+
+void	ft_update(t_vars *vars)
+{
+	(vars->x)++;
+	(vars->y)++;
+}
+
+void	ft_loop(t_vars *vars)
+{
+	if (ft_initialize_window(&vars->mlx, &vars->window, &vars->image))
+	{
+		ft_hooks(vars);
+		ft_render(vars);
+		ft_update(vars);
+	}
+}
+
 void	ft_minilibx()
 {
 	t_vars		vars;
 
 	vars.mlx = NULL;
 	vars.window = NULL;
-	if (ft_initialize_window(&vars.mlx, &vars.window, &vars.image))
-	{
-		ft_render(&vars);
-		ft_hooks(&vars);
-		mlx_loop(vars.mlx);
-	}
+	ft_setup(&vars);
+	ft_loop(&vars);
+	mlx_loop(vars.mlx);
 }
