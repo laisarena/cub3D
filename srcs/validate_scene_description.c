@@ -22,10 +22,13 @@ static int ft_is_map_digit(char c)
 
 static int	ft_is_map_line(char *string)
 {
-	while (*string)
-		if (!ft_is_map_digit(*string++))
+	int cols;
+
+	cols = 0;
+	while (string[cols])
+		if (!ft_is_map_digit(string[cols++]))
 			return (0);
-	return (1);
+	return (cols);
 }
 
 static int	ft_is_string_number(char *string)
@@ -48,11 +51,20 @@ static int	ft_resolution(char **split_line, t_resolution *s_resolution,
 							unsigned int *counter)
 {
 	if (ft_validate_number(split_line[1], &s_resolution->x))
+	{
+		free(split_line);
 		ft_error("Misconfiguration on resolution x render size\n");
+	}
 	if (ft_validate_number(split_line[2], &s_resolution->y))
+	{
+		free(split_line);
 		ft_error("Misconfiguration on resolution y render size\n");
+	}
 	if (split_line[3])
+	{
+		free(split_line);
 		ft_error("Misconfiguration on resolution\n");
+	}
 	s_resolution->identifier = 1;
 	counter++;
 	return (0);
@@ -64,9 +76,15 @@ static int	ft_texture(char **split_line, t_texture *s_texture,
 	int fd;
 
 	if (split_line[2])
+	{
+		free(split_line);
 		ft_error("Misconfiguration on texture\n");
+	}
 	if ((fd = open(split_line[1], O_RDONLY)) == -1)
+	{
+		free(split_line);
 		ft_error(NULL);
+	}
 	else
 		close(fd);
 	s_texture->identifier = 1;
@@ -86,25 +104,48 @@ static int	ft_color(char **split_line, t_color *s_color, unsigned int *counter)
 	char	**split_color;
 
 	if (split_line[2])
+	{
+		free(split_line);
 		ft_error("Misconfiguration on color\n");
+	}
 	split_color = ft_split(split_line[1], ',');
 	if (split_color)
 	{
 		if (ft_validate_number(split_color[0], &s_color->r))
+		{
+			free(split_line);
+			free(split_color);
 			ft_error("Misconfiguration on color\n");
+		}
 		if (ft_validate_number(split_color[1], &s_color->g))
+		{
+			free(split_line);
+			free(split_color);
 			ft_error("Misconfiguration on color\n");
+		}
 		if (ft_validate_number(split_color[2], &s_color->b))
+		{
+			free(split_line);
+			free(split_color);
 			ft_error("Misconfiguration on color\n");
-		if (split_color[3])
+		}
+	if (split_color[3])
+		{
+			free(split_line);
+			free(split_color);
 			ft_error("Misconfiguration on color\n");
+		}
 	}
 	if (ft_validate_range(s_color->r) ||
 			ft_validate_range(s_color->g) ||
 			ft_validate_range(s_color->b))
+	{
+		free(split_line);
 		ft_error("Misconfiguration on color\n");
+	}
 	s_color->identifier = 1;
 	counter++;
+	free(split_color);
 	return (0);
 }
 
@@ -144,42 +185,55 @@ static void	ft_identify_line(char *line, t_scene_description *s_scene_descriptio
 	split_line = ft_split(line, ' ');
 	if (split_line)
 		validate(split_line, s_scene_description);
-}
-
-void		ft_check_parameters(t_scene_description *s_scene_description)
-{
-	if (s_scene_description->resolution.identifier == 0)
-		ft_error("Missing R parameter");
-	if (s_scene_description->north.identifier == 0)
-		ft_error("Missing NO parameter");
-	if (s_scene_description->south.identifier == 0)
-		ft_error("Missing SO Parameter");
-	if (s_scene_description->west.identifier == 0)
-		ft_error("Missing WE parameter");
-	if (s_scene_description->east.identifier == 0)
-		ft_error("Missing EA parameter");
-	if (s_scene_description->sprite.identifier == 0)
-		ft_error("Missing S parameter");
-	if (s_scene_description->floor.identifier == 0)
-		ft_error("Missing F parameter");
-	if (s_scene_description->ceilling.identifier == 0)
-		ft_error("Missing C arameter");
+	free(split_line);
 }
 
 void		ft_scene_description_parameters(char *scene_description_file,
 									t_scene_description *s_scene_description)
 {
-	int		fd;
-	char	*line;
+	int				fd;
+	unsigned int	column;
+	unsigned int	rows;
+	char			*line;
 
 	fd = open(scene_description_file, O_RDONLY);
 	line = NULL;
 	while (get_next_line(fd, &line) > 0 && s_scene_description->counter <= 8)
 		if (line && *line)
 			ft_identify_line(line, s_scene_description);
-	ft_check_parameters(s_scene_description);
+	rows = 0;
 	while (get_next_line(fd, &line))
-		ft_is_map_line(line);
+	{
+		if (!(column = ft_is_map_line(line)))
+		{
+			free(line);
+			ft_error("Invalid map grid\n");
+		}
+		if (column > s_scene_description->map.cols)
+			s_scene_description->map.cols = column;
+		rows++;
+	}
 	close(fd);
 	free(line);
 }
+
+void		ft_check_parameters(t_scene_description *s_scene_description)
+{
+	if (s_scene_description->resolution.identifier == 0)
+		ft_error("Missing R parameter\n");
+	if (s_scene_description->north.identifier == 0)
+		ft_error("Missing NO parameter\n");
+	if (s_scene_description->south.identifier == 0)
+		ft_error("Missing SO Parameter\n");
+	if (s_scene_description->west.identifier == 0)
+		ft_error("Missing WE parameter\n");
+	if (s_scene_description->east.identifier == 0)
+		ft_error("Missing EA parameter\n");
+	if (s_scene_description->sprite.identifier == 0)
+		ft_error("Missing S parameter\n");
+	if (s_scene_description->floor.identifier == 0)
+		ft_error("Missing F parameter\n");
+	if (s_scene_description->ceilling.identifier == 0)
+		ft_error("Missing C parameter\n");
+}
+

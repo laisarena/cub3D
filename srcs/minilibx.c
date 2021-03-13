@@ -1,5 +1,18 @@
 #include "cub3d.h"
 
+#define KEYPRESS	2
+#define PI		3.14159265
+#define TWO_PI		6.28318530
+#define TILE_SIZE	64
+#define MAP_ROW		13
+#define MAP_COL		20
+#define SIZE		500
+#define FOV_ANGLE	(60 * (PI / 180))
+#define W		119		
+#define A		97
+#define S		115
+#define D		100
+
 typedef struct	s_image_data {
 	void	*image;
 	char	*address;
@@ -16,13 +29,16 @@ typedef struct	s_vars {
 	int		y;
 }		t_vars;
 
+void	ft_hooks(t_vars *vars);
+void	ft_render(t_vars *vars);
+
 int	ft_initialize_window(void **mlx, void **window, t_image_data *image)
 {
 	if (!(*mlx = mlx_init()))
 		ft_error("Error initializing minilibx");
-	if (!(*window = mlx_new_window(*mlx, 500, 500, "cub3D")))
+	if (!(*window = mlx_new_window(*mlx, SIZE, SIZE, "cub3D")))
 		ft_error("Error creating window");
-	if (!(image->image = mlx_new_image(*mlx, 500, 500)))
+	if (!(image->image = mlx_new_image(*mlx, SIZE, SIZE)))
 		ft_error("Error creating image");
 	image->address = mlx_get_data_addr(image->image, &image->bits_per_pixel, &image->line_length, &image->endian);
 	return 1;
@@ -40,7 +56,7 @@ void	ft_put_pixel(t_image_data *image, int x, int y, int color)
 	*(unsigned int*)address = color;
 }
 
-void	rectangle_on_image(t_image_data *image, int x, int y, int width, int heigth, int color)
+void	rectangle_on_image(t_vars *vars, int width, int heigth, int color)
 {
 	int i;
 	int j;
@@ -50,12 +66,12 @@ void	rectangle_on_image(t_image_data *image, int x, int y, int width, int heigth
 	{
 		j = -1;
 		while (++j < width)
-			ft_put_pixel(image, x + j, y + i, color);
+			ft_put_pixel(&vars->image, vars->x + j, vars->y + i, color);
 	}
 }
 
 
-int	ft_x(t_vars *vars)
+int	ft_close(t_vars *vars)
 {
 	mlx_destroy_image(vars->mlx, vars->image.image);
 	mlx_destroy_window(vars->mlx, vars->window);
@@ -63,54 +79,74 @@ int	ft_x(t_vars *vars)
 	exit (0);
 }
 
-int	ft_close(int keycode, t_vars *vars)
+void	ft_update(t_vars *vars)
+{
+	vars->x += 1;
+	vars->y += 1;
+
+}
+
+int	ft_y(t_vars *vars)
+{
+	ft_render(vars);
+	ft_update(vars);
+	return(0);
+}
+
+int	ft_key_press(int keycode, t_vars *vars)
 {
 	if (keycode == 0xFF1B)
-		ft_x(vars);
+		ft_close(vars);
+	if (keycode == W)
+		vars->y -= 1;
+	if (keycode == A)
+		vars->x -= 1;
+	if (keycode == S)
+		vars->y += 1;
+	if (keycode == D)
+		vars->x += 1;
+	//ft_update(vars);
+	ft_render(vars);
 	return (1);
 }
 
-void	ft_render(t_vars *vars)
+void	clear_image(t_vars *vars)
 {
-	rectangle_on_image(&vars->image, 100, 100, 30, 50,  0x00FF0000);	
-	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
+	int x;
+	int y;
+
+	y = -1;
+	while (++y < SIZE)
+	{
+		x = -1;
+		while (++x < SIZE)
+			ft_put_pixel(&vars->image, x, y, 0x00000000);
+	}	
 }
 
-void	ft_hooks(t_vars *vars)
-{
-	mlx_hook(vars->window, 2, 1L<<0, ft_close, vars);
-	mlx_hook(vars->window, 33, 0, ft_x, vars);
+void	ft_render(t_vars *vars)
+{	
+	clear_image(vars);
+	rectangle_on_image(vars, 30, 50,  0x00FF0000);	
+	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
 
 void	ft_setup(t_vars *vars)
 {
+	if (!(ft_initialize_window(&vars->mlx, &vars->window, &vars->image)))
+		ft_close(vars);
 	vars->x = 50;
 	vars->y = 50;
 }
 
-void	ft_update(t_vars *vars)
-{
-	(vars->x)++;
-	(vars->y)++;
-}
-
-void	ft_loop(t_vars *vars)
-{
-	if (ft_initialize_window(&vars->mlx, &vars->window, &vars->image))
-	{
-		ft_hooks(vars);
-		ft_render(vars);
-		ft_update(vars);
-	}
-}
-
-void	ft_minilibx()
+void	ft_minilibx(t_scene_description *scene_description)
 {
 	t_vars		vars;
 
-	vars.mlx = NULL;
-	vars.window = NULL;
+	(void)scene_description;
 	ft_setup(&vars);
-	ft_loop(&vars);
+	ft_render(&vars);
+	mlx_hook(vars.window, KEYPRESS, 1L<<0, ft_key_press, &vars);
+	mlx_hook(vars.window, 33, 0, ft_close, &vars);
 	mlx_loop(vars.mlx);
 }

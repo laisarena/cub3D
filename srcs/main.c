@@ -14,7 +14,7 @@
 
 void		ft_error(char *message)
 {
-	int errnum;
+	int		errnum;
 
 	errnum = errno;
 	ft_putstr_fd("Error\n", 1);
@@ -35,7 +35,7 @@ int			main(int argc, char **argv)
 	ft_validate_arguments(argc, argv);
 	ft_initialize(&s_scene_description);
 	ft_scene_description_parameters(argv[1], &s_scene_description);
-	
-	ft_minilibx();
+	ft_check_parameters(&s_scene_description);
+	ft_minilibx(&s_scene_description);
 	return (0);
 }

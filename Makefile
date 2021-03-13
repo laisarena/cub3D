@@ -57,7 +57,7 @@ fclean: clean
 re: fclean all
 
 sani: $(NAME)
-	gcc -g3 -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -o $(NAME)
+	gcc  -g -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 
 .PHONY: all clean fclean re
 

@@ -44,6 +44,13 @@ typedef struct
 
 typedef struct
 {
+	int	**matrix;
+	unsigned int	rows;
+	unsigned int	cols;
+}					t_map;
+
+typedef struct
+{
 	unsigned int	counter;
 	t_resolution	resolution;
 	t_texture		north;
@@ -53,6 +60,7 @@ typedef struct
 	t_texture		sprite;
 	t_color			floor;
 	t_color			ceilling;
+	t_map			map;
 }					t_scene_description;
 
 void				ft_validate_arguments(int argc, char **argv);
@@ -61,5 +69,6 @@ void				ft_initialize(t_scene_description *s_scene_description);
 void				ft_scene_description_parameters(
 						char *scene_description_file,
 						t_scene_description *s_scene_description);
-void	ft_minilibx();
+void				ft_minilibx(t_scene_description *s_scene_description);
+void				ft_check_parameters(t_scene_description *s_scene_description);
 #endif
