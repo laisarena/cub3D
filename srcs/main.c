@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/02/03 22:17:49 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/03/16 02:15:04 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ void		ft_error(char *message)
 
 int			main(int argc, char **argv)
 {
+	t_scene_description	scene_description;
+
 	(void)argc;
 	(void)argv;
-	t_scene_description	s_scene_description;
-
 	errno = 0;
 	ft_validate_arguments(argc, argv);
-	ft_initialize(&s_scene_description);
-	ft_scene_description_parameters(argv[1], &s_scene_description);
-	ft_check_parameters(&s_scene_description);
-	ft_minilibx(&s_scene_description);
+	ft_initialize(&scene_description);
+	scene_description.file = argv[1];
+	ft_scene_description_parameters(&scene_description);
+	ft_check_parameters(&scene_description);
+	ft_minilibx(&scene_description);
 	return (0);
 }

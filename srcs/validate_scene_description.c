@@ -6,15 +6,15 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/02/03 23:13:49 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/03/16 02:15:29 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int ft_is_map_digit(char c)
+static int	ft_is_map_digit(char c)
 {
-	if (c == '0'  || c == '1' || c == '2' ||
+	if (c == '0' || c == '1' || c == '2' ||
 			c == 'N' || c == 'S' || c == 'E' ||c == 'W')
 		return (1);
 	return (0);
@@ -129,7 +129,7 @@ static int	ft_color(char **split_line, t_color *s_color, unsigned int *counter)
 			free(split_color);
 			ft_error("Misconfiguration on color\n");
 		}
-	if (split_color[3])
+		if (split_color[3])
 		{
 			free(split_line);
 			free(split_color);
@@ -178,7 +178,8 @@ static void	validate(char **split_line,
 									&s_scene_description->counter);
 }
 
-static void	ft_identify_line(char *line, t_scene_description *s_scene_description)
+static void	ft_identify_line(char *line,
+							t_scene_description *s_scene_description)
 {
 	char	**split_line;
 
@@ -188,19 +189,18 @@ static void	ft_identify_line(char *line, t_scene_description *s_scene_descriptio
 	free(split_line);
 }
 
-void		ft_scene_description_parameters(char *scene_description_file,
-									t_scene_description *s_scene_description)
+void		ft_scene_description_parameters(t_scene_description *scene_dscp)
 {
 	int				fd;
 	unsigned int	column;
 	unsigned int	rows;
 	char			*line;
 
-	fd = open(scene_description_file, O_RDONLY);
+	fd = open(scene_dscp->file, O_RDONLY);
 	line = NULL;
-	while (get_next_line(fd, &line) > 0 && s_scene_description->counter <= 8)
+	while (get_next_line(fd, &line) > 0 && scene_dscp->counter <= 8)
 		if (line && *line)
-			ft_identify_line(line, s_scene_description);
+			ft_identify_line(line, scene_dscp);
 	rows = 0;
 	while (get_next_line(fd, &line))
 	{
@@ -209,8 +209,8 @@ void		ft_scene_description_parameters(char *scene_description_file,
 			free(line);
 			ft_error("Invalid map grid\n");
 		}
-		if (column > s_scene_description->map.cols)
-			s_scene_description->map.cols = column;
+		if (column > scene_dscp->map.cols)
+			scene_dscp->map.cols = column;
 		rows++;
 	}
 	close(fd);
@@ -236,4 +236,3 @@ void		ft_check_parameters(t_scene_description *s_scene_description)
 	if (s_scene_description->ceilling.identifier == 0)
 		ft_error("Missing C parameter\n");
 }
-
