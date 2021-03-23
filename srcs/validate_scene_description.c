@@ -6,11 +6,26 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/03/16 02:15:29 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/02 21:27:34 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+
+static void	ft_free_split(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		split[i++] = NULL;
+	}
+	free(split);
+	split = NULL;
+}
 
 static int	ft_is_map_digit(char c)
 {
@@ -109,30 +124,30 @@ static int	ft_color(char **split_line, t_vars *vars, t_color *s_color)
 	{
 		if (!(ft_validate_number(split_color[0], &s_color->r)))
 		{
-			free(split_color);
+			ft_free_split(split_color);
 			ft_save_error_message("Misconfiguration on color\n", vars);
 			return (0);
 		}
 		if (!(ft_validate_number(split_color[1], &s_color->g)))
 		{
-			free(split_color);
+			ft_free_split(split_color);
 			ft_save_error_message("Misconfiguration on color\n", vars);
 			return (0);
 		}
 		if (!(ft_validate_number(split_color[2], &s_color->b)))
 		{
-			free(split_color);
+			ft_free_split(split_color);
 			ft_save_error_message("Misconfiguration on color\n", vars);
 			return(0);
 		}
 		if (split_color[3])
 		{
-			free(split_color);
+			ft_free_split(split_color);
 			ft_save_error_message("Misconfiguration on color\n", vars);
 			return(0);
 		}
 	}
-	free(split_color);
+	ft_free_split(split_color);
 	if (ft_validate_range(s_color->r) ||
 			ft_validate_range(s_color->g) ||
 			ft_validate_range(s_color->b))
@@ -142,7 +157,7 @@ static int	ft_color(char **split_line, t_vars *vars, t_color *s_color)
 	}
 	s_color->identifier = 1;
 	vars->scene_description.counter++;
-	return (0);
+	return (1);
 }
 
 static int	validate(char **split_line, t_vars *vars)
@@ -173,32 +188,43 @@ static int	ft_identify_line(char *line,
 	int		ret;
 
 	split_line = ft_split(line, ' ');
+	free(line);
+	line = NULL;
 	if (split_line)
 		ret = validate(split_line, vars);
-	free(split_line);
+	ft_free_split(split_line);
 	return (ret);
 }
 
-int			ft_scene_description_parameters(t_vars *vars)
+int			ft_parameters(int fd, t_vars *vars)
 {
-	int				fd;
+	char	*line;
+	int		ret;
+
+	line = NULL;
+	ret = 1;
+	while (vars->scene_description.counter <= 8 && ret &&
+			get_next_line(fd, &line) > 0)
+	{
+		if (line && *line)
+			ret = ft_identify_line(line, vars);
+		else
+			free(line);
+		line = NULL;
+	}
+	free(line);
+	return (ret);
+}
+
+int			ft_map(int fd, t_vars *vars)
+{
 	unsigned int	column;
 	unsigned int	rows;
 	char			*line;
 	int				ret;
 
-	fd = open(vars->scene_description.file, O_RDONLY);
 	line = NULL;
-	ret = 0;
-	while (get_next_line(fd, &line) > 0 && vars->scene_description.counter <= 8)
-		if (line && *line && ret)
-			ret = ft_identify_line(line, vars);
-	if (!ret)
-	{
-		free(line);
-		return (ret);
-	}
-	
+	ret = 1;
 	rows = 0;
 	while (get_next_line(fd, &line))
 	{
@@ -211,11 +237,27 @@ int			ft_scene_description_parameters(t_vars *vars)
 			vars->scene_description.map.cols = column;
 		rows++;
 	}
-	close(fd);
 	free(line);
-	if (!ret)
-		return (ret);
-	return (1);
+	return (ret);
+}
+
+int			ft_scene_description_parameters(t_vars *vars)
+{
+	int	fd;
+
+	fd = open(vars->scene_description.file, O_RDONLY);
+	if (!(ft_parameters(fd, vars)))
+	{
+		close(fd);
+		return(1);
+	}
+	if (!(ft_map(fd, vars)))
+	{
+		close(fd);
+		return(1);
+	}
+	close(fd);
+	return (0);
 }
 
 void		ft_check_parameters(t_scene_description *s_scene_description)
