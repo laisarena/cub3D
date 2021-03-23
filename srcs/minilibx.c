@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/03/15 21:13:22 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/03/17 23:16:39 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,12 @@ void	ft_setup(t_vars *vars)
 	vars->y = 50;
 }
 
-void	ft_minilibx(t_scene_description *scene_description)
+void	ft_minilibx(t_vars *vars)
 {
-	t_vars		vars;
 
-	(void)scene_description;
-	ft_setup(&vars);
-	ft_render(&vars);
-	mlx_hook(vars.window, KEYPRESS, 1L << 0, ft_key_press, &vars);
-	mlx_hook(vars.window, 33, 0, ft_close, &vars);
-	mlx_loop(vars.mlx);
+	ft_setup(vars);
+	ft_render(vars);
+	mlx_hook(vars->window, KEYPRESS, 1L << 0, ft_key_press, vars);
+	mlx_hook(vars->window, 33, 0, ft_close, vars);
+	mlx_loop(vars->mlx);
 }

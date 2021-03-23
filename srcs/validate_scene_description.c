@@ -42,54 +42,50 @@ static int	ft_is_string_number(char *string)
 static int	ft_validate_number(char *string, unsigned int *parameter)
 {
 	if (!string || !ft_is_string_number(string))
-		return (-1);
+		return (0);
 	*parameter = ft_atoi(string);
-	return (0);
+	return (1);
 }
 
-static int	ft_resolution(char **split_line, t_resolution *s_resolution,
-							unsigned int *counter)
+static int	ft_resolution(char **split_line, t_vars *vars)
 {
-	if (ft_validate_number(split_line[1], &s_resolution->x))
+	if (!(ft_validate_number(split_line[1], &vars->scene_description.resolution.x)))
 	{
-		free(split_line);
-		ft_error("Misconfiguration on resolution x render size\n");
+		ft_save_error_message("Misconfiguration on resolution x render size\n", vars);
+		return (0);
 	}
-	if (ft_validate_number(split_line[2], &s_resolution->y))
+	if (!(ft_validate_number(split_line[2], &vars->scene_description.resolution.y)))
 	{
-		free(split_line);
-		ft_error("Misconfiguration on resolution y render size\n");
+		ft_save_error_message("Misconfiguration on resolution y render size\n", vars);
+		return (0);
 	}
 	if (split_line[3])
 	{
-		free(split_line);
-		ft_error("Misconfiguration on resolution\n");
+		ft_save_error_message("Misconfiguration on resolution\n", vars);
+		return (0);
 	}
-	s_resolution->identifier = 1;
-	counter++;
-	return (0);
+	vars->scene_description.resolution.identifier = 1;
+	vars->scene_description.counter++;
+	return (1);
 }
-
-static int	ft_texture(char **split_line, t_texture *s_texture,
-							unsigned int *counter)
+static int	ft_texture(char **split_line, t_vars *vars, t_texture *s_texture)
 {
 	int fd;
 
 	if (split_line[2])
 	{
-		free(split_line);
-		ft_error("Misconfiguration on texture\n");
+		ft_save_error_message("Misconfiguration on texture\n", vars);
+		return (0);
 	}
 	if ((fd = open(split_line[1], O_RDONLY)) == -1)
 	{
-		free(split_line);
-		ft_error(NULL);
+		ft_save_error_message(NULL, vars);
+		return (0);
 	}
-	else
-		close(fd);
+	close(fd);
 	s_texture->identifier = 1;
-	counter++;
-	return (0);
+	vars->scene_description.counter++;
+	return (1);
 }
 
 static int	ft_validate_range(int color)
@@ -99,122 +95,127 @@ static int	ft_validate_range(int color)
 	return (0);
 }
 
-static int	ft_color(char **split_line, t_color *s_color, unsigned int *counter)
+static int	ft_color(char **split_line, t_vars *vars, t_color *s_color)
 {
 	char	**split_color;
 
 	if (split_line[2])
 	{
-		free(split_line);
-		ft_error("Misconfiguration on color\n");
+		ft_save_error_message("Misconfiguration on color\n", vars);
+		return (0);
 	}
 	split_color = ft_split(split_line[1], ',');
 	if (split_color)
 	{
-		if (ft_validate_number(split_color[0], &s_color->r))
+		if (!(ft_validate_number(split_color[0], &s_color->r)))
 		{
-			free(split_line);
 			free(split_color);
-			ft_error("Misconfiguration on color\n");
+			ft_save_error_message("Misconfiguration on color\n", vars);
+			return (0);
 		}
-		if (ft_validate_number(split_color[1], &s_color->g))
+		if (!(ft_validate_number(split_color[1], &s_color->g)))
 		{
-			free(split_line);
 			free(split_color);
-			ft_error("Misconfiguration on color\n");
+			ft_save_error_message("Misconfiguration on color\n", vars);
+			return (0);
 		}
-		if (ft_validate_number(split_color[2], &s_color->b))
+		if (!(ft_validate_number(split_color[2], &s_color->b)))
 		{
-			free(split_line);
 			free(split_color);
-			ft_error("Misconfiguration on color\n");
+			ft_save_error_message("Misconfiguration on color\n", vars);
+			return(0);
 		}
 		if (split_color[3])
 		{
-			free(split_line);
 			free(split_color);
-			ft_error("Misconfiguration on color\n");
+			ft_save_error_message("Misconfiguration on color\n", vars);
+			return(0);
 		}
 	}
+	free(split_color);
 	if (ft_validate_range(s_color->r) ||
 			ft_validate_range(s_color->g) ||
 			ft_validate_range(s_color->b))
 	{
-		free(split_line);
-		ft_error("Misconfiguration on color\n");
+		ft_save_error_message("Misconfiguration on color\n", vars);
+		return (0);
 	}
 	s_color->identifier = 1;
-	counter++;
-	free(split_color);
+	vars->scene_description.counter++;
 	return (0);
 }
 
-static void	validate(char **split_line,
-						t_scene_description *s_scene_description)
+static int	validate(char **split_line, t_vars *vars)
 {
 	if (!ft_strncmp(split_line[0], "R", 2))
-		ft_resolution(split_line, &s_scene_description->resolution,
-									&s_scene_description->counter);
+		return(ft_resolution(split_line, vars));
 	else if (!ft_strncmp(split_line[0], "NO", 3))
-		ft_texture(split_line, &s_scene_description->north,
-									&s_scene_description->counter);
+		return(ft_texture(split_line, vars, &vars->scene_description.north));
 	else if (!ft_strncmp(split_line[0], "SO", 3))
-		ft_texture(split_line, &s_scene_description->south,
-									&s_scene_description->counter);
+		return(ft_texture(split_line, vars, &vars->scene_description.south));
 	else if (!ft_strncmp(split_line[0], "WE", 3))
-		ft_texture(split_line, &s_scene_description->west,
-									&s_scene_description->counter);
+		return(ft_texture(split_line, vars, &vars->scene_description.west));
 	else if (!ft_strncmp(split_line[0], "EA", 3))
-		ft_texture(split_line, &s_scene_description->east,
-									&s_scene_description->counter);
+		return(ft_texture(split_line, vars, &vars->scene_description.east));
 	else if (!ft_strncmp(split_line[0], "S", 2))
-		ft_texture(split_line, &s_scene_description->sprite,
-									&s_scene_description->counter);
+		return(ft_texture(split_line, vars, &vars->scene_description.sprite));
 	else if (!ft_strncmp(split_line[0], "F", 2))
-		ft_color(split_line, &s_scene_description->floor,
-									&s_scene_description->counter);
+		return(ft_color(split_line, vars, &vars->scene_description.floor));
 	else if (!ft_strncmp(split_line[0], "C", 2))
-		ft_color(split_line, &s_scene_description->ceilling,
-									&s_scene_description->counter);
+		return(ft_color(split_line, vars, &vars->scene_description.ceilling));
+	return (1);
 }
 
-static void	ft_identify_line(char *line,
-							t_scene_description *s_scene_description)
+static int	ft_identify_line(char *line,
+							t_vars *vars)
 {
 	char	**split_line;
+	int		ret;
 
 	split_line = ft_split(line, ' ');
 	if (split_line)
-		validate(split_line, s_scene_description);
+		ret = validate(split_line, vars);
 	free(split_line);
+	return (ret);
 }
 
-void		ft_scene_description_parameters(t_scene_description *scene_dscp)
+int			ft_scene_description_parameters(t_vars *vars)
 {
 	int				fd;
 	unsigned int	column;
 	unsigned int	rows;
 	char			*line;
+	int				ret;
 
-	fd = open(scene_dscp->file, O_RDONLY);
+	fd = open(vars->scene_description.file, O_RDONLY);
 	line = NULL;
-	while (get_next_line(fd, &line) > 0 && scene_dscp->counter <= 8)
-		if (line && *line)
-			ft_identify_line(line, scene_dscp);
+	ret = 0;
+	while (get_next_line(fd, &line) > 0 && vars->scene_description.counter <= 8)
+		if (line && *line && ret)
+			ret = ft_identify_line(line, vars);
+	if (!ret)
+	{
+		free(line);
+		return (ret);
+	}
+	
 	rows = 0;
 	while (get_next_line(fd, &line))
 	{
 		if (!(column = ft_is_map_line(line)))
 		{
-			free(line);
-			ft_error("Invalid map grid\n");
+			ret = 0;
+			ft_save_error_message("Invalid map grid\n", vars);
 		}
-		if (column > scene_dscp->map.cols)
-			scene_dscp->map.cols = column;
+		if (column > vars->scene_description.map.cols)
+			vars->scene_description.map.cols = column;
 		rows++;
 	}
 	close(fd);
 	free(line);
+	if (!ret)
+		return (ret);
+	return (1);
 }
 
 void		ft_check_parameters(t_scene_description *s_scene_description)

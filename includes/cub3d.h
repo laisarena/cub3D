@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/03/16 01:59:36 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/03/17 23:15:12 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,22 @@ typedef struct
 
 typedef struct
 {	
-	void			*mlx;
-	void			*window;
-	t_image_data	image;
-	int				x;
-	int				y;
-}					t_vars;
+	t_scene_description	scene_description;
+	void				*mlx;
+	void				*window;
+	t_image_data		image;
+	int					x;
+	int					y;
+	char				*message;
+}						t_vars;
 
 
 
 void				ft_validate_arguments(int argc, char **argv);
 void				ft_error(char *message);
+void		ft_save_error_message(char *message, t_vars *vars);
 void				ft_initialize(t_scene_description *s_scene_description);
-void				ft_scene_description_parameters(
-											t_scene_description *scene_dscp);
-void				ft_minilibx(t_scene_description *s_scene_description);
+int					ft_scene_description_parameters(t_vars *vars);
+void				ft_minilibx(t_vars *vars);
 void				ft_check_parameters(t_scene_description *s_scene_description);
 #endif

@@ -35,14 +35,15 @@ static	void	ft_initialize_color(t_color *color)
 
 static	void	ft_initialize_map(t_map *map)
 {
-	unsigned int i;
-
-	map->rows = 13;
-	map->cols = 20;
+	map->rows = 0;
+	map->cols = 0;
+	map->matrix = NULL;
+	/*
 	map->matrix = malloc(sizeof(int) * map->rows);
 	i = 0;
 	while (i < map->rows)
 		map->matrix[i++] = malloc(sizeof(int) * map->cols);
+*/
 }
 
 void			ft_initialize(t_scene_description *s_scene_description)
