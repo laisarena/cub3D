@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/03/23 22:58:08 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/04/02 22:09:44 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,15 @@ SRCS = main.c\
 	   validate_arguments.c\
 	   initialize.c\
 	   validate_scene_description.c\
+	   validate_map.c\
 	   get_next_line.c\
 	   get_next_line_utils.c\
 	   minilibx.c\
 
 OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra
+#FLAGS = -Wall -Wextra -Werror
 FLAGS_MLX = -lm -lX11 -lXext
 
 .c.o:

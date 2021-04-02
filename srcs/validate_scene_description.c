@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/02 21:27:34 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/02 21:58:27 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,6 @@ static int	ft_is_map_digit(char c)
 			c == 'N' || c == 'S' || c == 'E' ||c == 'W')
 		return (1);
 	return (0);
-}
-
-static int	ft_is_map_line(char *string)
-{
-	int cols;
-
-	cols = 0;
-	while (string[cols])
-		if (!ft_is_map_digit(string[cols++]))
-			return (0);
-	return (cols);
 }
 
 static int	ft_is_string_number(char *string)
@@ -211,31 +200,6 @@ int			ft_parameters(int fd, t_vars *vars)
 		else
 			free(line);
 		line = NULL;
-	}
-	free(line);
-	return (ret);
-}
-
-int			ft_map(int fd, t_vars *vars)
-{
-	unsigned int	column;
-	unsigned int	rows;
-	char			*line;
-	int				ret;
-
-	line = NULL;
-	ret = 1;
-	rows = 0;
-	while (get_next_line(fd, &line))
-	{
-		if (!(column = ft_is_map_line(line)))
-		{
-			ret = 0;
-			ft_save_error_message("Invalid map grid\n", vars);
-		}
-		if (column > vars->scene_description.map.cols)
-			vars->scene_description.map.cols = column;
-		rows++;
 	}
 	free(line);
 	return (ret);
