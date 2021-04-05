@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 21:49:43 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/05 03:35:08 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/05 22:04:46 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ static void	ft_list_to_matix(t_list *list, t_map *map)
 	int		j;
 	char	*line;
 
-	if (!(map->matrix = malloc(sizeof(char) * (map->rows + 1))))
+	if (!(map->matrix = malloc(sizeof(char *) * (map->rows + 1))))
 		return;
+	map->matrix[map->rows] = NULL;
 	i = 0;
 	while (list)
 	{
@@ -48,8 +49,8 @@ static void	ft_list_to_matix(t_list *list, t_map *map)
 		j = 0;
 		while (*line)
 			map->matrix[i][j++] = *line++;
+		map->matrix[i][map->cols] = '\0';
 		list = list->next;
-		printf("%s\n", map->matrix[i]);
 		i++;
 	}
 }
@@ -73,7 +74,6 @@ int			ft_map(int fd, t_vars *vars)
 	map_list = NULL;
 	while (get_next_line(fd, &line) && ret)
 	{
-		printf("%s\n", line);
 		if (*line)
 		{
 			if (!(column = ft_is_map_line(line)))
@@ -84,6 +84,11 @@ int			ft_map(int fd, t_vars *vars)
 				vars->scene_description.map.cols = column;
 			ft_lstadd_back(&map_list, ft_lstnew(line));
 			rows++;
+		}
+		else
+		{
+			free(line);
+			line = NULL;
 		}
 	}
 	vars->scene_description.map.rows = rows;
