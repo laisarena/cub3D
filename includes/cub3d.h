@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/02 22:05:42 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/05 00:43:10 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@
 # include <fcntl.h>
 # include <string.h>
 
-void				ft_validate_arguments(int argc, char **argv);
-void				ft_error(char *message);
-void		ft_save_error_message(char *message, t_vars *vars);
-void				ft_initialize(t_scene_description *s_scene_description);
-int					ft_scene_description_parameters(t_vars *vars);
-void				ft_minilibx(t_vars *vars);
-void				ft_check_parameters(t_scene_description *s_scene_description);
+void	ft_validate_arguments(int argc, char **argv);
+void	ft_error(char *message);
+void	ft_save_error_message(char *message, t_vars *vars);
+void	ft_initialize(t_scene_description *s_scene_description);
+int		ft_scene_description_parameters(t_vars *vars);
+void	ft_minilibx(t_vars *vars);
+void	ft_check_parameters(t_scene_description *s_scene_description);
+void	ft_free_map(t_vars *vars);
+
 #endif

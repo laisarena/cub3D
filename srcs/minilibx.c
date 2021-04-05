@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/03/17 23:16:39 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/05 00:42:38 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		ft_close(t_vars *vars)
 	mlx_destroy_image(vars->mlx, vars->image.image);
 	mlx_destroy_window(vars->mlx, vars->window);
 	free(vars->mlx);
+	ft_free_map(vars);
 	exit(0);
 }
 

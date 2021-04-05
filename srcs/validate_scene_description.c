@@ -6,12 +6,11 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/02 21:58:27 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/05 00:42:42 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static void	ft_free_split(char **split)
 {
@@ -25,14 +24,6 @@ static void	ft_free_split(char **split)
 	}
 	free(split);
 	split = NULL;
-}
-
-static int	ft_is_map_digit(char c)
-{
-	if (c == '0' || c == '1' || c == '2' ||
-			c == 'N' || c == 'S' || c == 'E' ||c == 'W')
-		return (1);
-	return (0);
 }
 
 static int	ft_is_string_number(char *string)
@@ -192,7 +183,7 @@ int			ft_parameters(int fd, t_vars *vars)
 
 	line = NULL;
 	ret = 1;
-	while (vars->scene_description.counter <= 8 && ret &&
+	while (vars->scene_description.counter < 8 && ret &&
 			get_next_line(fd, &line) > 0)
 	{
 		if (line && *line)

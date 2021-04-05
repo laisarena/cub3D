@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/02 22:04:19 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/05 02:15:43 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct
 
 typedef struct
 {
-	int	**matrix;
+	char	**matrix;
 	unsigned int	rows;
 	unsigned int	cols;
 }					t_map;

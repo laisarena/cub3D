@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:00:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/02/03 22:19:09 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/03 16:25:02 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ static	void	ft_initialize_map(t_map *map)
 	map->rows = 0;
 	map->cols = 0;
 	map->matrix = NULL;
-	/*
-	map->matrix = malloc(sizeof(int) * map->rows);
-	i = 0;
-	while (i < map->rows)
-		map->matrix[i++] = malloc(sizeof(int) * map->cols);
-*/
 }
 
 void			ft_initialize(t_scene_description *s_scene_description)

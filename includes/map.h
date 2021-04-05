@@ -6,14 +6,12 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 21:55:59 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/02 22:01:38 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/03 03:30:32 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
-
-# include "cub3d.h"
 
 int	ft_map(int fd, t_vars *vars);
 
