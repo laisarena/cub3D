@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/06 20:40:53 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/06 23:21:32 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #define KEYPRESS	2
 #define PI			3.14159265
 #define TWO_PI		6.28318530
-#define TILE_SIZE	64
 #define MAP_ROW		13
 #define MAP_COL		20
 #define FOV_ANGLE	(60 * (PI / 180))
@@ -23,6 +22,7 @@
 #define A			97
 #define S			115
 #define D			100
+#define MINI_FACTOR	0.3
 
 void	ft_hooks(t_vars *vars);
 void	ft_render(t_vars *vars);
@@ -58,7 +58,7 @@ void	ft_put_pixel(t_image_data *image, int x, int y, int color)
 	*(unsigned int*)address = color;
 }
 
-void	rectangle_on_image(t_vars *vars, int width, int heigth, int color)
+/*void	rectangle_on_image(t_vars *vars, int width, int heigth, int color)
 {
 	int i;
 	int j;
@@ -69,6 +69,22 @@ void	rectangle_on_image(t_vars *vars, int width, int heigth, int color)
 		j = -1;
 		while (++j < width)
 			ft_put_pixel(&vars->image, vars->player.x + j, vars->player.y + i, color);
+	}
+}*/
+
+void	rectangle_on_image(t_vars *vars, int width, int heigth, int color, int x, int y)
+{
+	int i;
+	int j;
+
+	i = -1;
+	//while (++i < heigth && x + i < heigth)
+	while (++i < heigth)
+	{
+		j = -1;
+		//while (++j < width && y + j < width)
+		while (++j < width)
+			ft_put_pixel(&vars->image, y + j, x + i, color);
 	}
 }
 
@@ -124,10 +140,45 @@ void	clear_image(t_vars *vars)
 	}
 }
 
+void	ft_renderMap(t_vars *vars)
+{
+	int i;
+	int j;
+	int tile_w;
+	int tile_h;
+	int color;
+	
+	tile_w = vars->scene_description.resolution.x /
+				vars->scene_description.map.cols;
+	tile_h = vars->scene_description.resolution.y /
+				vars->scene_description.map.rows;
+
+	tile_w = MINI_FACTOR * tile_w; 
+	tile_h = MINI_FACTOR * tile_h; 
+	i = 0;
+	while (i < vars->scene_description.map.rows)
+	{
+		j = 0;
+		while (j < vars->scene_description.map.cols)
+		{
+			if (vars->scene_description.map.matrix[i][j] == '1')
+				color = 0x00FFFFFF;
+			else
+				color = 0x00000000;
+			rectangle_on_image(vars, tile_w, tile_h, color, i * tile_h, j * tile_w);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	ft_render(t_vars *vars)
 {
 	clear_image(vars);
-	rectangle_on_image(vars, 30, 50, 0x00FF0000);
+	ft_renderMap(vars);
+	//ft_renderRays(vars);
+	//ft_renderPlayer(vars);
+	//rectangle_on_image(vars, 30, 50, 0x00FF0000);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
 
