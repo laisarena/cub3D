@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/05 02:15:43 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/06 20:32:00 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 typedef struct
 {
-	unsigned int	identifier;
-	unsigned int	x;
-	unsigned int	y;
-}					t_resolution;
+	int	identifier;
+	int	x;
+	int	y;
+}		t_resolution;
 
 typedef struct
 {
@@ -28,15 +28,15 @@ typedef struct
 
 typedef struct
 {
-	unsigned int	identifier;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-}					t_color;
+	int	identifier;
+	int	r;
+	int	g;
+	int	b;
+}		t_color;
 
 typedef struct
 {
-	char	**matrix;
+	char			**matrix;
 	unsigned int	rows;
 	unsigned int	cols;
 }					t_map;
@@ -66,13 +66,25 @@ typedef struct
 }					t_image_data;
 
 typedef struct
+{
+	float			x;
+	float			y;
+	float			width;
+	float			height;
+	int				turnDirection;
+	int				walkDirection;
+	float			rotationAngle;
+	float			walkSpeed;
+	float			turnSpeed;
+}					t_player;
+
+typedef struct
 {	
 	t_scene_description	scene_description;
 	void				*mlx;
 	void				*window;
 	t_image_data		image;
-	int					x;
-	int					y;
+	t_player			player;
 	char				*message;
 }						t_vars;
 

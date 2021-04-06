@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/05 00:42:42 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/06 20:30:53 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_is_string_number(char *string)
 	return (1);
 }
 
-static int	ft_validate_number(char *string, unsigned int *parameter)
+static int	ft_validate_number(char *string, int *parameter)
 {
 	if (!string || !ft_is_string_number(string))
 		return (0);
