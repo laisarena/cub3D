@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/06 20:30:53 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/18 18:23:17 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,31 @@ static int	ft_validate_number(char *string, int *parameter)
 
 static int	ft_resolution(char **split_line, t_vars *vars)
 {
-	if (!(ft_validate_number(split_line[1], &vars->scene_description.resolution.x)))
+	if (!(ft_validate_number(split_line[1],
+					&vars->scene_description.resolution.x)))
 	{
-		ft_save_error_message("Misconfiguration on resolution x render size\n", vars);
+		ft_save_error_message(
+				"Misconfiguration on resolution x render size\n", vars);
 		return (0);
 	}
-	if (!(ft_validate_number(split_line[2], &vars->scene_description.resolution.y)))
+	if (!(ft_validate_number(split_line[2],
+					&vars->scene_description.resolution.y)))
 	{
-		ft_save_error_message("Misconfiguration on resolution y render size\n", vars);
+		ft_save_error_message(
+				"Misconfiguration on resolution y render size\n", vars);
 		return (0);
 	}
 	if (split_line[3])
 	{
-		ft_save_error_message("Misconfiguration on resolution\n", vars);
+		ft_save_error_message(
+				"Misconfiguration on resolution\n", vars);
 		return (0);
 	}
 	vars->scene_description.resolution.identifier = 1;
 	vars->scene_description.counter++;
 	return (1);
 }
+
 static int	ft_texture(char **split_line, t_vars *vars, t_texture *s_texture)
 {
 	int fd;
@@ -118,13 +124,13 @@ static int	ft_color(char **split_line, t_vars *vars, t_color *s_color)
 		{
 			ft_free_split(split_color);
 			ft_save_error_message("Misconfiguration on color\n", vars);
-			return(0);
+			return (0);
 		}
 		if (split_color[3])
 		{
 			ft_free_split(split_color);
 			ft_save_error_message("Misconfiguration on color\n", vars);
-			return(0);
+			return (0);
 		}
 	}
 	ft_free_split(split_color);
@@ -143,21 +149,21 @@ static int	ft_color(char **split_line, t_vars *vars, t_color *s_color)
 static int	validate(char **split_line, t_vars *vars)
 {
 	if (!ft_strncmp(split_line[0], "R", 2))
-		return(ft_resolution(split_line, vars));
+		return (ft_resolution(split_line, vars));
 	else if (!ft_strncmp(split_line[0], "NO", 3))
-		return(ft_texture(split_line, vars, &vars->scene_description.north));
+		return (ft_texture(split_line, vars, &vars->scene_description.north));
 	else if (!ft_strncmp(split_line[0], "SO", 3))
-		return(ft_texture(split_line, vars, &vars->scene_description.south));
+		return (ft_texture(split_line, vars, &vars->scene_description.south));
 	else if (!ft_strncmp(split_line[0], "WE", 3))
-		return(ft_texture(split_line, vars, &vars->scene_description.west));
+		return (ft_texture(split_line, vars, &vars->scene_description.west));
 	else if (!ft_strncmp(split_line[0], "EA", 3))
-		return(ft_texture(split_line, vars, &vars->scene_description.east));
+		return (ft_texture(split_line, vars, &vars->scene_description.east));
 	else if (!ft_strncmp(split_line[0], "S", 2))
-		return(ft_texture(split_line, vars, &vars->scene_description.sprite));
+		return (ft_texture(split_line, vars, &vars->scene_description.sprite));
 	else if (!ft_strncmp(split_line[0], "F", 2))
-		return(ft_color(split_line, vars, &vars->scene_description.floor));
+		return (ft_color(split_line, vars, &vars->scene_description.floor));
 	else if (!ft_strncmp(split_line[0], "C", 2))
-		return(ft_color(split_line, vars, &vars->scene_description.ceilling));
+		return (ft_color(split_line, vars, &vars->scene_description.ceilling));
 	return (1);
 }
 
@@ -204,12 +210,12 @@ int			ft_scene_description_parameters(t_vars *vars)
 	if (!(ft_parameters(fd, vars)))
 	{
 		close(fd);
-		return(1);
+		return (1);
 	}
 	if (!(ft_map(fd, vars)))
 	{
 		close(fd);
-		return(1);
+		return (1);
 	}
 	close(fd);
 	return (0);

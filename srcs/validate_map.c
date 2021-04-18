@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 21:49:43 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/05 22:04:46 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/18 18:33:59 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_is_map_digit(char c)
 {
 	if (c == ' ' || c == '0' || c == '1' || c == '2' ||
-			c == 'N' || c == 'S' || c == 'E' ||c == 'W')
+			c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
 }
@@ -38,14 +38,14 @@ static void	ft_list_to_matix(t_list *list, t_map *map)
 	char	*line;
 
 	if (!(map->matrix = malloc(sizeof(char *) * (map->rows + 1))))
-		return;
+		return ;
 	map->matrix[map->rows] = NULL;
 	i = 0;
 	while (list)
 	{
 		if (!(map->matrix[i] = malloc(sizeof(char) * (map->cols + 1))))
-			return;
-		line = list->content; 
+			return ;
+		line = list->content;
 		j = 0;
 		while (*line)
 			map->matrix[i][j++] = *line++;
@@ -62,11 +62,11 @@ void		ft_del(void *pointer)
 
 int			ft_map(int fd, t_vars *vars)
 {
-	unsigned int	column;
-	unsigned int	rows;
-	char			*line;
-	int				ret;
-	t_list			*map_list;
+	int		column;
+	int		rows;
+	char	*line;
+	int		ret;
+	t_list	*map_list;
 
 	line = NULL;
 	ret = 1;
@@ -97,4 +97,3 @@ int			ft_map(int fd, t_vars *vars)
 	free(line);
 	return (ret);
 }
-

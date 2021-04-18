@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/09 02:15:18 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/18 18:43:49 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@
 #define D			100
 #define LEFT		65361
 #define RIGTH		65363
-#define MINI_FACTOR	1
+#define MINI_FACTOR	0.3
+#define TILE		32
+#define ROT_SPEED 	0.1
+#define WALK_SPEED 	2
 
 void	ft_hooks(t_vars *vars);
 void	ft_render(t_vars *vars);
@@ -60,7 +63,8 @@ void	ft_put_pixel(t_image_data *image, int x, int y, int color)
 	*(unsigned int*)address = color;
 }
 
-void	rectangle_on_image(t_vars *vars, int width, int heigth, int color, int x, int y)
+void	rectangle_on_image(t_vars *vars, int width, int heigth,
+							int color, int x, int y)
 {
 	int i;
 	int j;
@@ -101,17 +105,17 @@ int		ft_key_press(int keycode, t_vars *vars)
 	if (keycode == 0xFF1B)
 		ft_close(vars);
 	if (keycode == W)
-		vars->player.y -= 1;
+		vars->player.y -= 1 * WALK_SPEED;
 	if (keycode == A)
-		vars->player.x -= 1;
+		vars->player.x -= 1 * WALK_SPEED;
 	if (keycode == S)
-		vars->player.y += 1;
+		vars->player.y += 1 * WALK_SPEED;
 	if (keycode == D)
-		vars->player.x += 1;
+		vars->player.x += 1 * WALK_SPEED;
 	if (keycode == LEFT)
-		vars->player.rotationAngle -= 0.1;
+		vars->player.rotationAngle -= 1 * ROT_SPEED;
 	if (keycode == RIGTH)
-		vars->player.rotationAngle += 0.1;
+		vars->player.rotationAngle += 1 * ROT_SPEED;
 	ft_render(vars);
 	return (1);
 }
@@ -130,7 +134,7 @@ void	clear_image(t_vars *vars)
 	}
 }
 
-void	ft_renderPlayer(t_vars *vars)
+void	ft_render_player(t_vars *vars)
 {
 	rectangle_on_image(vars,
 			vars->player.width * MINI_FACTOR,
@@ -138,30 +142,24 @@ void	ft_renderPlayer(t_vars *vars)
 			0x00FF0000,
 			vars->player.x * MINI_FACTOR,
 			vars->player.y * MINI_FACTOR);
-
 	draw_line(vars,
 			vars->player.x * MINI_FACTOR,
-			vars->player.y * MINI_FACTOR, 
-			(vars->player.x + cos(vars->player.rotationAngle) * 40) * MINI_FACTOR,
-			(vars->player.y + sin(vars->player.rotationAngle ) * 40) * MINI_FACTOR,
+			vars->player.y * MINI_FACTOR,
+			(vars->player.x + cos(vars->player.rotationAngle) * 40)
+			* MINI_FACTOR,
+			(vars->player.y + sin(vars->player.rotationAngle) * 40)
+			* MINI_FACTOR,
 			0x00FF0000);
 }
 
-void	ft_renderMap(t_vars *vars)
+void	ft_render_map(t_vars *vars)
 {
 	int i;
 	int j;
-	int tile_w;
-	int tile_h;
+	int tile;
 	int color;
-	
-	tile_w = vars->scene_description.resolution.x /
-				vars->scene_description.map.cols;
-	tile_h = vars->scene_description.resolution.y /
-				vars->scene_description.map.rows;
 
-	tile_w = MINI_FACTOR * tile_w; 
-	tile_h = MINI_FACTOR * tile_h; 
+	tile = MINI_FACTOR * TILE;
 	i = 0;
 	while (i < vars->scene_description.map.rows)
 	{
@@ -172,7 +170,7 @@ void	ft_renderMap(t_vars *vars)
 				color = 0x00FFFFFF;
 			else
 				color = 0x00000000;
-			rectangle_on_image(vars, tile_w, tile_h, color, j * tile_w, i * tile_h);
+			rectangle_on_image(vars, tile, tile, color, j * tile, i * tile);
 			j++;
 		}
 		i++;
@@ -182,10 +180,9 @@ void	ft_renderMap(t_vars *vars)
 void	ft_render(t_vars *vars)
 {
 	clear_image(vars);
-	ft_renderMap(vars);
-	//ft_renderRays(vars);
-	ft_renderPlayer(vars);
-	//rectangle_on_image(vars, 30, 50, 0x00FF0000);
+	ft_render_map(vars);
+	//ft_rende_rays(vars);
+	ft_render_player(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
 
@@ -202,7 +199,6 @@ void	ft_setup(t_vars *vars)
 
 void	ft_minilibx(t_vars *vars)
 {
-
 	ft_setup(vars);
 	ft_render(vars);
 	mlx_hook(vars->window, KEYPRESS, 1L << 0, ft_key_press, vars);
