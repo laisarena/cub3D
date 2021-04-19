@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/06 21:45:31 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/18 23:21:40 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ typedef struct
 	float			y;
 	float			width;
 	float			height;
-	int				turnDirection;
-	int				walkDirection;
-	float			rotationAngle;
-	float			walkSpeed;
-	float			turnSpeed;
+	int				turn_direction;
+	int				walk_direction_x;
+	int				walk_direction_y;
+	float			rotation_angle;
+	float			walk_speed;
+	float			turn_speed;
 }					t_player;
 
 typedef struct

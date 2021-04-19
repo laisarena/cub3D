@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/18 18:43:49 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 00:16:32 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define MINI_FACTOR	0.3
 #define TILE		32
 #define ROT_SPEED 	0.1
-#define WALK_SPEED 	2
+#define WALK_SPEED 	3
 
 void	ft_hooks(t_vars *vars);
 void	ft_render(t_vars *vars);
@@ -105,17 +105,17 @@ int		ft_key_press(int keycode, t_vars *vars)
 	if (keycode == 0xFF1B)
 		ft_close(vars);
 	if (keycode == W)
-		vars->player.y -= 1 * WALK_SPEED;
+		vars->player.walk_direction_y = -1;
 	if (keycode == A)
-		vars->player.x -= 1 * WALK_SPEED;
+		vars->player.walk_direction_x = -1;
 	if (keycode == S)
-		vars->player.y += 1 * WALK_SPEED;
+		vars->player.walk_direction_y = 1;
 	if (keycode == D)
-		vars->player.x += 1 * WALK_SPEED;
+		vars->player.walk_direction_x = 1;
 	if (keycode == LEFT)
-		vars->player.rotationAngle -= 1 * ROT_SPEED;
+		vars->player.turn_direction = -1;
 	if (keycode == RIGTH)
-		vars->player.rotationAngle += 1 * ROT_SPEED;
+		vars->player.turn_direction = 1;
 	ft_render(vars);
 	return (1);
 }
@@ -134,6 +134,36 @@ void	clear_image(t_vars *vars)
 	}
 }
 
+void	ft_reset_moviments(t_player *player)
+{
+	player->turn_direction = 0;
+	player->walk_direction_x = 0;
+	player->walk_direction_y = 0;
+}
+
+int		ft_is_wall_at(float x, float y, int window_x, int window_y)
+{
+	if (x < 0 || y < 0 || x > window_x || y > window_y) 
+		return 1;
+	return 0;
+}
+
+void	ft_move_player(t_vars *vars)
+{
+	float x;
+	float y;
+
+	vars->player.rotation_angle += vars->player.turn_direction * ROT_SPEED;
+	x = vars->player.x + vars->player.walk_direction_x * WALK_SPEED;
+	y = vars->player.y + vars->player.walk_direction_y * WALK_SPEED;
+	if (!ft_is_wall_at(x, y,
+				vars->scene_description.resolution.x,
+				vars->scene_description.resolution.y)) {
+		vars->player.x = x; 
+		vars->player.y = y;
+	}
+}
+
 void	ft_render_player(t_vars *vars)
 {
 	rectangle_on_image(vars,
@@ -145,9 +175,9 @@ void	ft_render_player(t_vars *vars)
 	draw_line(vars,
 			vars->player.x * MINI_FACTOR,
 			vars->player.y * MINI_FACTOR,
-			(vars->player.x + cos(vars->player.rotationAngle) * 40)
+			(vars->player.x + cos(vars->player.rotation_angle) * 40)
 			* MINI_FACTOR,
-			(vars->player.y + sin(vars->player.rotationAngle) * 40)
+			(vars->player.y + sin(vars->player.rotation_angle) * 40)
 			* MINI_FACTOR,
 			0x00FF0000);
 }
@@ -182,6 +212,8 @@ void	ft_render(t_vars *vars)
 	clear_image(vars);
 	ft_render_map(vars);
 	//ft_rende_rays(vars);
+	ft_move_player(vars);
+	ft_reset_moviments(&vars->player);
 	ft_render_player(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
@@ -194,7 +226,8 @@ void	ft_setup(t_vars *vars)
 	vars->player.height = 1;
 	vars->player.x = vars->scene_description.resolution.x / 2;
 	vars->player.y = vars->scene_description.resolution.y / 2;
-	vars->player.rotationAngle = PI / 2;
+	vars->player.rotation_angle = PI / 2;
+	ft_reset_moviments(&vars->player);
 }
 
 void	ft_minilibx(t_vars *vars)
