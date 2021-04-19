@@ -6,13 +6,13 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 23:01:39 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/18 18:47:17 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 03:28:53 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_line(t_vars *vars, int x0, int y0, int x1, int y1, int color)
+void	ft_draw_line(t_vars *vars, int x0, int y0, int x1, int y1, int color)
 {
 	float	x;
 	float	y;

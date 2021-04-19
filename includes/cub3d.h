@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/19 03:04:33 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 03:24:32 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int		ft_scene_description_parameters(t_vars *vars);
 void	ft_minilibx(t_vars *vars);
 void	ft_check_parameters(t_scene_description *s_scene_description);
 void	ft_free_map(t_vars *vars);
-void	draw_line(t_vars *vars, int x0, int y0, int x1, int y1, int color);
+void	ft_draw_line(t_vars *vars, int x0, int y0, int x1, int y1, int color);
 void	ft_put_pixel(t_image_data *image, int x, int y, int color);
+void	ft_rectangle_on_image(t_vars *vars, int width, int heigth,
+							int color, int x, int y);
 
 #endif
