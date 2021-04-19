@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/19 02:35:22 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 03:07:28 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int		ft_is_wall_at(float x, float y, t_vars *vars)
 		return (1);
 	map_row = floor(y / TILE);
 	map_column = floor(x / TILE);
-	var = vars->scene_description.map.matrix[map_row][map_column];
+	var = vars->map.matrix[map_row][map_column];
 	return (var == '1');
 }
 
@@ -197,12 +197,12 @@ void	ft_render_map(t_vars *vars)
 
 	tile = MINI_FACTOR * TILE;
 	i = 0;
-	while (i < vars->scene_description.map.rows)
+	while (i < vars->map.rows)
 	{
 		j = 0;
-		while (j < vars->scene_description.map.cols)
+		while (j < vars->map.cols)
 		{
-			if (vars->scene_description.map.matrix[i][j] == '1')
+			if (vars->map.matrix[i][j] == '1')
 				color = 0x00FFFFFF;
 			else
 				color = 0x00000000;
@@ -216,11 +216,13 @@ void	ft_render_map(t_vars *vars)
 void	ft_render(t_vars *vars)
 {
 	clear_image(vars);
-	ft_render_map(vars);
-	//ft_rende_rays(vars);
 	ft_move_player(vars);
 	ft_reset_moviments(&vars->player);
+	//ft_cast_rays(vars);
+	
+	ft_render_map(vars);
 	ft_render_player(vars);
+	//ft_rende_rays(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
 

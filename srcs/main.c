@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/05 22:07:22 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 03:01:47 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void		ft_free_map(t_vars *vars)
 	int i;
 
 	i = 0;
-	while (vars->scene_description.map.matrix[i])
+	while (vars->map.matrix[i])
 	{
-		free(vars->scene_description.map.matrix[i]);
-		vars->scene_description.map.matrix[i] = NULL;
+		free(vars->map.matrix[i]);
+		vars->map.matrix[i] = NULL;
 		i++;
 	}
-	free(vars->scene_description.map.matrix);
-	vars->scene_description.map.matrix = NULL;
+	free(vars->map.matrix);
+	vars->map.matrix = NULL;
 }
 
 void		ft_save_error_message(char *message, t_vars *vars)
@@ -52,7 +52,7 @@ int			main(int argc, char **argv)
 	errno = 0;
 	vars.message = NULL;
 	ft_validate_arguments(argc, argv);
-	ft_initialize(&vars.scene_description);
+	ft_initialize(&vars);
 	vars.scene_description.file = argv[1];
 	if (ft_scene_description_parameters(&vars))
 		ft_error(vars.message);

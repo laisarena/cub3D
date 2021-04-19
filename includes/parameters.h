@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/18 23:21:40 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 02:53:04 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct
 	t_texture		sprite;
 	t_color			floor;
 	t_color			ceilling;
-	t_map			map;
 }					t_scene_description;
 
 typedef struct
@@ -82,6 +81,7 @@ typedef struct
 typedef struct
 {	
 	t_scene_description	scene_description;
+	t_map				map;
 	void				*mlx;
 	void				*window;
 	t_image_data		image;

@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 21:49:43 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/18 18:33:59 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 03:00:55 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int			ft_map(int fd, t_vars *vars)
 			{
 				ft_save_error_message("Invalid map grid\n", vars);
 				ret = 0;
-			} else if (column > vars->scene_description.map.cols)
-				vars->scene_description.map.cols = column;
+			} else if (column > vars->map.cols)
+				vars->map.cols = column;
 			ft_lstadd_back(&map_list, ft_lstnew(line));
 			rows++;
 		}
@@ -91,8 +91,8 @@ int			ft_map(int fd, t_vars *vars)
 			line = NULL;
 		}
 	}
-	vars->scene_description.map.rows = rows;
-	ft_list_to_matix(map_list, &vars->scene_description.map);
+	vars->map.rows = rows;
+	ft_list_to_matix(map_list, &vars->map);
 	ft_lstclear(&map_list, &ft_del);
 	free(line);
 	return (ret);

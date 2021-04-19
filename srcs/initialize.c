@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:00:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/03 16:25:02 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 03:07:01 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ static	void	ft_initialize_map(t_map *map)
 	map->matrix = NULL;
 }
 
-void			ft_initialize(t_scene_description *s_scene_description)
+void			ft_initialize(t_vars *vars)
 {
-	s_scene_description->counter = 0;
-	ft_initialize_resolution(&s_scene_description->resolution);
-	ft_initialize_texture(&s_scene_description->north);
-	ft_initialize_texture(&s_scene_description->south);
-	ft_initialize_texture(&s_scene_description->west);
-	ft_initialize_texture(&s_scene_description->east);
-	ft_initialize_texture(&s_scene_description->sprite);
-	ft_initialize_color(&s_scene_description->floor);
-	ft_initialize_color(&s_scene_description->ceilling);
-	ft_initialize_map(&s_scene_description->map);
+	vars->scene_description.counter = 0;
+	ft_initialize_resolution(&vars->scene_description.resolution);
+	ft_initialize_texture(&vars->scene_description.north);
+	ft_initialize_texture(&vars->scene_description.south);
+	ft_initialize_texture(&vars->scene_description.west);
+	ft_initialize_texture(&vars->scene_description.east);
+	ft_initialize_texture(&vars->scene_description.sprite);
+	ft_initialize_color(&vars->scene_description.floor);
+	ft_initialize_color(&vars->scene_description.ceilling);
+	ft_initialize_map(&vars->map);
 }
