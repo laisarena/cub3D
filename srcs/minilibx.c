@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/19 00:16:32 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/19 02:35:22 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #define D			100
 #define LEFT		65361
 #define RIGTH		65363
-#define MINI_FACTOR	0.3
+#define MINI_FACTOR	0.5
 #define TILE		32
 #define ROT_SPEED 	0.1
 #define WALK_SPEED 	3
@@ -141,11 +141,19 @@ void	ft_reset_moviments(t_player *player)
 	player->walk_direction_y = 0;
 }
 
-int		ft_is_wall_at(float x, float y, int window_x, int window_y)
+int		ft_is_wall_at(float x, float y, t_vars *vars)
 {
-	if (x < 0 || y < 0 || x > window_x || y > window_y) 
-		return 1;
-	return 0;
+	int		map_row;
+	int		map_column;
+	char	var;
+
+	if (x < 0 || x > vars->scene_description.resolution.x ||
+		y < 0 || y > vars->scene_description.resolution.y)
+		return (1);
+	map_row = floor(y / TILE);
+	map_column = floor(x / TILE);
+	var = vars->scene_description.map.matrix[map_row][map_column];
+	return (var == '1');
 }
 
 void	ft_move_player(t_vars *vars)
@@ -156,9 +164,7 @@ void	ft_move_player(t_vars *vars)
 	vars->player.rotation_angle += vars->player.turn_direction * ROT_SPEED;
 	x = vars->player.x + vars->player.walk_direction_x * WALK_SPEED;
 	y = vars->player.y + vars->player.walk_direction_y * WALK_SPEED;
-	if (!ft_is_wall_at(x, y,
-				vars->scene_description.resolution.x,
-				vars->scene_description.resolution.y)) {
+	if (!ft_is_wall_at(x, y, vars)) {
 		vars->player.x = x; 
 		vars->player.y = y;
 	}
