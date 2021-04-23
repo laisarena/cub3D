@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/18 18:23:17 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/20 00:21:16 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_free_split(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (split[i])
@@ -45,23 +45,23 @@ static int	ft_validate_number(char *string, int *parameter)
 static int	ft_resolution(char **split_line, t_vars *vars)
 {
 	if (!(ft_validate_number(split_line[1],
-					&vars->scene_description.resolution.x)))
+				&vars->scene_description.resolution.x)))
 	{
 		ft_save_error_message(
-				"Misconfiguration on resolution x render size\n", vars);
+			"Misconfiguration on resolution x render size\n", vars);
 		return (0);
 	}
 	if (!(ft_validate_number(split_line[2],
-					&vars->scene_description.resolution.y)))
+				&vars->scene_description.resolution.y)))
 	{
 		ft_save_error_message(
-				"Misconfiguration on resolution y render size\n", vars);
+			"Misconfiguration on resolution y render size\n", vars);
 		return (0);
 	}
 	if (split_line[3])
 	{
 		ft_save_error_message(
-				"Misconfiguration on resolution\n", vars);
+			"Misconfiguration on resolution\n", vars);
 		return (0);
 	}
 	vars->scene_description.resolution.identifier = 1;
@@ -71,14 +71,15 @@ static int	ft_resolution(char **split_line, t_vars *vars)
 
 static int	ft_texture(char **split_line, t_vars *vars, t_texture *s_texture)
 {
-	int fd;
+	int	fd;
 
 	if (split_line[2])
 	{
 		ft_save_error_message("Misconfiguration on texture\n", vars);
 		return (0);
 	}
-	if ((fd = open(split_line[1], O_RDONLY)) == -1)
+	fd = open(split_line[1], O_RDONLY);
+	if (fd == -1)
 	{
 		ft_save_error_message(NULL, vars);
 		return (0);
@@ -134,9 +135,9 @@ static int	ft_color(char **split_line, t_vars *vars, t_color *s_color)
 		}
 	}
 	ft_free_split(split_color);
-	if (ft_validate_range(s_color->r) ||
-			ft_validate_range(s_color->g) ||
-			ft_validate_range(s_color->b))
+	if (ft_validate_range(s_color->r)
+		|| ft_validate_range(s_color->g)
+		|| ft_validate_range(s_color->b))
 	{
 		ft_save_error_message("Misconfiguration on color\n", vars);
 		return (0);
@@ -182,15 +183,15 @@ static int	ft_identify_line(char *line,
 	return (ret);
 }
 
-int			ft_parameters(int fd, t_vars *vars)
+int	ft_parameters(int fd, t_vars *vars)
 {
 	char	*line;
 	int		ret;
 
 	line = NULL;
 	ret = 1;
-	while (vars->scene_description.counter < 8 && ret &&
-			get_next_line(fd, &line) > 0)
+	while (vars->scene_description.counter < 8 && ret
+		&& get_next_line(fd, &line) > 0)
 	{
 		if (line && *line)
 			ret = ft_identify_line(line, vars);
@@ -202,7 +203,7 @@ int			ft_parameters(int fd, t_vars *vars)
 	return (ret);
 }
 
-int			ft_scene_description_parameters(t_vars *vars)
+int	ft_scene_description_parameters(t_vars *vars)
 {
 	int	fd;
 
@@ -221,7 +222,7 @@ int			ft_scene_description_parameters(t_vars *vars)
 	return (0);
 }
 
-void		ft_check_parameters(t_scene_description *s_scene_description)
+void	ft_check_parameters(t_scene_description *s_scene_description)
 {
 	if (s_scene_description->resolution.identifier == 0)
 		ft_error("Missing R parameter\n");

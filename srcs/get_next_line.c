@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:54:38 by lfrasson          #+#    #+#             */
-/*   Updated: 2020/11/13 17:49:03 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/20 01:27:40 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 **		-1 : An error happened
 */
 
-static int		ft_move_rest(char *dst, char *src)
+static int	ft_move_rest(char *dst, char *src)
 {
-	int i;
-	int size;
+	int	i;
+	int	size;
 
 	if (!src || !dst)
 		return (-1);
@@ -41,7 +41,7 @@ static int		ft_move_rest(char *dst, char *src)
 	return (size);
 }
 
-static void		save_rest(int position, char *buffer, char *rest)
+static void	save_rest(int position, char *buffer, char *rest)
 {
 	if (position == -1)
 		return ;
@@ -56,7 +56,8 @@ static t_list	*take_from_file(int fd, char **rest,
 
 	while (aux->position == -1 && aux->bytes_read)
 	{
-		if (!(buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char))))
+		buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (!buffer)
 			return (NULL);
 		aux->bytes_read = read(fd, buffer, BUFFER_SIZE);
 		buffer[aux->bytes_read] = '\0';
@@ -76,7 +77,8 @@ static t_list	*analize_rest(char **rest, t_list *buffer_list, t_aux *aux)
 		*rest = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	else
 	{
-		if (!(buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char))))
+		buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (!buffer)
 			return (NULL);
 		aux->line_size = ft_move_rest(buffer, *rest);
 		aux->position = break_line_position(buffer);
@@ -86,7 +88,7 @@ static t_list	*analize_rest(char **rest, t_list *buffer_list, t_aux *aux)
 	return (buffer_list);
 }
 
-int				get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*rest[_SC_OPEN_MAX];
 	t_list		*buffer_list;

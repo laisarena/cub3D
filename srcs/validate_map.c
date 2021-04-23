@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 21:49:43 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/19 03:00:55 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/20 00:29:50 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int	ft_is_map_digit(char c)
 {
-	if (c == ' ' || c == '0' || c == '1' || c == '2' ||
-			c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == ' ' || c == '0' || c == '1' || c == '2'
+		|| c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
 }
 
 static int	ft_is_map_line(char *string)
 {
-	int cols;
+	int	cols;
 
 	cols = 0;
 	while (string[cols])
@@ -37,13 +37,15 @@ static void	ft_list_to_matix(t_list *list, t_map *map)
 	int		j;
 	char	*line;
 
-	if (!(map->matrix = malloc(sizeof(char *) * (map->rows + 1))))
+	map->matrix = malloc(sizeof(char *) * (map->rows + 1));
+	if (!map->matrix)
 		return ;
 	map->matrix[map->rows] = NULL;
 	i = 0;
 	while (list)
 	{
-		if (!(map->matrix[i] = malloc(sizeof(char) * (map->cols + 1))))
+		map->matrix[i] = malloc(sizeof(char) * (map->cols + 1));
+		if (!map->matrix[i])
 			return ;
 		line = list->content;
 		j = 0;
@@ -55,12 +57,12 @@ static void	ft_list_to_matix(t_list *list, t_map *map)
 	}
 }
 
-void		ft_del(void *pointer)
+void	ft_del(void *pointer)
 {
 	free(pointer);
 }
 
-int			ft_map(int fd, t_vars *vars)
+int	ft_map(int fd, t_vars *vars)
 {
 	int		column;
 	int		rows;
@@ -76,11 +78,13 @@ int			ft_map(int fd, t_vars *vars)
 	{
 		if (*line)
 		{
-			if (!(column = ft_is_map_line(line)))
+			column = ft_is_map_line(line);
+			if (!column)
 			{
 				ft_save_error_message("Invalid map grid\n", vars);
 				ret = 0;
-			} else if (column > vars->map.cols)
+			}
+			else if (column > vars->map.cols)
 				vars->map.cols = column;
 			ft_lstadd_back(&map_list, ft_lstnew(line));
 			rows++;

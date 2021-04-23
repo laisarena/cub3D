@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:00:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/19 03:07:01 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/20 01:19:53 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	void	ft_initialize_map(t_map *map)
 	map->matrix = NULL;
 }
 
-void			ft_initialize(t_vars *vars)
+void	ft_initialize(t_vars *vars)
 {
 	vars->scene_description.counter = 0;
 	ft_initialize_resolution(&vars->scene_description.resolution);

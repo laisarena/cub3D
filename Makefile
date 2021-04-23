@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/04/19 03:25:29 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/04/19 13:28:23 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = main.c\
 	   get_next_line.c\
 	   get_next_line_utils.c\
 	   minilibx.c\
+	   rays.c\
 	   draw.c\
 	   draw_line.c\
 

@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/19 03:17:50 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/22 23:22:33 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct
 	int				is_facing_down;
 	int				is_facing_left;
 	int				is_facing_right;
+	int				wall_hit_content;
 }					t_ray;
 
 typedef struct
@@ -99,6 +100,7 @@ typedef struct
 	void				*window;
 	t_image_data		image;
 	t_player			player;
+	t_ray				*ray;
 	char				*message;
 }						t_vars;
 

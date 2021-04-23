@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/19 03:24:32 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/22 23:38:15 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "get_next_line.h"
+# include "auxiliary_structs.h"
 # include "parameters.h"
+# include "constants.h"
 # include "map.h"
 # include <errno.h>
 # include <stdio.h>
@@ -35,6 +37,9 @@ void	ft_free_map(t_vars *vars);
 void	ft_draw_line(t_vars *vars, int x0, int y0, int x1, int y1, int color);
 void	ft_put_pixel(t_image_data *image, int x, int y, int color);
 void	ft_rectangle_on_image(t_vars *vars, int width, int heigth,
-							int color, int x, int y);
+			int color, int x, int y);
+void	ft_cast_rays(t_vars *vars);
+void	ft_rende_rays(t_vars *vars);
+int		ft_is_wall_at(float x, float y, t_vars *vars);
 
 #endif

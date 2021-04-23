@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:05:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/02/03 22:23:01 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/20 01:43:43 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ static void	ft_check_file_path_argument(char *scene_description_file)
 	extension = ft_strnstr(scene_description_file, ".cub", len);
 	if (!extension || ft_strncmp(extension, ".cub", 5))
 		ft_error("The scene description file must have the .cub extension\n");
-	if ((fd = open(scene_description_file, O_RDONLY)) == -1)
+	fd = open(scene_description_file, O_RDONLY);
+	if (!fd)
 		ft_error(NULL);
 	else
 		close(fd);
 }
 
-void		ft_validate_arguments(int argc, char **argv)
+void	ft_validate_arguments(int argc, char **argv)
 {
 	if (argc == 1)
 		ft_error("This program needs a scene description file as argument\n");

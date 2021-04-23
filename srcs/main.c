@@ -6,15 +6,15 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/19 03:01:47 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/23 02:56:33 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		ft_free_map(t_vars *vars)
+void	ft_free_map(t_vars *vars)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (vars->map.matrix[i])
@@ -27,14 +27,14 @@ void		ft_free_map(t_vars *vars)
 	vars->map.matrix = NULL;
 }
 
-void		ft_save_error_message(char *message, t_vars *vars)
+void	ft_save_error_message(char *message, t_vars *vars)
 {
 	vars->message = message;
 }
 
-void		ft_error(char *message)
+void	ft_error(char *message)
 {
-	int		errnum;
+	int	errnum;
 
 	errnum = errno;
 	ft_putstr_fd("Error\n", 1);
@@ -45,9 +45,9 @@ void		ft_error(char *message)
 	exit(-1);
 }
 
-int			main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_vars vars;
+	t_vars	vars;
 
 	errno = 0;
 	vars.message = NULL;
@@ -59,5 +59,6 @@ int			main(int argc, char **argv)
 	ft_check_parameters(&vars.scene_description);
 	ft_minilibx(&vars);
 	ft_free_map(&vars);
+	free(vars.ray);
 	return (0);
 }
