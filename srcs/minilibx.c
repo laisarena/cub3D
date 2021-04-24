@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minilibx.c                                         :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/20 01:16:17 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/24 23:36:37 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ int	ft_is_wall_at(float x, float y, t_vars *vars)
 	int		map_column;
 	char	var;
 
-	if (x < 0 || x > vars->scene_description.resolution.x
-		|| y < 0 || y > vars->scene_description.resolution.y)
+	//if (x < 0 || x > vars->scene_description.resolution.x
+	//	|| y < 0 || y > vars->scene_description.resolution.y)
+	if (x < 0 || x > vars->map.cols * TILE
+		|| y < 0 || y > vars->map.rows * TILE)
 		return (1);
 	map_row = floor(y / TILE);
 	map_column = floor(x / TILE);
@@ -146,7 +148,7 @@ void	ft_render(t_vars *vars)
 	
 	ft_render_map(vars);
 	ft_render_player(vars);
-	//ft_rende_rays(vars);
+	ft_rende_rays(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
 
@@ -179,6 +181,7 @@ void	ft_setup(t_vars *vars)
 	vars->player.x = vars->scene_description.resolution.x / 2;
 	vars->player.y = vars->scene_description.resolution.y / 2;
 	vars->player.rotation_angle = PI / 2;
+	vars->player.rotation_angle = 0;
 	ft_reset_moviments(&vars->player);
 }
 

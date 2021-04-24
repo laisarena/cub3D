@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   auxiliary_structs.h                                :+:      :+:    :+:   */
+/*   rander_rays.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 23:38:57 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/23 04:27:13 by lfrasson         ###   ########.fr       */
+/*   Created: 2021/04/23 23:22:33 by lfrasson          #+#    #+#             */
+/*   Updated: 2021/04/23 23:32:44 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AUXILIARY_STRUCTS_H
-# define AUXILIARY_STRUCTS_H
+#include "cub3d.h"
 
-typedef struct
+void	ft_rende_rays(t_vars *vars)
 {
-	float	x;
-	float	y;
-}			t_coordinate;
+	int i;
 
-typedef struct
-{
-	t_coordinate	intercept;
-	t_coordinate	step;
-	t_coordinate	next_touch;
-	t_coordinate	wall_hit;
-	int				found_wall_hit;
-	int				hit_distance;
-	int				wall_content;
-}					t_intersection;
-
-#endif
+	i = 0;
+	while(i < vars->scene_description.resolution.x)
+	{
+		ft_draw_line(vars,
+			vars->player.x * MINI_FACTOR,
+			vars->player.y * MINI_FACTOR,
+			vars->ray[i].wall_hit.x * MINI_FACTOR,
+			vars->ray[i].wall_hit.y * MINI_FACTOR,
+			0x00FF0000);
+		i++;
+	}
+}

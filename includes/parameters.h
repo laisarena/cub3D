@@ -6,12 +6,14 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/22 23:22:33 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/23 23:07:52 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARAMETERS_H
 # define PARAMETERS_H
+
+#include "cub3d.h"
 
 typedef struct
 {
@@ -81,8 +83,7 @@ typedef struct
 typedef struct
 {
 	float			angle;
-	float			wall_hit_x;
-	float			wall_hit_y;
+	t_coordinate	wall_hit;
 	float			distance;
 	int				is_hit_vertical;
 	int				is_facing_up;
