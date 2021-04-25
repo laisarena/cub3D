@@ -2,7 +2,7 @@ NO ./images/NO.xpm
 SO ./images/SO.xpm 
 WE ./images/WE.xpm
 EA ./images/EA.xpm
-R 640 480 
+R 840 640 
 S ./images/ITEM.xpm
 F 00,153,15
 C 255,255,255
