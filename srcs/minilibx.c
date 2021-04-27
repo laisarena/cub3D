@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/25 23:06:29 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/26 02:07:25 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,7 @@ void	ft_setup(t_vars *vars)
 	//vars->player.x = 70; 
 	vars->player.y = vars->scene_description.resolution.y / 2;
 	//vars->player.y = 70;
-	vars->player.rotation_angle = PI / 2;
-	vars->player.rotation_angle = 1.5 * PI;
+	vars->player.rotation_angle = 6.22;
 	ft_reset_moviments(&vars->player);
 }
 

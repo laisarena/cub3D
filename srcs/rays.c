@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 13:24:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/25 22:59:31 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/27 02:50:47 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	ft_distance_between_points(float x1, float y1, float x2, float y2)
 
 	x_sq = (x2 - x1) * (x2 - x1);
 	y_sq = (y2 - y1) * (y2 - y1);
-	return (sqrt( x_sq + y_sq ));
+	return (sqrt(x_sq + y_sq));
 }
 
 float	ft_normalize_angle(float angle)
@@ -42,17 +42,17 @@ static void	ft_where_ray_facing(t_ray *ray)
 	ray->is_facing_down = !ray->is_facing_up;
 	ray->is_facing_right = ray->angle < (0.5 * PI) || ray->angle > (1.5 * PI);
 	ray->is_facing_left = !ray->is_facing_right;
-	}
+}
 
 static t_intersection	ft_init_horiz(t_ray *ray, t_vars *vars)
 {
 	t_intersection	horiz;
-	
+
 	horiz.intercept.y = floor(vars->player.y / TILE) * TILE;
 	if (ray->is_facing_up)
 		horiz.intercept.y += TILE;
-	horiz.intercept.x = vars->player.x +
-		(horiz.intercept.y - vars->player.y) / tan(ray->angle);	
+	horiz.intercept.x = vars->player.x
+		+ (horiz.intercept.y - vars->player.y) / tan(ray->angle);
 	horiz.step.y = TILE;
 	if (ray->is_facing_down)
 		horiz.step.y *= -1;
@@ -72,12 +72,12 @@ static t_intersection	ft_init_horiz(t_ray *ray, t_vars *vars)
 static t_intersection	ft_init_verti(t_ray *ray, t_vars *vars)
 {
 	t_intersection	verti;
-	
+
 	verti.intercept.x = floor(vars->player.x / TILE) * TILE;
 	if (ray->is_facing_right)
 		verti.intercept.x += TILE;
-	verti.intercept.y = vars->player.y +
-		(verti.intercept.x - vars->player.x) * tan(ray->angle);	
+	verti.intercept.y = vars->player.y
+		+ (verti.intercept.x - vars->player.x) * tan(ray->angle);
 	verti.step.x = TILE;
 	if (ray->is_facing_left)
 		verti.step.x *= -1;
@@ -94,27 +94,29 @@ static t_intersection	ft_init_verti(t_ray *ray, t_vars *vars)
 	return (verti);
 }
 
-static void	ft_find_intersection_horiz(t_intersection *horiz, t_ray *ray, t_vars *vars)
+static void	ft_find_intersection_horiz(t_intersection *horiz,
+		t_ray *ray, t_vars *vars)
 {
 	t_coordinate	check;
 
-	while (horiz->next_touch.x >= 0
-			&& horiz->next_touch.x <= vars->scene_description.resolution.x
-			&& horiz->next_touch.y >= 0
-			&& horiz->next_touch.y <= vars->scene_description.resolution.y)
+	while (1)
 	{
 		check.x = horiz->next_touch.x;
-		check.y = horiz->next_touch.y; 
+		check.y = horiz->next_touch.y;
 		if (ray->is_facing_up)
 			check.y += 1;
 		if (ray->is_facing_down)
 			check.y -= 1;
-		if (ft_is_wall_at(check.x, check.y, vars))
+		if (ft_is_wall_at(check.x, check.y, vars)
+			|| (horiz->next_touch.x <= 0
+				&& horiz->next_touch.x >= vars->scene_description.resolution.x
+				&& horiz->next_touch.y <= 0
+				&& horiz->next_touch.y >= vars->scene_description.resolution.y))
 		{
 			horiz->wall_hit.x = horiz->next_touch.x;
 			horiz->wall_hit.y = horiz->next_touch.y;
-			horiz->wall_content = vars->map.matrix[(int)floor(check.y / TILE)]
-				[(int)floor(check.x / TILE)];
+			//horiz->wall_content = vars->map.matrix[(int)floor(check.y / TILE)]
+			//	[(int)floor(check.x / TILE)];
 			horiz->found_wall_hit = 1;
 			break ;
 		}
@@ -123,22 +125,24 @@ static void	ft_find_intersection_horiz(t_intersection *horiz, t_ray *ray, t_vars
 	}
 }
 
-static void	ft_find_intersection_verti(t_intersection *verti, t_ray *ray, t_vars *vars)
+static void	ft_find_intersection_verti(t_intersection *verti,
+		t_ray *ray, t_vars *vars)
 {
 	t_coordinate	check;
 
-	while (verti->next_touch.x >= 0
-			&& verti->next_touch.x <= vars->scene_description.resolution.x
-			&& verti->next_touch.y >= 0
-			&& verti->next_touch.y <= vars->scene_description.resolution.y)
+	while (1)
 	{
 		check.x = verti->next_touch.x;
-		check.y = verti->next_touch.y; 
+		check.y = verti->next_touch.y;
 		if (ray->is_facing_right)
 			check.x += 1;
 		if (ray->is_facing_left)
 			check.x -= 1;
-		if (ft_is_wall_at(check.x, check.y, vars))
+		if (ft_is_wall_at(check.x, check.y, vars)
+			|| (verti->next_touch.x <= 0
+				&& verti->next_touch.x >= vars->scene_description.resolution.x
+				&& verti->next_touch.y <= 0
+				&& verti->next_touch.y >= vars->scene_description.resolution.y))
 		{
 			verti->wall_hit.x = verti->next_touch.x;
 			verti->wall_hit.y = verti->next_touch.y;
@@ -151,13 +155,14 @@ static void	ft_find_intersection_verti(t_intersection *verti, t_ray *ray, t_vars
 		verti->next_touch.y += verti->step.y;
 	}
 }
-static void	ft_distance(t_intersection *inter,t_vars *vars)
+
+static void	ft_distance(t_intersection *inter, t_vars *vars)
 {
 	inter->hit_distance = INT_MAX;
 	if (inter->found_wall_hit)
-	inter->hit_distance = ft_distance_between_points(
-			vars->player.x, vars->player.y,
-			inter->wall_hit.x, inter->wall_hit.y);
+		inter->hit_distance = ft_distance_between_points(
+				vars->player.x, vars->player.y,
+				inter->wall_hit.x, inter->wall_hit.y);
 }
 
 static void	ft_set_hit_wall(t_intersection *inter, t_ray *ray)
@@ -172,16 +177,14 @@ static void	ft_cast_single_ray(t_ray *ray, t_vars *vars)
 {
 	t_intersection	horiz;
 	t_intersection	verti;
-	
+
 	ft_where_ray_facing(ray);
-	horiz = ft_init_horiz(ray, vars); 
-	verti = ft_init_verti(ray, vars); 
+	horiz = ft_init_horiz(ray, vars);
+	verti = ft_init_verti(ray, vars);
 	ft_find_intersection_horiz(&horiz, ray, vars);
 	ft_find_intersection_verti(&verti, ray, vars);
-
 	ft_distance(&horiz, vars);
 	ft_distance(&verti, vars);
-
 	if (verti.hit_distance < horiz.hit_distance)
 	{
 		ft_set_hit_wall(&verti, ray);
@@ -192,7 +195,6 @@ static void	ft_cast_single_ray(t_ray *ray, t_vars *vars)
 		ft_set_hit_wall(&horiz, ray);
 		ray->is_hit_vertical = 0;
 	}
-
 }
 
 void	ft_cast_rays(t_vars *vars)
@@ -204,7 +206,7 @@ void	ft_cast_rays(t_vars *vars)
 	//num_rays = TILE * vars->map.cols;
 	num_rays = vars->scene_description.resolution.x;
 	ray_angle = vars->player.rotation_angle - (FOV_ANGLE / 2);
-	vars->ray = malloc(sizeof(t_ray) * (num_rays + 1)); 
+	vars->ray = malloc(sizeof(t_ray) * (num_rays + 1));
 	strip = 0;
 	while (strip < num_rays)
 	{
