@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/26 02:07:25 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 03:16:32 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,8 @@ void	ft_render(t_vars *vars)
 	ft_move_player(vars);
 	ft_reset_moviments(&vars->player);
 	ft_cast_rays(vars);
-	
+	ft_render_3d_projection(vars);
+
 	ft_render_map(vars);
 	ft_render_player(vars);
 	ft_rende_rays(vars);

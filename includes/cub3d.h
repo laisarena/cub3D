@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/22 23:38:15 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 03:16:35 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	ft_rectangle_on_image(t_vars *vars, int width, int heigth,
 void	ft_cast_rays(t_vars *vars);
 void	ft_rende_rays(t_vars *vars);
 int		ft_is_wall_at(float x, float y, t_vars *vars);
+void	ft_render_3d_projection(t_vars *vars);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 13:34:20 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/25 23:05:30 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 03:20:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define D			100
 # define LEFT		65361
 # define RIGTH		65363
-# define MINI_FACTOR	0.5
+# define MINI_FACTOR	0.2
 # define TILE		32
 # define ROT_SPEED 	0.1
 # define WALK_SPEED 	3

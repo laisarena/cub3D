@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/04/23 23:23:31 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/04/28 03:17:12 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS = main.c\
 	   minilibx.c\
 	   rays.c\
 	   rander_rays.c\
+	   projection.c\
 	   draw.c\
 	   draw_line.c\
 
