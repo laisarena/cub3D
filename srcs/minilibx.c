@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 03:16:32 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:03:03 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,88 +57,6 @@ void	ft_clear_image(t_vars *vars)
 	}
 }
 
-void	ft_reset_moviments(t_player *player)
-{
-	player->turn_direction = 0;
-	player->walk_direction_x = 0;
-	player->walk_direction_y = 0;
-}
-
-int	ft_is_wall_at(float x, float y, t_vars *vars)
-{
-	int		map_row;
-	int		map_column;
-	char	var;
-
-	//if (x < 0 || x > vars->scene_description.resolution.x
-	//	|| y < 0 || y > vars->scene_description.resolution.y)
-	if (x < 0 || x > vars->map.cols * TILE
-		|| y < 0 || y > vars->map.rows * TILE)
-		return (1);
-	map_row = floor(y / TILE);
-	map_column = floor(x / TILE);
-	var = vars->map.matrix[map_row][map_column];
-	return (var == '1');
-}
-
-void	ft_move_player(t_vars *vars)
-{
-	float	x;
-	float	y;
-
-	vars->player.rotation_angle += vars->player.turn_direction * ROT_SPEED;
-	x = vars->player.x + vars->player.walk_direction_x * WALK_SPEED;
-	y = vars->player.y + vars->player.walk_direction_y * WALK_SPEED;
-	if (!ft_is_wall_at(x, y, vars))
-	{
-		vars->player.x = x;
-		vars->player.y = y;
-	}
-}
-
-void	ft_render_player(t_vars *vars)
-{
-	ft_rectangle_on_image(vars,
-		vars->player.width * MINI_FACTOR,
-		vars->player.height * MINI_FACTOR,
-		0x00FF0000,
-		vars->player.x * MINI_FACTOR,
-		vars->player.y * MINI_FACTOR);
-	ft_draw_line(vars,
-		vars->player.x * MINI_FACTOR,
-		vars->player.y * MINI_FACTOR,
-		(vars->player.x + cos(vars->player.rotation_angle) * 40)
-		* MINI_FACTOR,
-		(vars->player.y + sin(vars->player.rotation_angle) * 40)
-		* MINI_FACTOR,
-		0x00FF0000);
-}
-
-void	ft_render_map(t_vars *vars)
-{
-	int	i;
-	int	j;
-	int	tile;
-	int	color;
-
-	tile = MINI_FACTOR * TILE;
-	i = 0;
-	while (i < vars->map.rows)
-	{
-		j = 0;
-		while (j < vars->map.cols)
-		{
-			if (vars->map.matrix[i][j] == '1')
-				color = 0x00FFFFFF;
-			else
-				color = 0x00000000;
-			ft_rectangle_on_image(vars, tile, tile, color, j * tile, i * tile);
-			j++;
-		}
-		i++;
-	}
-}
-
 void	ft_render(t_vars *vars)
 {
 	ft_clear_image(vars);
@@ -147,7 +65,7 @@ void	ft_render(t_vars *vars)
 	ft_cast_rays(vars);
 	ft_render_3d_projection(vars);
 
-	ft_render_map(vars);
+	ft_render_minimap(vars);
 	ft_render_player(vars);
 	ft_rende_rays(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);

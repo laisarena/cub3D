@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 03:21:57 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 03:47:26 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 typedef struct
 {
+	float	perp_distance;
 	float	distance;
 	int		height;
 	int		top;
@@ -29,9 +30,11 @@ void	ft_render_3d_projection(t_vars *vars)
 	i = 0;
 	while(i < vars->scene_description.resolution.x)
 	{
+		wall.perp_distance = vars->ray[i].distance
+			* cos(vars->ray[i].angle - vars->player.rotation_angle);
 		wall.distance = (vars->scene_description.resolution.x / 2)
 			/ tan(FOV_ANGLE / 2);
-		wall.height = (int)((TILE / vars->ray[i].distance) * wall.distance);
+		wall.height = (int)((TILE / wall.perp_distance) * wall.distance);
 		wall.top = (vars->scene_description.resolution.y / 2) - (wall.height / 2);
 		if (wall.top < 0)
 			wall.top = 0;
@@ -41,7 +44,10 @@ void	ft_render_3d_projection(t_vars *vars)
 		y = wall.top;
 		while(y < wall.bottom)
 		{
-			ft_put_pixel(&vars->image, i, y, 0xFFFFFFFF);
+			if (vars->ray[i].is_hit_vertical)
+				ft_put_pixel(&vars->image, i, y, 0xFFFFFFFF);
+			else
+				ft_put_pixel(&vars->image, i, y, 0xFFCCCCCC);
 			y++;
 		}
 		i++;

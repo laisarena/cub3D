@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 23:38:57 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/23 04:27:13 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:13:35 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ typedef struct
 	float	x;
 	float	y;
 }			t_coordinate;
+
+typedef struct
+{
+	t_coordinate	position;
+	int				width;
+	int				height;
+}					t_retangle;
 
 typedef struct
 {

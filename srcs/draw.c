@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 03:21:08 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/20 01:30:11 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:19:01 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ void	ft_put_pixel(t_image_data *image, int x, int y, int color)
 	*(unsigned int *)address = color;
 }
 
-void	ft_rectangle_on_image(t_vars *vars, int width, int heigth,
-							int color, int x, int y)
+void	ft_rectangle_on_image(t_vars *vars, t_retangle retangle, int color)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (++i < heigth)
+	while (++i < retangle.height)
 	{
 		j = -1;
-		while (++j < width)
-			ft_put_pixel(&vars->image, x + j, y + i, color);
+		while (++j < retangle.width)
+			ft_put_pixel(&vars->image,
+					retangle.position.x + j,
+					retangle.position.y + i,
+					color);
 	}
 }
