@@ -6,29 +6,29 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 20:31:02 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:22:42 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARAMETERS_H
 # define PARAMETERS_H
 
-#include "cub3d.h"
+# include "cub3d.h"
 
-typedef struct
+typedef struct s_resolution
 {
 	int	identifier;
 	int	x;
 	int	y;
 }		t_resolution;
 
-typedef struct
+typedef struct s_texture
 {
 	unsigned int	identifier;
 	char			*path;
 }					t_texture;
 
-typedef struct
+typedef struct s_color
 {
 	int	identifier;
 	int	r;
@@ -36,14 +36,14 @@ typedef struct
 	int	b;
 }		t_color;
 
-typedef struct
+typedef struct s_map
 {
 	char	**matrix;
 	int		rows;
 	int		cols;
 }			t_map;
 
-typedef struct
+typedef struct s_scene_description
 {
 	char			*file;
 	unsigned int	counter;
@@ -57,29 +57,29 @@ typedef struct
 	t_color			ceilling;
 }					t_scene_description;
 
-typedef struct
+typedef struct s_image_data
 {
-	void			*image;
-	char			*address;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-}					t_image_data;
+	void	*image;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_image_data;
 
-typedef struct
+typedef struct s_player
 {
-	float			x;
-	float			y;
-	float			width;
-	float			height;
-	int				turn_direction;
-	int				walk_direction;
-	float			rotation_angle;
-	float			walk_speed;
-	float			turn_speed;
-}					t_player;
+	float	x;
+	float	y;
+	float	width;
+	float	height;
+	int		turn_direction;
+	int		walk_direction;
+	float	rotation_angle;
+	float	walk_speed;
+	float	turn_speed;
+}			t_player;
 
-typedef struct
+typedef struct s_ray
 {
 	float			angle;
 	t_coordinate	wall_hit;
@@ -92,7 +92,7 @@ typedef struct
 	int				wall_hit_content;
 }					t_ray;
 
-typedef struct
+typedef struct s_vars
 {	
 	t_scene_description	scene_description;
 	t_map				map;

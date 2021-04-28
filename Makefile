@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/04/28 19:01:20 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/04/29 01:32:51 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS = main.c\
 	   minimap.c\
 	   player_movements.c\
 	   rays.c\
-	   rander_rays.c\
+	   render_rays.c\
 	   projection.c\
 	   draw.c\
 	   draw_line.c\

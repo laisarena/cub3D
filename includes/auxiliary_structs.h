@@ -6,27 +6,33 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 23:38:57 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 19:13:35 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:30:45 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AUXILIARY_STRUCTS_H
 # define AUXILIARY_STRUCTS_H
 
-typedef struct
+typedef struct s_coordinate
 {
 	float	x;
 	float	y;
 }			t_coordinate;
 
-typedef struct
+typedef struct s_int_coordinate
+{
+	int	x;
+	int	y;
+}		t_int_coordinate;
+
+typedef struct s_retangle
 {
 	t_coordinate	position;
 	int				width;
 	int				height;
 }					t_retangle;
 
-typedef struct
+typedef struct s_intersection
 {
 	t_coordinate	intercept;
 	t_coordinate	step;
