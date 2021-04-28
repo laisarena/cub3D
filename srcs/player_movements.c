@@ -6,27 +6,44 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:32:50 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 19:55:52 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:34:52 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	ft_key_press(int keycode, t_vars *vars)
+{
+	if (keycode == 0xFF1B)
+		ft_close(vars);
+	if (keycode == W)
+		vars->player.walk_direction = 1;
+	if (keycode == A)
+		vars->player.turn_direction = -1;
+	if (keycode == S)
+		vars->player.walk_direction = -1;
+	if (keycode == D)
+		vars->player.turn_direction = 1;
+	ft_render(vars);
+	return (1);
+}
+
 void	ft_reset_moviments(t_player *player)
 {
 	player->turn_direction = 0;
-	player->walk_direction_x = 0;
-	player->walk_direction_y = 0;
+	player->walk_direction = 0;
 }
 
 void	ft_move_player(t_vars *vars)
 {
 	float	x;
 	float	y;
+	float	step;
 
 	vars->player.rotation_angle += vars->player.turn_direction * ROT_SPEED;
-	x = vars->player.x + vars->player.walk_direction_x * WALK_SPEED;
-	y = vars->player.y + vars->player.walk_direction_y * WALK_SPEED;
+	step = vars->player.walk_direction * WALK_SPEED;
+	x = vars->player.x + cos(vars->player.rotation_angle) * step;
+	y = vars->player.y + sin(vars->player.rotation_angle) * step;
 	if (!ft_is_wall_at(x, y, vars))
 	{
 		vars->player.x = x;

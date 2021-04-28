@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/23 23:07:52 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:31:02 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ typedef struct
 	float			width;
 	float			height;
 	int				turn_direction;
-	int				walk_direction_x;
-	int				walk_direction_y;
+	int				walk_direction;
 	float			rotation_angle;
 	float			walk_speed;
 	float			turn_speed;

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 19:03:03 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:37:04 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,6 @@ void	ft_render(t_vars *vars)
 	ft_render_player(vars);
 	ft_rende_rays(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
-}
-
-int	ft_key_press(int keycode, t_vars *vars)
-{
-	if (keycode == 0xFF1B)
-		ft_close(vars);
-	if (keycode == W)
-		vars->player.walk_direction_y = -1;
-	if (keycode == A)
-		vars->player.walk_direction_x = -1;
-	if (keycode == S)
-		vars->player.walk_direction_y = 1;
-	if (keycode == D)
-		vars->player.walk_direction_x = 1;
-	if (keycode == LEFT)
-		vars->player.turn_direction = -1;
-	if (keycode == RIGTH)
-		vars->player.turn_direction = 1;
-	ft_render(vars);
-	return (1);
 }
 
 void	ft_setup(t_vars *vars)
