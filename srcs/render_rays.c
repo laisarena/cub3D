@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:22:33 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/29 01:37:38 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/29 03:06:24 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ void	ft_rende_rays(t_vars *vars)
 			0x00FF0000);
 		i++;
 	}
+	free(vars->ray);
+	vars->ray = NULL;
 }
