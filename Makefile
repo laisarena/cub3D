@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/04/29 01:32:51 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/04/29 03:16:05 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = main.c\
 	   projection.c\
 	   draw.c\
 	   draw_line.c\
+	   texture.c\
 
 OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 

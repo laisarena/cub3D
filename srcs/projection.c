@@ -6,18 +6,11 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/29 02:43:36 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:15:28 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-typedef struct s_wall
-{
-	int		height;
-	int		top;
-	int		bottom;
-}		t_wall;
 
 static int	ft_calc_wall_height(t_ray ray, float player_angle, int win_width)
 {
@@ -70,23 +63,33 @@ static void	ft_render_floor(t_wall wall, t_vars *vars, int x)
 static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x)
 {
 	int	y;
+	int color;
 
 	y = wall.top;
 	while (y < wall.bottom)
 	{
+		wall.texture_offset.y = ft_calc_y_texture_offset(wall, y,
+				vars->scene_description.resolution.y);
+		color = vars->wall_texture[(TILE * wall.texture_offset.y)
+			+ wall.texture_offset.x]; 
 		if (ray.is_hit_vertical)
-			ft_put_pixel(&vars->image, x, y, 0xFFFFFFFF);
+			ft_put_pixel(&vars->image, x, y, color);
+			//ft_put_pixel(&vars->image, x, y, 0xFFFFFFFF);
 		else
-			ft_put_pixel(&vars->image, x, y, 0xFFCCCCCC);
+			ft_put_pixel(&vars->image, x, y, color);
+			//ft_put_pixel(&vars->image, x, y, 0xFFCCCCCC);
+		
 		y++;
 	}
 }
 
+void ft_create_texture(t_vars *vars);
 void	ft_render_3d_projection(t_vars *vars)
 {
 	int		x;
 	t_wall	wall;
 
+	ft_create_texture(vars);
 	x = 0;
 	while (x < vars->scene_description.resolution.x)
 	{
@@ -97,6 +100,7 @@ void	ft_render_3d_projection(t_vars *vars)
 				wall.height);
 		wall.bottom = ft_calc_wall_bottom(vars->scene_description.resolution.y,
 				wall.height);
+		wall.texture_offset.x = ft_calc_x_texture_offset(vars->ray[x]);
 		ft_render_ceiling(wall, vars, x);
 		ft_render_wall(wall, vars->ray[x], vars, x);
 		ft_render_floor(wall, vars, x);

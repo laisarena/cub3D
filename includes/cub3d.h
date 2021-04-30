@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/29 01:31:43 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:16:41 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ void	ft_render(t_vars *vars);
 void	ft_render_3d_projection(t_vars *vars);
 int		ft_close(t_vars *vars);
 int		ft_key_press(int keycode, t_vars *vars);
+int		ft_calc_x_texture_offset(t_ray ray);
+int		ft_calc_y_texture_offset(t_wall wall, int y, int win_height);
 
 #endif
