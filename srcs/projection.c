@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/30 19:15:28 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/03 00:04:18 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static void	ft_render_ceiling(t_wall wall, t_vars *vars, int x)
 
 	y = 0;
 	while (y < wall.top)
-		ft_put_pixel(&vars->image, x, y++, 0xFF222222);
+		ft_put_pixel(&vars->image,
+			x,
+			y++,
+			vars->scene_description.ceilling.hex);
 }
 
 static void	ft_render_floor(t_wall wall, t_vars *vars, int x)
@@ -57,13 +60,16 @@ static void	ft_render_floor(t_wall wall, t_vars *vars, int x)
 
 	y = wall.bottom;
 	while (y < vars->scene_description.resolution.y)
-		ft_put_pixel(&vars->image, x, y++, 0xFF555555);
+		ft_put_pixel(&vars->image,
+			x,
+			y++,
+			vars->scene_description.floor.hex);
 }
 
 static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x)
 {
 	int	y;
-	int color;
+	int	color;
 
 	y = wall.top;
 	while (y < wall.bottom)
@@ -71,19 +77,19 @@ static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x)
 		wall.texture_offset.y = ft_calc_y_texture_offset(wall, y,
 				vars->scene_description.resolution.y);
 		color = vars->wall_texture[(TILE * wall.texture_offset.y)
-			+ wall.texture_offset.x]; 
+			+ wall.texture_offset.x];
 		if (ray.is_hit_vertical)
 			ft_put_pixel(&vars->image, x, y, color);
 			//ft_put_pixel(&vars->image, x, y, 0xFFFFFFFF);
 		else
 			ft_put_pixel(&vars->image, x, y, color);
 			//ft_put_pixel(&vars->image, x, y, 0xFFCCCCCC);
-		
 		y++;
 	}
 }
 
-void ft_create_texture(t_vars *vars);
+void	ft_create_texture(t_vars *vars);
+
 void	ft_render_3d_projection(t_vars *vars)
 {
 	int		x;

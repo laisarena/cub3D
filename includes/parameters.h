@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/29 22:35:23 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/02 22:59:08 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_color
 	int	r;
 	int	g;
 	int	b;
+	int	hex;
 }		t_color;
 
 typedef struct s_map

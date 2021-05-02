@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/30 19:16:41 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/30 21:23:36 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "auxiliary_structs.h"
 # include "parameters.h"
 # include "constants.h"
+# include "validation.h"
 # include "map.h"
 # include <errno.h>
 # include <stdio.h>
@@ -26,13 +27,9 @@
 # include <string.h>
 # include <math.h>
 
-void	ft_validate_arguments(int argc, char **argv);
 void	ft_error(char *message);
 void	ft_save_error_message(char *message, t_vars *vars);
-void	ft_initialize(t_vars *vars);
-int		ft_scene_description_parameters(t_vars *vars);
 void	ft_minilibx(t_vars *vars);
-void	ft_check_parameters(t_scene_description *s_scene_description);
 void	ft_free_map(t_vars *vars);
 void	ft_draw_line(t_vars *vars,
 			t_int_coordinate p0, t_int_coordinate p1, int color);

@@ -6,13 +6,13 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/20 00:21:16 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/04/30 21:29:09 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_free_split(char **split)
+void	ft_free_split(char **split)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ static int	ft_is_string_number(char *string)
 	return (1);
 }
 
-static int	ft_validate_number(char *string, int *parameter)
+int	ft_validate_number(char *string, int *parameter)
 {
 	if (!string || !ft_is_string_number(string))
 		return (0);
@@ -86,63 +86,6 @@ static int	ft_texture(char **split_line, t_vars *vars, t_texture *s_texture)
 	}
 	close(fd);
 	s_texture->identifier = 1;
-	vars->scene_description.counter++;
-	return (1);
-}
-
-static int	ft_validate_range(int color)
-{
-	if (color < 0 && color > 255)
-		return (-1);
-	return (0);
-}
-
-static int	ft_color(char **split_line, t_vars *vars, t_color *s_color)
-{
-	char	**split_color;
-
-	if (split_line[2])
-	{
-		ft_save_error_message("Misconfiguration on color\n", vars);
-		return (0);
-	}
-	split_color = ft_split(split_line[1], ',');
-	if (split_color)
-	{
-		if (!(ft_validate_number(split_color[0], &s_color->r)))
-		{
-			ft_free_split(split_color);
-			ft_save_error_message("Misconfiguration on color\n", vars);
-			return (0);
-		}
-		if (!(ft_validate_number(split_color[1], &s_color->g)))
-		{
-			ft_free_split(split_color);
-			ft_save_error_message("Misconfiguration on color\n", vars);
-			return (0);
-		}
-		if (!(ft_validate_number(split_color[2], &s_color->b)))
-		{
-			ft_free_split(split_color);
-			ft_save_error_message("Misconfiguration on color\n", vars);
-			return (0);
-		}
-		if (split_color[3])
-		{
-			ft_free_split(split_color);
-			ft_save_error_message("Misconfiguration on color\n", vars);
-			return (0);
-		}
-	}
-	ft_free_split(split_color);
-	if (ft_validate_range(s_color->r)
-		|| ft_validate_range(s_color->g)
-		|| ft_validate_range(s_color->b))
-	{
-		ft_save_error_message("Misconfiguration on color\n", vars);
-		return (0);
-	}
-	s_color->identifier = 1;
 	vars->scene_description.counter++;
 	return (1);
 }

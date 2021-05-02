@@ -6,13 +6,13 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 03:03:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/30 19:13:59 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/03 00:06:03 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ft_create_texture(t_vars *vars)
+void 	t_create_texture(t_vars *vars)
 {
 	int	x;
 	int	y;
@@ -25,9 +25,9 @@ void ft_create_texture(t_vars *vars)
 		while (y < 32)
 		{
 			if (x % 8 && y % 8)
-				vars->wall_texture[(32 * y) + x] = 0xFF0000FF; 
+				vars->wall_texture[(32 * y) + x] = 0xFF0000FF;
 			else
-				vars->wall_texture[(32 * y) + x] = 0xFF000000; 
+				vars->wall_texture[(32 * y) + x] = 0xFF000000;
 			y++;
 		}
 		x++;
@@ -47,6 +47,6 @@ int	ft_calc_y_texture_offset(t_wall wall, int y, int win_height)
 	float	stretch_factor;
 
 	distance_from_top = y + (wall.height / 2) - (win_height / 2);
-	stretch_factor = (float)32 / wall.height; 
-	return (distance_from_top * stretch_factor); 
+	stretch_factor = (float)32 / wall.height;
+	return (distance_from_top * stretch_factor);
 }
