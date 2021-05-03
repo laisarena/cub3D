@@ -6,13 +6,13 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 03:03:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/03 00:06:03 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/03 02:30:43 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void 	t_create_texture(t_vars *vars)
+void 	ft_create_texture(t_vars *vars)
 {
 	int	x;
 	int	y;

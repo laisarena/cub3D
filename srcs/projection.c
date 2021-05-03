@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/03 00:04:18 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/03 02:29:33 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x)
 		y++;
 	}
 }
-
-void	ft_create_texture(t_vars *vars);
 
 void	ft_render_3d_projection(t_vars *vars)
 {

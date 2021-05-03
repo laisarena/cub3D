@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/04/30 21:13:02 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/05/03 23:14:14 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ FLAGS_MLX = -lm -lX11 -lXext
 
 $(NAME): $(OBJS)
 	make bonus -C $(PATH_LIBFT)
+	make -C $(PATH_MLX)
 	#gcc  -g -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 	gcc  -g  $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 	#gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
@@ -59,6 +60,7 @@ all:	$(NAME)
 
 clean:
 	make clean -C $(PATH_LIBFT)
+	make clean -C $(PATH_MLX)
 	rm -f $(OBJS)
 
 fclean: clean
