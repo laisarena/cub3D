@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/05/04 19:10:28 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/05/05 01:16:08 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS = main.c\
 	   texture.c\
 	   gnl/get_next_line.c\
 	   gnl/get_next_line_utils.c\
+	   bitmap/bitmap.c\
 
 OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 
@@ -62,6 +63,7 @@ clean:
 	make clean -C $(PATH_LIBFT)
 	make clean -C $(PATH_MLX)
 	rm -f $(OBJS)
+	rm *.bmp
 
 fclean: clean
 	make fclean -C $(PATH_LIBFT)

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 20:37:04 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/05 01:02:07 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ void	ft_setup(t_vars *vars)
 	ft_reset_moviments(&vars->player);
 }
 
+int	ft_write_bmp_file(t_vars *vars);
 void	ft_minilibx(t_vars *vars)
 {
 	ft_setup(vars);
 	ft_render(vars);
+	ft_write_bmp_file(vars);
 	mlx_hook(vars->window, KEYPRESS, 1L << 0, ft_key_press, vars);
 	mlx_hook(vars->window, 33, 0, ft_close, vars);
 	mlx_loop(vars->mlx);
