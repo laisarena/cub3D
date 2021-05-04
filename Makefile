@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/05/03 23:14:14 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/05/04 19:10:28 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,6 @@ SRCS = main.c\
 	   validate_scene_description.c\
 	   validate_color.c\
 	   validate_map.c\
-	   get_next_line.c\
-	   get_next_line_utils.c\
 	   minilibx.c\
 	   minimap.c\
 	   player_movements.c\
@@ -39,6 +37,8 @@ SRCS = main.c\
 	   draw.c\
 	   draw_line.c\
 	   texture.c\
+	   gnl/get_next_line.c\
+	   gnl/get_next_line_utils.c\
 
 OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 

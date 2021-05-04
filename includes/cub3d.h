@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/03 02:29:32 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/04 19:11:46 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include "get_next_line.h"
+# include "../srcs/gnl/get_next_line.h"
 # include "auxiliary_structs.h"
 # include "parameters.h"
 # include "constants.h"
