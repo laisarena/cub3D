@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/05/05 01:16:08 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/05/05 21:16:20 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS = main.c\
 	   validate_scene_description.c\
 	   validate_color.c\
 	   validate_map.c\
-	   minilibx.c\
+	   game.c\
 	   minimap.c\
 	   player_movements.c\
 	   rays.c\

@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 22:31:53 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/05 04:03:50 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/06 01:44:29 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_open_file(char *name)
 {
 	int	fd;
 
-	fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 666);
+	fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 777);
 	return (fd);
 }
 

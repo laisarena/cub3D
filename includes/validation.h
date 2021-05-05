@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:20:42 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/30 21:28:57 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:16:41 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "cub3d.h" 
 
-void	ft_validate_arguments(int argc, char **argv);
+void	ft_validate_arguments(int argc, char **argv, t_vars *vars);
 void	ft_initialize(t_vars *vars);
 int		ft_scene_description_parameters(t_vars *vars);
 int		ft_color(char **split_line, t_vars *vars, t_color *s_color);

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/24 01:19:20 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/05 21:12:21 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_free_map(t_vars *vars)
 
 void	ft_save_error_message(char *message, t_vars *vars)
 {
-	vars->message = message;
+	vars->error_message = message;
 }
 
 void	ft_error(char *message)
@@ -50,14 +50,13 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 
 	errno = 0;
-	vars.message = NULL;
-	ft_validate_arguments(argc, argv);
+	vars.error_message = NULL;
+	ft_validate_arguments(argc, argv, &vars);
 	ft_initialize(&vars);
-	vars.scene_description.file = argv[1];
 	if (ft_scene_description_parameters(&vars))
-		ft_error(vars.message);
+		ft_error(vars.error_message);
 	ft_check_parameters(&vars.scene_description);
-	ft_minilibx(&vars);
+	ft_game(&vars);
 	ft_free_map(&vars);
 	free(vars.ray);
 	return (0);
