@@ -6,31 +6,11 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/06 01:52:26 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 00:37:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	ft_initialize_mlx(t_vars *vars)
-{
-	vars->mlx = mlx_init();
-	if (!vars->mlx)
-		ft_error("Error initializing minilibx");
-}
-
-void	ft_initialize_image(t_vars *vars)
-{
-	vars->image.image = mlx_new_image(vars->mlx,
-			vars->scene_description.resolution.x,
-			vars->scene_description.resolution.y);
-	if (!vars->image.image)
-		ft_error("Error creating image");
-	vars->image.address = mlx_get_data_addr(vars->image.image,
-			&vars->image.bits_per_pixel,
-			&vars->image.line_length,
-			&vars->image.endian);
-}
 
 int	ft_close(t_vars *vars)
 {
@@ -76,37 +56,24 @@ void	ft_create_window(t_vars *vars)
 		ft_error("Error creating window");
 }
 
-void	ft_render(t_vars *vars)
+void	ft_update(t_vars *vars)
 {
 	ft_clear_image(vars);
 	ft_move_player(vars);
 	ft_reset_moviments(&vars->player);
 	ft_cast_rays(vars);
-	ft_render_3d_projection(vars);
+}
 
+void	ft_render(t_vars *vars)
+{
+	ft_update(vars);
+	ft_render_3d_projection(vars);
 	ft_render_minimap(vars);
 	ft_render_player(vars);
 	ft_rende_rays(vars);
 	ft_bmp_file(vars);
 	ft_create_window(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
-}
-
-void	ft_initialize_player_position(t_vars *vars)
-{
-	vars->player.width = 1;
-	vars->player.height = 1;
-	vars->player.x = vars->scene_description.resolution.x / 2;
-	vars->player.y = vars->scene_description.resolution.y / 2;
-	vars->player.rotation_angle = 6.22;
-}
-
-void	ft_setup(t_vars *vars)
-{
-	ft_initialize_mlx(vars);
-	ft_initialize_image(vars);
-	ft_initialize_player_position(vars);
-	ft_reset_moviments(&vars->player);
 }
 
 void	ft_game(t_vars *vars)

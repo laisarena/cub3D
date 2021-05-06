@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/05 21:12:21 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/06 23:46:47 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ void	ft_error(char *message)
 	exit(-1);
 }
 
+static void	ft_free_resources(t_vars *vars)
+{
+	ft_free_map(vars);
+	free(vars->ray);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -57,7 +63,6 @@ int	main(int argc, char **argv)
 		ft_error(vars.error_message);
 	ft_check_parameters(&vars.scene_description);
 	ft_game(&vars);
-	ft_free_map(&vars);
-	free(vars.ray);
+	ft_free_resources(&vars);
 	return (0);
 }

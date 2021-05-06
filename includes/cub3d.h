@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/05 21:22:42 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 00:06:46 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 void	ft_error(char *message);
 void	ft_save_error_message(char *message, t_vars *vars);
 void	ft_game(t_vars *vars);
+void	ft_setup(t_vars *vars);
 void	ft_free_map(t_vars *vars);
 void	ft_draw_line(t_vars *vars,
 			t_int_coordinate p0, t_int_coordinate p1, int color);
@@ -49,6 +50,5 @@ int		ft_key_press(int keycode, t_vars *vars);
 int		ft_calc_x_texture_offset(t_ray ray);
 int		ft_calc_y_texture_offset(t_wall wall, int y, int win_height);
 void	ft_create_texture(t_vars *vars);
-
 
 #endif

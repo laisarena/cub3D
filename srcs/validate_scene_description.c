@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/30 21:29:09 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/06 23:10:52 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,6 @@ static int	ft_resolution(char **split_line, t_vars *vars)
 		return (0);
 	}
 	vars->scene_description.resolution.identifier = 1;
-	vars->scene_description.counter++;
-	return (1);
-}
-
-static int	ft_texture(char **split_line, t_vars *vars, t_texture *s_texture)
-{
-	int	fd;
-
-	if (split_line[2])
-	{
-		ft_save_error_message("Misconfiguration on texture\n", vars);
-		return (0);
-	}
-	fd = open(split_line[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_save_error_message(NULL, vars);
-		return (0);
-	}
-	close(fd);
-	s_texture->identifier = 1;
 	vars->scene_description.counter++;
 	return (1);
 }
