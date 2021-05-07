@@ -1,4 +1,4 @@
-
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/06 23:46:47 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 21:25:16 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,18 @@ void	ft_error(char *message)
 	exit(-1);
 }
 
+static void	ft_free_texture(t_vars *vars)
+{
+	free(vars->scene_description.north.path);
+	free(vars->scene_description.south.path);
+	free(vars->scene_description.west.path);
+	free(vars->scene_description.east.path);
+}
+
 static void	ft_free_resources(t_vars *vars)
 {
 	ft_free_map(vars);
+	ft_free_texture(vars);
 	free(vars->ray);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 00:37:19 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 21:15:16 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 int	ft_close(t_vars *vars)
 {
 	mlx_destroy_image(vars->mlx, vars->image.image);
+	mlx_destroy_image(vars->mlx, vars->scene_description.north.image.image);
+	mlx_destroy_image(vars->mlx, vars->scene_description.south.image.image);
+	mlx_destroy_image(vars->mlx, vars->scene_description.west.image.image);
+	mlx_destroy_image(vars->mlx, vars->scene_description.east.image.image);
 	if (vars->window)
 		mlx_destroy_window(vars->mlx, vars->window);
 	free(vars->mlx);
