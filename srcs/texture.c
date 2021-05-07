@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 03:03:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 22:38:16 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/08 01:12:09 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	ft_create_texture_images(t_vars *vars)
 	ft_initialize_file_image(vars, &vars->scene_description.east);
 }
 
-int	ft_calc_x_texture_offset(t_ray ray)
+int	ft_calc_x_texture_offset(t_ray ray, t_texture *texture)
 {
 	if (ray.is_hit_vertical)
-		return ((int)ray.wall_hit.y % TILE);
-	return ((int)ray.wall_hit.x % TILE);
+		return ((int)ray.wall_hit.y % texture->width);
+	return ((int)ray.wall_hit.x % texture->width);
 }
 
 int	ft_calc_y_texture_offset(t_wall wall, int y, int win_height)
