@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:53:48 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 00:18:13 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 02:50:11 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_setup(t_vars *vars)
 {
 	ft_initialize_mlx(vars);
 	ft_initialize_image(vars);
-	//ft_create_texture_images(vars);
+	ft_create_texture_images(vars);
 	ft_initialize_player_position(vars);
 	ft_reset_moviments(&vars->player);
 }

@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:09:22 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/06 23:28:17 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 21:01:47 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ static int	ft_open_texture_file(char *file, t_vars *vars)
 	return (0);
 }
 
+static char	*ft_save_path(char *str)
+{
+	char	*dst;
+	int		len;
+
+	len = ft_strlen(str);
+	dst = (char *)malloc(sizeof(char) * (len + 1));
+	ft_strlcpy(dst, str, len + 1);
+	return (dst);
+}
+
 int	ft_texture(char **split_line, t_vars *vars, t_texture *texture)
 {
 	int	fd;
@@ -39,9 +50,8 @@ int	ft_texture(char **split_line, t_vars *vars, t_texture *texture)
 		return (0);
 	fd = ft_open_texture_file(split_line[1], vars);
 	close(fd);
+	texture->path = ft_save_path(split_line[1]);
 	texture->identifier = 1;
-	texture->path = split_line[1];
 	vars->scene_description.counter++;
 	return (1);
 }
-

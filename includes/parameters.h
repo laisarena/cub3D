@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/05 20:04:57 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 02:45:42 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define PARAMETERS_H
 
 # include "cub3d.h"
+
+typedef struct s_image_data
+{
+	void	*image;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_image_data;
 
 typedef struct s_resolution
 {
@@ -26,6 +35,9 @@ typedef struct s_texture
 {
 	unsigned int	identifier;
 	char			*path;
+	int				width;
+	int				height;
+	t_image_data	image;
 }					t_texture;
 
 typedef struct s_color
@@ -57,15 +69,6 @@ typedef struct s_scene_description
 	t_color			floor;
 	t_color			ceilling;
 }					t_scene_description;
-
-typedef struct s_image_data
-{
-	void	*image;
-	char	*address;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_image_data;
 
 typedef struct s_player
 {

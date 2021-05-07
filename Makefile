@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 14:07:28 by lfrasson          #+#    #+#              #
-#    Updated: 2021/05/07 00:01:43 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/05/07 02:02:28 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,21 +23,21 @@ PATH_MLX = ./minilibx-linux/
 PATH_SRCS = ./srcs/
 
 SRCS = main.c\
-	   validate_arguments.c\
-	   initialize.c\
-	   validate_scene_description.c\
-	   validate_color.c\
-	   validate_texture.c\
-	   validate_map.c\
-	   game.c\
-	   game_setup.c\
-	   minimap.c\
-	   player_movements.c\
-	   rays.c\
-	   render_rays.c\
-	   projection.c\
-	   draw.c\
-	   draw_line.c\
+	   validation/validate_arguments.c\
+	   validation/initialize.c\
+	   validation/validate_scene_description.c\
+	   validation/validate_color.c\
+	   validation/validate_texture.c\
+	   validation/validate_map.c\
+	   game/game.c\
+	   game/game_setup.c\
+	   game/minimap.c\
+	   game/player_movements.c\
+	   game/rays.c\
+	   game/render_rays.c\
+	   game/projection.c\
+	   game/draw.c\
+	   game/draw_line.c\
 	   texture.c\
 	   gnl/get_next_line.c\
 	   gnl/get_next_line_utils.c\
