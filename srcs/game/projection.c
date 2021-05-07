@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 22:41:17 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/08 00:49:53 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,32 @@ int	ft_get_color(t_image_data *image, int x, int y)
 	return (color);
 }
 
+static t_image_data	*ft_get_texture_image(t_ray ray, t_vars *vars)
+{
+	if (ray.is_hit_vertical)
+	{
+		if (ray.angle > 1.5 * PI || ray.angle < 0.5 * PI)
+			return (&vars->scene_description.east.image);
+		return (&vars->scene_description.west.image);
+	}
+	if (ray.angle > 0 && ray.angle < PI)
+		return (&vars->scene_description.south.image);
+	return (&vars->scene_description.north.image);
+}
 
 static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x)
 {
-	int	y;
-	int	color;
+	int				y;
+	int				color;
+	t_image_data	*image;
 
 	y = wall.top;
 	while (y < wall.bottom)
 	{
 		wall.texture_offset.y = ft_calc_y_texture_offset(wall, y,
 				vars->scene_description.resolution.y);
-		color = ft_get_color(&vars->scene_description.east.image,
-				wall.texture_offset.x,
+		image = ft_get_texture_image(ray, vars);
+		color = ft_get_color(image, wall.texture_offset.x,
 				wall.texture_offset.y);
 		if (ray.is_hit_vertical)
 			ft_put_pixel(&vars->image, x, y, color);
