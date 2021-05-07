@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 03:03:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 02:48:30 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:38:16 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,6 @@ void	ft_create_texture_images(t_vars *vars)
 	ft_initialize_file_image(vars, &vars->scene_description.south);
 	ft_initialize_file_image(vars, &vars->scene_description.west);
 	ft_initialize_file_image(vars, &vars->scene_description.east);
-}
-
-void 	ft_create_texture(t_vars *vars)
-{
-	int	x;
-	int	y;
-
-	vars->wall_texture = (int *)malloc(sizeof(int) * 32 * 32);
-	x = 0;
-	while (x < 32)
-	{
-		y = 0;
-		while (y < 32)
-		{
-			if (x % 8 && y % 8)
-				vars->wall_texture[(32 * y) + x] = 0xFF0000FF;
-			else
-				vars->wall_texture[(32 * y) + x] = 0xFF000000;
-			y++;
-		}
-		x++;
-	}
 }
 
 int	ft_calc_x_texture_offset(t_ray ray)

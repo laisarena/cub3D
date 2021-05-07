@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/03 02:29:33 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:41:17 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,21 @@ static void	ft_render_floor(t_wall wall, t_vars *vars, int x)
 			vars->scene_description.floor.hex);
 }
 
+int	ft_get_color(t_image_data *image, int x, int y)
+{
+	int		offset;
+	int		bytes_per_pixel;
+	int		color;
+	char	*address;
+
+	bytes_per_pixel = image->bits_per_pixel / 8;
+	offset = y * image->line_length + x * bytes_per_pixel;
+	address = image->address + offset;
+	color = *(unsigned int *)address;
+	return (color);
+}
+
+
 static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x)
 {
 	int	y;
@@ -76,14 +91,13 @@ static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x)
 	{
 		wall.texture_offset.y = ft_calc_y_texture_offset(wall, y,
 				vars->scene_description.resolution.y);
-		color = vars->wall_texture[(TILE * wall.texture_offset.y)
-			+ wall.texture_offset.x];
+		color = ft_get_color(&vars->scene_description.east.image,
+				wall.texture_offset.x,
+				wall.texture_offset.y);
 		if (ray.is_hit_vertical)
 			ft_put_pixel(&vars->image, x, y, color);
-			//ft_put_pixel(&vars->image, x, y, 0xFFFFFFFF);
 		else
 			ft_put_pixel(&vars->image, x, y, color);
-			//ft_put_pixel(&vars->image, x, y, 0xFFCCCCCC);
 		y++;
 	}
 }
@@ -93,7 +107,6 @@ void	ft_render_3d_projection(t_vars *vars)
 	int		x;
 	t_wall	wall;
 
-	ft_create_texture(vars);
 	x = 0;
 	while (x < vars->scene_description.resolution.x)
 	{

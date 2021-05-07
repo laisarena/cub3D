@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 02:45:42 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:38:04 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ typedef struct s_vars
 	t_image_data		image;
 	t_player			player;
 	t_ray				*ray;
-	int					*wall_texture;
 	int					bmp_save;
 	char				*error_message;
 }						t_vars;

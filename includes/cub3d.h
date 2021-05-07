@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 02:46:58 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:39:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		ft_close(t_vars *vars);
 int		ft_key_press(int keycode, t_vars *vars);
 int		ft_calc_x_texture_offset(t_ray ray);
 int		ft_calc_y_texture_offset(t_wall wall, int y, int win_height);
-void	ft_create_texture(t_vars *vars);
 void	ft_create_texture_images(t_vars *vars);
 
 #endif
