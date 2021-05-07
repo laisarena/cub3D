@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 03:03:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/08 01:12:09 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/08 01:19:51 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	ft_calc_x_texture_offset(t_ray ray, t_texture *texture)
 	return ((int)ray.wall_hit.x % texture->width);
 }
 
-int	ft_calc_y_texture_offset(t_wall wall, int y, int win_height)
+int	ft_calc_y_texture_offset(t_wall wall, int y, int win_height, t_texture *texture)
 {
 	int		distance_from_top;
 	float	stretch_factor;
 
 	distance_from_top = y + (wall.height / 2) - (win_height / 2);
-	stretch_factor = (float)32 / wall.height;
+	stretch_factor = (float)texture->height / wall.height;
 	return (distance_from_top * stretch_factor);
 }

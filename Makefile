@@ -1,4 +1,5 @@
-# **************************************************************************** #
+#
+#**************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -38,7 +39,7 @@ SRCS = main.c\
 	   game/projection.c\
 	   game/draw.c\
 	   game/draw_line.c\
-	   texture.c\
+	   game/texture.c\
 	   gnl/get_next_line.c\
 	   gnl/get_next_line_utils.c\
 	   bitmap/bitmap.c\

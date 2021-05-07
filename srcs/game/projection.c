@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/08 01:11:31 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/08 01:22:15 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static t_texture	*ft_get_texture(t_ray ray, t_vars *vars)
 	return (&vars->scene_description.north);
 }
 
-static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x, t_image_data *image)
+static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x, t_texture *texture)
 {
 	int				y;
 	int				color;
@@ -102,8 +102,8 @@ static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x, t_image_
 	while (y < wall.bottom)
 	{
 		wall.texture_offset.y = ft_calc_y_texture_offset(wall, y,
-				vars->scene_description.resolution.y);
-		color = ft_get_color(image, wall.texture_offset.x,
+				vars->scene_description.resolution.y, texture);
+		color = ft_get_color(&texture->image, wall.texture_offset.x,
 				wall.texture_offset.y);
 		if (ray.is_hit_vertical)
 			ft_put_pixel(&vars->image, x, y, color);
@@ -132,7 +132,7 @@ void	ft_render_3d_projection(t_vars *vars)
 		texture = ft_get_texture(vars->ray[x], vars);
 		wall.texture_offset.x = ft_calc_x_texture_offset(vars->ray[x], texture);
 		ft_render_ceiling(wall, vars, x);
-		ft_render_wall(wall, vars->ray[x], vars, x, &texture->image);
+		ft_render_wall(wall, vars->ray[x], vars, x, texture);
 		ft_render_floor(wall, vars, x);
 		x++;
 	}
