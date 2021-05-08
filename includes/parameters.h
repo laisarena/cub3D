@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 22:38:04 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/08 02:43:38 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_player
 	float	rotation_angle;
 	float	walk_speed;
 	float	turn_speed;
+	int		set;
 }			t_player;
 
 typedef struct s_ray

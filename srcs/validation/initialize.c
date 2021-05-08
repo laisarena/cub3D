@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:00:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/20 01:19:53 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/08 02:44:36 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	ft_initialize(t_vars *vars)
 	ft_initialize_color(&vars->scene_description.floor);
 	ft_initialize_color(&vars->scene_description.ceilling);
 	ft_initialize_map(&vars->map);
+	vars->player.set = 0;
 }

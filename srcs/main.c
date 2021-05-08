@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 21:25:16 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/08 02:48:27 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	main(int argc, char **argv)
 	if (ft_scene_description_parameters(&vars))
 		ft_error(vars.error_message);
 	ft_check_parameters(&vars.scene_description);
+	ft_check_map(&vars);
 	ft_game(&vars);
 	ft_free_resources(&vars);
 	return (0);

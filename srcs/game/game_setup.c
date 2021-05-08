@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:53:48 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 02:50:11 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/08 03:12:05 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ static void	ft_initialize_player_position(t_vars *vars)
 {
 	vars->player.width = 1;
 	vars->player.height = 1;
-	vars->player.x = vars->scene_description.resolution.x / 2;
-	vars->player.y = vars->scene_description.resolution.y / 2;
-	vars->player.rotation_angle = 6.22;
+	vars->player.x = ((vars->player.x * TILE) + TILE / 2);
+	vars->player.y = ((vars->player.y * TILE) + TILE / 2);
 }
 
 void	ft_setup(t_vars *vars)

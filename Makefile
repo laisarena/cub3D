@@ -30,6 +30,7 @@ SRCS = main.c\
 	   validation/validate_color.c\
 	   validation/validate_texture.c\
 	   validation/validate_map.c\
+	   validation/validate_map_2.c\
 	   game/game.c\
 	   game/game_setup.c\
 	   game/minimap.c\
