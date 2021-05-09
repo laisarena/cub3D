@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/08 01:22:15 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/09 21:54:40 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	ft_render_ceiling(t_wall wall, t_vars *vars, int x)
 {
 	int	y;
 
+	if (wall.top > vars->game.resolution.y)
+		return ;
 	y = 0;
 	while (y < wall.top)
 		ft_put_pixel(&vars->image,
@@ -58,6 +60,9 @@ static void	ft_render_floor(t_wall wall, t_vars *vars, int x)
 {
 	int	y;
 
+	if (wall.bottom > vars->game.resolution.y
+		|| wall.bottom < 0)
+		return ;
 	y = wall.bottom;
 	while (y < vars->game.resolution.y)
 		ft_put_pixel(&vars->image,

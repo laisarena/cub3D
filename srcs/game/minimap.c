@@ -18,8 +18,6 @@ int	ft_is_wall_at(float x, float y, t_vars *vars)
 	int		map_column;
 	char	var;
 
-	//if (x < 0 || x > vars->scene_description.resolution.x
-	//	|| y < 0 || y > vars->scene_description.resolution.y)
 	if (x < 0 || x > vars->map.cols * TILE
 		|| y < 0 || y > vars->map.rows * TILE)
 		return (1);

@@ -39,7 +39,7 @@ static void	ft_check_file_path_argument(char *scene_description_file)
 void	ft_validate_arguments(int argc, char **argv, t_vars *vars)
 {
 	if (argc == 1)
-		ft_error("This program needs a scene description file as argument\n");
+		ft_error("This program needs a file .cub as first argument\n");
 	else if (argc > 3)
 		ft_error("Too many arguments\n");
 	vars->bmp_save = 0;
