@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 23:38:57 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 20:59:46 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/10 03:14:14 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_intersection
 	t_coord	wall_hit;
 	int		found_wall_hit;
 	int		hit_distance;
-	int		wall_content;
 }			t_intersection;
 
 #endif

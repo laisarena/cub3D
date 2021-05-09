@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 13:24:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 23:05:02 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/10 03:15:20 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static t_intersection	ft_init_horiz(t_ray *ray, t_vars *vars)
 	horiz.wall_hit.x = 0;
 	horiz.wall_hit.y = 0;
 	horiz.hit_distance = 0;
-	horiz.wall_content = 0;
 	return (horiz);
 }
 
@@ -84,7 +83,6 @@ static t_intersection	ft_init_verti(t_ray *ray, t_vars *vars)
 	verti.wall_hit.x = 0;
 	verti.wall_hit.y = 0;
 	verti.hit_distance = 0;
-	verti.wall_content = 0;
 	return (verti);
 }
 
@@ -103,14 +101,12 @@ static void	ft_find_intersection_horiz(t_intersection *horiz,
 			check.y -= 1;
 		if (ft_is_wall_at(check.x, check.y, vars)
 			|| (horiz->next_touch.x <= 0
-				&& horiz->next_touch.x >= vars->game.resolution.x
+				&& horiz->next_touch.x >= vars->map.cols * TILE
 				&& horiz->next_touch.y <= 0
-				&& horiz->next_touch.y >= vars->game.resolution.y))
+				&& horiz->next_touch.y >= vars->map.rows *TILE))
 		{
 			horiz->wall_hit.x = horiz->next_touch.x;
 			horiz->wall_hit.y = horiz->next_touch.y;
-			//horiz->wall_content = vars->map.matrix[(int)floor(check.y / TILE)]
-			//	[(int)floor(check.x / TILE)];
 			horiz->found_wall_hit = 1;
 			break ;
 		}
@@ -134,14 +130,12 @@ static void	ft_find_intersection_verti(t_intersection *verti,
 			check.x -= 1;
 		if (ft_is_wall_at(check.x, check.y, vars)
 			|| (verti->next_touch.x <= 0
-				&& verti->next_touch.x >= vars->game.resolution.x
+				&& verti->next_touch.x >= vars->map.cols * TILE
 				&& verti->next_touch.y <= 0
-				&& verti->next_touch.y >= vars->game.resolution.y))
+				&& verti->next_touch.y >= vars->map.rows * TILE))
 		{
 			verti->wall_hit.x = verti->next_touch.x;
 			verti->wall_hit.y = verti->next_touch.y;
-			//verti->wall_content = vars->map.matrix[(int)floor(check.y / TILE)]
-			//	[(int)floor(check.x / TILE)];
 			verti->found_wall_hit = 1;
 			break ;
 		}
@@ -164,7 +158,6 @@ static void	ft_set_hit_wall(t_intersection *inter, t_ray *ray)
 	ray->distance = inter->hit_distance;
 	ray->wall_hit.x = inter->wall_hit.x;
 	ray->wall_hit.y = inter->wall_hit.y;
-	ray->wall_hit_content = inter->wall_content;
 }
 
 static void	ft_cast_single_ray(t_ray *ray, t_vars *vars)
@@ -198,12 +191,12 @@ void	ft_cast_rays(t_vars *vars)
 	int		num_rays;
 	float	project_distance;
 
-	num_rays = vars->game.resolution.x;
+	num_rays = vars->game.resolution.width;
 	vars->ray = malloc(sizeof(t_ray) * (num_rays + 1));
 	column = 0;
 	while (column < num_rays)
 	{
-		project_distance = (vars->game.resolution.x / 2) / tan(FOV_ANGLE / 2);
+		project_distance = (vars->game.resolution.width / 2) / tan(FOV_ANGLE / 2);
 		ray_angle = vars->player.rotation_angle
 			+ atan((column - num_rays / 2) / project_distance);
 		vars->ray[column].angle = ft_normalize_angle(ray_angle);

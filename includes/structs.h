@@ -27,8 +27,8 @@ typedef struct s_image_data
 typedef struct s_resolution
 {
 	int	identifier;
-	int	x;
-	int	y;
+	int	width;
+	int	height;
 }		t_resolution;
 
 typedef struct s_texture

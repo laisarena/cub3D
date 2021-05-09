@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 22:31:53 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/06 01:44:29 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/09 23:41:59 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	ft_write_bmp_file(t_vars *vars)
 	t_bmp_header	header;
 	int				fd;
 
-	header = ft_create_header(vars->game.resolution.x,
-			vars->game.resolution.y * (-1));
+	header = ft_create_header(vars->game.resolution.width,
+			vars->game.resolution.height * (-1));
 	fd = ft_open_file("cub3D.bmp");
 	if (!fd)
 		ft_save_error_message("Could not create .bmp file", vars);

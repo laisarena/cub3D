@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:00:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/08 02:44:36 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/09 23:13:25 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static	void	ft_initialize_resolution(t_resolution *resolution)
 {
 	resolution->identifier = 0;
-	resolution->x = 0;
-	resolution->y = 0;
+	resolution->width = 0;
+	resolution->height = 0;
 }
 
 static	void	ft_initialize_texture(t_texture *texture)

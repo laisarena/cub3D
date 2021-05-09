@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 20:40:35 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/09 23:19:02 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	ft_clear_image(t_vars *vars)
 	int	y;
 
 	y = -1;
-	while (++y < vars->game.resolution.y)
+	while (++y < vars->game.resolution.height)
 	{
 		x = -1;
-		while (++x < vars->game.resolution.x)
+		while (++x < vars->game.resolution.width)
 			ft_put_pixel(&vars->image, x, y, 0x00000000);
 	}
 }
@@ -40,8 +40,9 @@ void	ft_create_window(t_vars *vars)
 	if (vars->window)
 		return ;
 	vars->window = mlx_new_window(vars->mlx,
-			vars->game.resolution.x,
-			vars->game.resolution.y, "cub3D");
+			vars->game.resolution.width,
+			vars->game.resolution.height,
+			"cub3D");
 	if (!vars->window)
 		ft_error("Error creating window");
 }

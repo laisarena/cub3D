@@ -6,25 +6,11 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/06 23:10:52 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/09 23:16:17 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	ft_free_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		split[i++] = NULL;
-	}
-	free(split);
-	split = NULL;
-}
 
 static int	ft_is_string_number(char *string)
 {
@@ -44,15 +30,13 @@ int	ft_validate_number(char *string, int *parameter)
 
 static int	ft_resolution(char **split_line, t_vars *vars)
 {
-	if (!(ft_validate_number(split_line[1],
-				&vars->game.resolution.x)))
+	if (!(ft_validate_number(split_line[1], &vars->game.resolution.width)))
 	{
 		ft_save_error_message(
 			"Misconfiguration on resolution x render size\n", vars);
 		return (0);
 	}
-	if (!(ft_validate_number(split_line[2],
-				&vars->game.resolution.y)))
+	if (!(ft_validate_number(split_line[2], &vars->game.resolution.height)))
 	{
 		ft_save_error_message(
 			"Misconfiguration on resolution y render size\n", vars);
