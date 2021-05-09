@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 13:24:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/27 02:50:47 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/09 23:05:02 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ float	ft_normalize_angle(float angle)
 
 static void	ft_where_ray_facing(t_ray *ray)
 {
-	/*
-	ray->is_facing_down = ray->angle > 0 && ray->angle < PI;
-	ray->is_facing_up = !ray->is_facing_down;
-	ray->is_facing_left = ray->angle < 0.5 * PI && ray->angle > 3.5 * PI;
-	ray->is_facing_right = !ray->is_facing_left;
-	*/
 	ray->is_facing_up = ray->angle > 0 && ray->angle < PI;
 	ray->is_facing_down = !ray->is_facing_up;
 	ray->is_facing_right = ray->angle < (0.5 * PI) || ray->angle > (1.5 * PI);
@@ -200,19 +194,21 @@ static void	ft_cast_single_ray(t_ray *ray, t_vars *vars)
 void	ft_cast_rays(t_vars *vars)
 {
 	float	ray_angle;
-	int		strip;
+	int		column;
 	int		num_rays;
+	float	project_distance;
 
-	//num_rays = TILE * vars->map.cols;
 	num_rays = vars->game.resolution.x;
-	ray_angle = vars->player.rotation_angle - (FOV_ANGLE / 2);
 	vars->ray = malloc(sizeof(t_ray) * (num_rays + 1));
-	strip = 0;
-	while (strip < num_rays)
+	column = 0;
+	while (column < num_rays)
 	{
-		vars->ray[strip].angle = ft_normalize_angle(ray_angle);
-		ft_cast_single_ray(&vars->ray[strip], vars);
+		project_distance = (vars->game.resolution.x / 2) / tan(FOV_ANGLE / 2);
+		ray_angle = vars->player.rotation_angle
+			+ atan((column - num_rays / 2) / project_distance);
+		vars->ray[column].angle = ft_normalize_angle(ray_angle);
+		ft_cast_single_ray(&vars->ray[column], vars);
 		ray_angle += FOV_ANGLE / num_rays;
-		strip++;
+		column++;
 	}
 }
