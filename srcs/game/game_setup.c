@@ -19,13 +19,13 @@ static void	ft_initialize_mlx(t_vars *vars)
 		ft_error("Error initializing minilibx");
 }
 
-static void	ft_initialize_image(t_vars *vars)
+static void	ft_initialize_mlx_image(t_vars *vars)
 {
 	vars->image.image = mlx_new_image(vars->mlx,
-			vars->scene_description.resolution.x,
-			vars->scene_description.resolution.y);
+			vars->game.resolution.x,
+			vars->game.resolution.y);
 	if (!vars->image.image)
-		ft_error("Error creating image");
+		ft_error("Error creating game image");
 	vars->image.address = mlx_get_data_addr(vars->image.image,
 			&vars->image.bits_per_pixel,
 			&vars->image.line_length,
@@ -43,7 +43,7 @@ static void	ft_initialize_player_position(t_vars *vars)
 void	ft_setup(t_vars *vars)
 {
 	ft_initialize_mlx(vars);
-	ft_initialize_image(vars);
+	ft_initialize_mlx_image(vars);
 	ft_create_texture_images(vars);
 	ft_initialize_player_position(vars);
 	ft_reset_moviments(&vars->player);

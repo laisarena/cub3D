@@ -52,6 +52,6 @@ int	ft_texture(char **split_line, t_vars *vars, t_texture *texture)
 	close(fd);
 	texture->path = ft_save_path(split_line[1]);
 	texture->identifier = 1;
-	vars->scene_description.counter++;
+	vars->game.counter++;
 	return (1);
 }

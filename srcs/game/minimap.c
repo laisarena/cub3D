@@ -29,7 +29,7 @@ int	ft_is_wall_at(float x, float y, t_vars *vars)
 	return (var == '1');
 }
 
-void	ft_render_minimap(t_vars *vars)
+void	ft_render_minimap_grid(t_vars *vars)
 {
 	int			i;
 	int			j;

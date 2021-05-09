@@ -51,7 +51,7 @@ static void	ft_render_ceiling(t_wall wall, t_vars *vars, int x)
 		ft_put_pixel(&vars->image,
 			x,
 			y++,
-			vars->scene_description.ceilling.hex);
+			vars->game.ceilling.hex);
 }
 
 static void	ft_render_floor(t_wall wall, t_vars *vars, int x)
@@ -59,11 +59,11 @@ static void	ft_render_floor(t_wall wall, t_vars *vars, int x)
 	int	y;
 
 	y = wall.bottom;
-	while (y < vars->scene_description.resolution.y)
+	while (y < vars->game.resolution.y)
 		ft_put_pixel(&vars->image,
 			x,
 			y++,
-			vars->scene_description.floor.hex);
+			vars->game.floor.hex);
 }
 
 int	ft_get_color(t_image_data *image, int x, int y)
@@ -85,12 +85,12 @@ static t_texture	*ft_get_texture(t_ray ray, t_vars *vars)
 	if (ray.is_hit_vertical)
 	{
 		if (ray.angle > 1.5 * PI || ray.angle < 0.5 * PI)
-			return (&vars->scene_description.east);
-		return (&vars->scene_description.west);
+			return (&vars->game.east);
+		return (&vars->game.west);
 	}
 	if (ray.angle > 0 && ray.angle < PI)
-		return (&vars->scene_description.south);
-	return (&vars->scene_description.north);
+		return (&vars->game.south);
+	return (&vars->game.north);
 }
 
 static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x, t_texture *texture)
@@ -102,7 +102,7 @@ static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x, t_textur
 	while (y < wall.bottom)
 	{
 		wall.texture_offset.y = ft_calc_y_texture_offset(wall, y,
-				vars->scene_description.resolution.y, texture);
+				vars->game.resolution.y, texture);
 		color = ft_get_color(&texture->image, wall.texture_offset.x,
 				wall.texture_offset.y);
 		if (ray.is_hit_vertical)
@@ -120,14 +120,14 @@ void	ft_render_3d_projection(t_vars *vars)
 	t_texture	*texture;
 
 	x = 0;
-	while (x < vars->scene_description.resolution.x)
+	while (x < vars->game.resolution.x)
 	{
 		wall.height = ft_calc_wall_height(vars->ray[x],
 				vars->player.rotation_angle,
-				vars->scene_description.resolution.x);
-		wall.top = ft_calc_wall_top(vars->scene_description.resolution.y,
+				vars->game.resolution.x);
+		wall.top = ft_calc_wall_top(vars->game.resolution.y,
 				wall.height);
-		wall.bottom = ft_calc_wall_bottom(vars->scene_description.resolution.y,
+		wall.bottom = ft_calc_wall_bottom(vars->game.resolution.y,
 				wall.height);
 		texture = ft_get_texture(vars->ray[x], vars);
 		wall.texture_offset.x = ft_calc_x_texture_offset(vars->ray[x], texture);

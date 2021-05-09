@@ -16,13 +16,13 @@ int	ft_key_press(int keycode, t_vars *vars)
 {
 	if (keycode == 0xFF1B)
 		ft_close(vars);
-	if (keycode == W)
+	if (keycode == W_KEY)
 		vars->player.walk_direction = 1;
-	if (keycode == A)
+	if (keycode == A_KEY)
 		vars->player.turn_direction = -1;
-	if (keycode == S)
+	if (keycode == S_KEY)
 		vars->player.walk_direction = -1;
-	if (keycode == D)
+	if (keycode == D_KEY)
 		vars->player.turn_direction = 1;
 	ft_render(vars);
 	return (1);
@@ -51,7 +51,7 @@ void	ft_move_player(t_vars *vars)
 	}
 }
 
-void	ft_render_player(t_vars *vars)
+void	ft_render_minimap_player(t_vars *vars)
 {
 	t_retangle	retangle;
 

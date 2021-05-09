@@ -6,25 +6,11 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 21:15:16 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/09 20:40:35 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	ft_close(t_vars *vars)
-{
-	mlx_destroy_image(vars->mlx, vars->image.image);
-	mlx_destroy_image(vars->mlx, vars->scene_description.north.image.image);
-	mlx_destroy_image(vars->mlx, vars->scene_description.south.image.image);
-	mlx_destroy_image(vars->mlx, vars->scene_description.west.image.image);
-	mlx_destroy_image(vars->mlx, vars->scene_description.east.image.image);
-	if (vars->window)
-		mlx_destroy_window(vars->mlx, vars->window);
-	free(vars->mlx);
-	ft_free_map(vars);
-	exit(0);
-}
 
 void	ft_clear_image(t_vars *vars)
 {
@@ -32,10 +18,10 @@ void	ft_clear_image(t_vars *vars)
 	int	y;
 
 	y = -1;
-	while (++y < vars->scene_description.resolution.y)
+	while (++y < vars->game.resolution.y)
 	{
 		x = -1;
-		while (++x < vars->scene_description.resolution.x)
+		while (++x < vars->game.resolution.x)
 			ft_put_pixel(&vars->image, x, y, 0x00000000);
 	}
 }
@@ -54,13 +40,13 @@ void	ft_create_window(t_vars *vars)
 	if (vars->window)
 		return ;
 	vars->window = mlx_new_window(vars->mlx,
-			vars->scene_description.resolution.x,
-			vars->scene_description.resolution.y, "cub3D");
+			vars->game.resolution.x,
+			vars->game.resolution.y, "cub3D");
 	if (!vars->window)
 		ft_error("Error creating window");
 }
 
-void	ft_update(t_vars *vars)
+void	ft_game_update(t_vars *vars)
 {
 	ft_clear_image(vars);
 	ft_move_player(vars);
@@ -70,11 +56,12 @@ void	ft_update(t_vars *vars)
 
 void	ft_render(t_vars *vars)
 {
-	ft_update(vars);
+	ft_game_update(vars);
 	ft_render_3d_projection(vars);
-	ft_render_minimap(vars);
-	ft_render_player(vars);
-	ft_rende_rays(vars);
+	//ft_render_sprites(vars);
+	ft_render_minimap_grid(vars);
+	ft_render_minimap_player(vars);
+	ft_render_minimap_rays(vars);
 	ft_bmp_file(vars);
 	ft_create_window(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);

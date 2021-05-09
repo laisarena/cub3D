@@ -13,12 +13,12 @@
 #include "cub3d.h"
 
 void	ft_draw_line(t_vars *vars,
-					t_int_coordinate p0,
-					t_int_coordinate p1,
+					t_int_coord p0,
+					t_int_coord p1,
 					int color)
 {
-	t_coordinate	position;
-	t_coordinate	delta;
+	t_coord	position;
+	t_coord	delta;
 	float			step;
 	int				i;
 

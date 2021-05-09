@@ -24,13 +24,15 @@ PATH_MLX = ./minilibx-linux/
 PATH_SRCS = ./srcs/
 
 SRCS = main.c\
-	   validation/validate_arguments.c\
-	   validation/initialize.c\
-	   validation/validate_scene_description.c\
-	   validation/validate_color.c\
-	   validation/validate_texture.c\
-	   validation/validate_map.c\
-	   validation/validate_map_2.c\
+	   error_handler.c\
+	   free_resources.c\
+	   input_validation/validate_arguments.c\
+	   input_validation/initialize.c\
+	   input_validation/validate_scene_description.c\
+	   input_validation/validate_color.c\
+	   input_validation/validate_texture.c\
+	   input_validation/validate_map.c\
+	   input_validation/validate_map_2.c\
 	   game/game.c\
 	   game/game_setup.c\
 	   game/minimap.c\

@@ -45,14 +45,14 @@ int	ft_validate_number(char *string, int *parameter)
 static int	ft_resolution(char **split_line, t_vars *vars)
 {
 	if (!(ft_validate_number(split_line[1],
-				&vars->scene_description.resolution.x)))
+				&vars->game.resolution.x)))
 	{
 		ft_save_error_message(
 			"Misconfiguration on resolution x render size\n", vars);
 		return (0);
 	}
 	if (!(ft_validate_number(split_line[2],
-				&vars->scene_description.resolution.y)))
+				&vars->game.resolution.y)))
 	{
 		ft_save_error_message(
 			"Misconfiguration on resolution y render size\n", vars);
@@ -64,8 +64,8 @@ static int	ft_resolution(char **split_line, t_vars *vars)
 			"Misconfiguration on resolution\n", vars);
 		return (0);
 	}
-	vars->scene_description.resolution.identifier = 1;
-	vars->scene_description.counter++;
+	vars->game.resolution.identifier = 1;
+	vars->game.counter++;
 	return (1);
 }
 
@@ -74,19 +74,19 @@ static int	validate(char **split_line, t_vars *vars)
 	if (!ft_strncmp(split_line[0], "R", 2))
 		return (ft_resolution(split_line, vars));
 	else if (!ft_strncmp(split_line[0], "NO", 3))
-		return (ft_texture(split_line, vars, &vars->scene_description.north));
+		return (ft_texture(split_line, vars, &vars->game.north));
 	else if (!ft_strncmp(split_line[0], "SO", 3))
-		return (ft_texture(split_line, vars, &vars->scene_description.south));
+		return (ft_texture(split_line, vars, &vars->game.south));
 	else if (!ft_strncmp(split_line[0], "WE", 3))
-		return (ft_texture(split_line, vars, &vars->scene_description.west));
+		return (ft_texture(split_line, vars, &vars->game.west));
 	else if (!ft_strncmp(split_line[0], "EA", 3))
-		return (ft_texture(split_line, vars, &vars->scene_description.east));
+		return (ft_texture(split_line, vars, &vars->game.east));
 	else if (!ft_strncmp(split_line[0], "S", 2))
-		return (ft_texture(split_line, vars, &vars->scene_description.sprite));
+		return (ft_texture(split_line, vars, &vars->game.sprite));
 	else if (!ft_strncmp(split_line[0], "F", 2))
-		return (ft_color(split_line, vars, &vars->scene_description.floor));
+		return (ft_color(split_line, vars, &vars->game.floor));
 	else if (!ft_strncmp(split_line[0], "C", 2))
-		return (ft_color(split_line, vars, &vars->scene_description.ceilling));
+		return (ft_color(split_line, vars, &vars->game.ceilling));
 	return (1);
 }
 
@@ -112,7 +112,7 @@ int	ft_parameters(int fd, t_vars *vars)
 
 	line = NULL;
 	ret = 1;
-	while (vars->scene_description.counter < 8 && ret
+	while (vars->game.counter < 8 && ret
 		&& get_next_line(fd, &line) > 0)
 	{
 		if (line && *line)
@@ -129,7 +129,7 @@ int	ft_scene_description_parameters(t_vars *vars)
 {
 	int	fd;
 
-	fd = open(vars->scene_description.file, O_RDONLY);
+	fd = open(vars->game.file, O_RDONLY);
 	if (!(ft_parameters(fd, vars)))
 	{
 		close(fd);
@@ -144,7 +144,7 @@ int	ft_scene_description_parameters(t_vars *vars)
 	return (0);
 }
 
-void	ft_check_parameters(t_scene_description *s_scene_description)
+void	ft_check_parameters(t_game *s_scene_description)
 {
 	if (s_scene_description->resolution.identifier == 0)
 		ft_error("Missing R parameter\n");

@@ -73,6 +73,6 @@ int	ft_color(char **split_line, t_vars *vars, t_color *color)
 	}
 	color->hex = ft_rgb_to_hex(color->r, color->g, color->b);
 	color->identifier = 1;
-	vars->scene_description.counter++;
+	vars->game.counter++;
 	return (1);
 }

@@ -12,16 +12,16 @@
 
 #include "cub3d.h"
 
-void	ft_rende_rays(t_vars *vars)
+void	ft_render_minimap_rays(t_vars *vars)
 {
 	int					i;
-	t_int_coordinate	player;
-	t_int_coordinate	wall;
+	t_int_coord	player;
+	t_int_coord	wall;
 
 	player.x = vars->player.x * MINI_FACTOR;
 	player.y = vars->player.y * MINI_FACTOR;
 	i = 0;
-	while (i < vars->scene_description.resolution.x)
+	while (i < vars->game.resolution.x)
 	{
 		wall.x = vars->ray[i].wall_hit.x * MINI_FACTOR;
 		wall.y = vars->ray[i].wall_hit.y * MINI_FACTOR;

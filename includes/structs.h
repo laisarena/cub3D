@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARAMETERS_H
-# define PARAMETERS_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 # include "cub3d.h"
 
@@ -56,7 +56,7 @@ typedef struct s_map
 	int		cols;
 }			t_map;
 
-typedef struct s_scene_description
+typedef struct s_game
 {
 	char			*file;
 	unsigned int	counter;
@@ -68,7 +68,7 @@ typedef struct s_scene_description
 	t_texture		sprite;
 	t_color			floor;
 	t_color			ceilling;
-}					t_scene_description;
+}					t_game;
 
 typedef struct s_player
 {
@@ -86,36 +86,36 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	float			angle;
-	t_coordinate	wall_hit;
-	float			distance;
-	int				is_hit_vertical;
-	int				is_facing_up;
-	int				is_facing_down;
-	int				is_facing_left;
-	int				is_facing_right;
-	int				wall_hit_content;
-}					t_ray;
+	float	angle;
+	t_coord	wall_hit;
+	float	distance;
+	int		is_hit_vertical;
+	int		is_facing_up;
+	int		is_facing_down;
+	int		is_facing_left;
+	int		is_facing_right;
+	int		wall_hit_content;
+}			t_ray;
 
 typedef struct s_vars
 {	
-	t_scene_description	scene_description;
-	t_map				map;
-	void				*mlx;
-	void				*window;
-	t_image_data		image;
-	t_player			player;
-	t_ray				*ray;
-	int					bmp_save;
-	char				*error_message;
-}						t_vars;
+	t_game			game;
+	t_map			map;
+	void			*mlx;
+	void			*window;
+	t_image_data	image;
+	t_player		player;
+	t_ray			*ray;
+	int				bmp_save;
+	char			*error_message;
+}					t_vars;
 
 typedef struct s_wall
 {
-	int					height;
-	int					top;
-	int					bottom;
-	t_int_coordinate	texture_offset;
-}						t_wall;
+	int			height;
+	int			top;
+	int			bottom;
+	t_int_coord	texture_offset;
+}				t_wall;
 
 #endif

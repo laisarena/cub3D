@@ -29,10 +29,10 @@ static void	ft_initialize_file_image(t_vars *vars,
 
 void	ft_create_texture_images(t_vars *vars)
 {
-	ft_initialize_file_image(vars, &vars->scene_description.north);
-	ft_initialize_file_image(vars, &vars->scene_description.south);
-	ft_initialize_file_image(vars, &vars->scene_description.west);
-	ft_initialize_file_image(vars, &vars->scene_description.east);
+	ft_initialize_file_image(vars, &vars->game.north);
+	ft_initialize_file_image(vars, &vars->game.south);
+	ft_initialize_file_image(vars, &vars->game.west);
+	ft_initialize_file_image(vars, &vars->game.east);
 }
 
 int	ft_calc_x_texture_offset(t_ray ray, t_texture *texture)

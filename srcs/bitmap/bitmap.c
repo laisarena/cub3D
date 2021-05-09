@@ -83,8 +83,8 @@ int	ft_write_bmp_file(t_vars *vars)
 	t_bmp_header	header;
 	int				fd;
 
-	header = ft_create_header(vars->scene_description.resolution.x,
-			vars->scene_description.resolution.y * (-1));
+	header = ft_create_header(vars->game.resolution.x,
+			vars->game.resolution.y * (-1));
 	fd = ft_open_file("cub3D.bmp");
 	if (!fd)
 		ft_save_error_message("Could not create .bmp file", vars);

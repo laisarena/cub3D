@@ -42,15 +42,15 @@ static	void	ft_initialize_map(t_map *map)
 
 void	ft_initialize(t_vars *vars)
 {
-	vars->scene_description.counter = 0;
-	ft_initialize_resolution(&vars->scene_description.resolution);
-	ft_initialize_texture(&vars->scene_description.north);
-	ft_initialize_texture(&vars->scene_description.south);
-	ft_initialize_texture(&vars->scene_description.west);
-	ft_initialize_texture(&vars->scene_description.east);
-	ft_initialize_texture(&vars->scene_description.sprite);
-	ft_initialize_color(&vars->scene_description.floor);
-	ft_initialize_color(&vars->scene_description.ceilling);
+	vars->game.counter = 0;
+	ft_initialize_resolution(&vars->game.resolution);
+	ft_initialize_texture(&vars->game.north);
+	ft_initialize_texture(&vars->game.south);
+	ft_initialize_texture(&vars->game.west);
+	ft_initialize_texture(&vars->game.east);
+	ft_initialize_texture(&vars->game.sprite);
+	ft_initialize_color(&vars->game.floor);
+	ft_initialize_color(&vars->game.ceilling);
 	ft_initialize_map(&vars->map);
 	vars->player.set = 0;
 }

@@ -97,7 +97,7 @@ static t_intersection	ft_init_verti(t_ray *ray, t_vars *vars)
 static void	ft_find_intersection_horiz(t_intersection *horiz,
 		t_ray *ray, t_vars *vars)
 {
-	t_coordinate	check;
+	t_coord	check;
 
 	while (1)
 	{
@@ -109,9 +109,9 @@ static void	ft_find_intersection_horiz(t_intersection *horiz,
 			check.y -= 1;
 		if (ft_is_wall_at(check.x, check.y, vars)
 			|| (horiz->next_touch.x <= 0
-				&& horiz->next_touch.x >= vars->scene_description.resolution.x
+				&& horiz->next_touch.x >= vars->game.resolution.x
 				&& horiz->next_touch.y <= 0
-				&& horiz->next_touch.y >= vars->scene_description.resolution.y))
+				&& horiz->next_touch.y >= vars->game.resolution.y))
 		{
 			horiz->wall_hit.x = horiz->next_touch.x;
 			horiz->wall_hit.y = horiz->next_touch.y;
@@ -128,7 +128,7 @@ static void	ft_find_intersection_horiz(t_intersection *horiz,
 static void	ft_find_intersection_verti(t_intersection *verti,
 		t_ray *ray, t_vars *vars)
 {
-	t_coordinate	check;
+	t_coord	check;
 
 	while (1)
 	{
@@ -140,9 +140,9 @@ static void	ft_find_intersection_verti(t_intersection *verti,
 			check.x -= 1;
 		if (ft_is_wall_at(check.x, check.y, vars)
 			|| (verti->next_touch.x <= 0
-				&& verti->next_touch.x >= vars->scene_description.resolution.x
+				&& verti->next_touch.x >= vars->game.resolution.x
 				&& verti->next_touch.y <= 0
-				&& verti->next_touch.y >= vars->scene_description.resolution.y))
+				&& verti->next_touch.y >= vars->game.resolution.y))
 		{
 			verti->wall_hit.x = verti->next_touch.x;
 			verti->wall_hit.y = verti->next_touch.y;
@@ -204,7 +204,7 @@ void	ft_cast_rays(t_vars *vars)
 	int		num_rays;
 
 	//num_rays = TILE * vars->map.cols;
-	num_rays = vars->scene_description.resolution.x;
+	num_rays = vars->game.resolution.x;
 	ray_angle = vars->player.rotation_angle - (FOV_ANGLE / 2);
 	vars->ray = malloc(sizeof(t_ray) * (num_rays + 1));
 	strip = 0;
