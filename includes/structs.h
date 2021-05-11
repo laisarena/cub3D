@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parameters.h                                       :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/08 02:43:38 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 03:10:26 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ typedef struct s_map
 	int		cols;
 }			t_map;
 
+typedef struct s_sprites
+{
+	int			num;
+	t_list		*position;
+	t_texture	texture;
+}				t_sprites;
+
 typedef struct s_game
 {
 	char			*file;
@@ -65,7 +72,7 @@ typedef struct s_game
 	t_texture		south;
 	t_texture		west;
 	t_texture		east;
-	t_texture		sprite;
+	t_sprites		sprites;
 	t_color			floor;
 	t_color			ceilling;
 }					t_game;

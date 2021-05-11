@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 21:02:34 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 03:20:53 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "../srcs/gnl/get_next_line.h"
 # include "auxiliary_structs.h"
+# include "sprites.h"
 # include "structs.h"
 # include "constants.h"
 # include "input_validation.h"
@@ -30,6 +31,7 @@
 void	ft_error(char *message);
 void	ft_save_error_message(char *message, t_vars *vars);
 void	ft_free_resources(t_vars *vars);
+void	ft_del(void *pointer);
 void	ft_game(t_vars *vars);
 void	ft_setup(t_vars *vars);
 void	ft_draw_line(t_vars *vars, t_int_coord p0, t_int_coord p1, int color);

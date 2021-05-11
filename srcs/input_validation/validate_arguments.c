@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:05:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 20:14:53 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/11 23:20:36 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,4 @@ void	ft_validate_arguments(int argc, char **argv, t_vars *vars)
 		vars->bmp_save = ft_check_save_argument(argv[2]);
 	ft_check_file_path_argument(argv[1]);
 	vars->game.file = argv[1];
-}
-
-void	ft_validate_input_data(int argc, char **argv, t_vars *vars)
-{
-	ft_validate_arguments(argc, argv, vars);
-	ft_initialize(vars);
-	if (ft_scene_description_parameters(vars))
-		ft_error(vars->error_message);
-	ft_check_parameters(&vars->game);
-	ft_check_map(vars);
 }

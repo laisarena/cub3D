@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 23:16:17 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 03:40:10 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	validate(char **split_line, t_vars *vars)
 	else if (!ft_strncmp(split_line[0], "EA", 3))
 		return (ft_texture(split_line, vars, &vars->game.east));
 	else if (!ft_strncmp(split_line[0], "S", 2))
-		return (ft_texture(split_line, vars, &vars->game.sprite));
+		return (ft_texture(split_line, vars, &vars->game.sprites.texture));
 	else if (!ft_strncmp(split_line[0], "F", 2))
 		return (ft_color(split_line, vars, &vars->game.floor));
 	else if (!ft_strncmp(split_line[0], "C", 2))
@@ -96,8 +96,7 @@ int	ft_parameters(int fd, t_vars *vars)
 
 	line = NULL;
 	ret = 1;
-	while (vars->game.counter < 8 && ret
-		&& get_next_line(fd, &line) > 0)
+	while (vars->game.counter < 8 && ret && get_next_line(fd, &line) > 0)
 	{
 		if (line && *line)
 			ret = ft_identify_line(line, vars);
@@ -128,22 +127,22 @@ int	ft_scene_description_parameters(t_vars *vars)
 	return (0);
 }
 
-void	ft_check_parameters(t_game *s_scene_description)
+void	ft_check_parameters(t_game *game)
 {
-	if (s_scene_description->resolution.identifier == 0)
+	if (game->resolution.identifier == 0)
 		ft_error("Missing R parameter\n");
-	if (s_scene_description->north.identifier == 0)
+	if (game->north.identifier == 0)
 		ft_error("Missing NO parameter\n");
-	if (s_scene_description->south.identifier == 0)
+	if (game->south.identifier == 0)
 		ft_error("Missing SO Parameter\n");
-	if (s_scene_description->west.identifier == 0)
+	if (game->west.identifier == 0)
 		ft_error("Missing WE parameter\n");
-	if (s_scene_description->east.identifier == 0)
+	if (game->east.identifier == 0)
 		ft_error("Missing EA parameter\n");
-	if (s_scene_description->sprite.identifier == 0)
+	if (game->sprites.texture.identifier == 0)
 		ft_error("Missing S parameter\n");
-	if (s_scene_description->floor.identifier == 0)
+	if (game->floor.identifier == 0)
 		ft_error("Missing F parameter\n");
-	if (s_scene_description->ceilling.identifier == 0)
+	if (game->ceilling.identifier == 0)
 		ft_error("Missing C parameter\n");
 }

@@ -27,6 +27,7 @@ SRCS = main.c\
 	   error_handler.c\
 	   free_resources.c\
 	   input_validation/validate_arguments.c\
+	   input_validation/validate_input_data.c\
 	   input_validation/initialize.c\
 	   input_validation/validate_scene_description.c\
 	   input_validation/validate_color.c\
