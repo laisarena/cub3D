@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:56:33 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 19:26:33 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 19:37:43 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,26 @@ int	ft_is_wall_at(float x, float y, t_vars *vars)
 	map_column = floor(x / TILE);
 	var = vars->map.matrix[map_row][map_column];
 	return (var == '1');
+}
+
+void	ft_render_minimap_sprites(t_vars *vars)
+{
+	t_list		*sprites_list;
+	t_coord		*position;
+	t_retangle	retangle;
+
+	sprites_list = vars->game.sprites.position;
+	while (sprites_list)
+	{
+		position = sprites_list->content;
+		retangle.position = *position;
+		retangle.width = 2;
+		retangle.height = 2;
+		retangle.position.x *= MINI_FACTOR;
+		retangle.position.y *= MINI_FACTOR;
+		ft_rectangle_on_image(vars, retangle, 0xFF00FFFF);
+		sprites_list = sprites_list->next;
+	}
 }
 
 void	ft_render_minimap_grid(t_vars *vars)

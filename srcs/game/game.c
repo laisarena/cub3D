@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 23:19:02 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 19:38:15 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_render(t_vars *vars)
 	ft_render_minimap_grid(vars);
 	ft_render_minimap_player(vars);
 	ft_render_minimap_rays(vars);
+	ft_render_minimap_sprites(vars);
 	ft_bmp_file(vars);
 	ft_create_window(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);

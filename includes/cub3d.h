@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 03:20:53 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 19:31:08 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_render_minimap_grid(t_vars *vars);
 void	ft_reset_moviments(t_player *player);
 void	ft_move_player(t_vars *vars);
 void	ft_render_minimap_player(t_vars *vars);
+void	ft_render_minimap_sprites(t_vars *vars);
 void	ft_cast_rays(t_vars *vars);
 void	ft_render_minimap_rays(t_vars *vars);
 int		ft_is_wall_at(float x, float y, t_vars *vars);
