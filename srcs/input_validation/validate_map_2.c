@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 01:58:13 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 03:47:42 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 21:05:21 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static void	ft_check_player(char c, int i, int j, t_vars *vars)
 
 static void	ft_check_sprite(char c, int i, int j, t_vars *vars)
 {
-	t_coord	*position;
+	t_sprite	*sprite;
 
 	if (c != '2')
 		return ;
-	position = (t_coord *)malloc(sizeof(t_coord));
-	position->x = j;
-	position->y = i;
-	ft_lstadd_back(&vars->game.sprites.position, ft_lstnew(position));
+	sprite = (t_sprite *)malloc(sizeof(t_sprite));
+	sprite->position.x = j;
+	sprite->position.y = i;
+	ft_lstadd_back(&vars->game.sprites.list, ft_lstnew(sprite));
 }
 
 void	ft_check_map(t_vars *vars)

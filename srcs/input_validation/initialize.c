@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:00:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 02:11:47 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 21:02:30 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static	void	ft_initialize_map(t_map *map)
 static	void	ft_initialize_sprites(t_sprites *sprites)
 {
 	sprites->num = 0;
-	sprites->position = NULL;
+	sprites->list = NULL;
+	sprites->list_visible = NULL;
 	ft_initialize_texture(&sprites->texture);
 }
 

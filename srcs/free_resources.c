@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 03:20:01 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 21:01:42 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	ft_free_resources(t_vars *vars)
 {
 	ft_free_map(vars);
 	ft_free_texture(vars);
-	ft_lstclear(&vars->game.sprites.position, &ft_del);
+	ft_lstclear(&vars->game.sprites.list, &ft_del);
+	ft_lstclear(&vars->game.sprites.list_visible, &ft_del);
 	free(vars->ray);
 }
 

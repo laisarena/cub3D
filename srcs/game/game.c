@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 19:38:15 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 21:21:09 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_game_update(t_vars *vars)
 {
 	ft_clear_image(vars);
 	ft_move_player(vars);
+	ft_define_visible_sprites(vars);
 	ft_reset_moviments(&vars->player);
 	ft_cast_rays(vars);
 }

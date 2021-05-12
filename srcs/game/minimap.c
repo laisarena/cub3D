@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:56:33 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 19:37:43 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 21:37:07 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,24 @@ int	ft_is_wall_at(float x, float y, t_vars *vars)
 
 void	ft_render_minimap_sprites(t_vars *vars)
 {
-	t_list		*sprites_list;
-	t_coord		*position;
+	t_list		*sprite_list;
+	t_sprite	*sprite;
 	t_retangle	retangle;
 
-	sprites_list = vars->game.sprites.position;
-	while (sprites_list)
+	sprite_list = vars->game.sprites.list;
+	while (sprite_list)
 	{
-		position = sprites_list->content;
-		retangle.position = *position;
+		sprite = sprite_list->content;
+		retangle.position = sprite->position;
 		retangle.width = 2;
 		retangle.height = 2;
 		retangle.position.x *= MINI_FACTOR;
 		retangle.position.y *= MINI_FACTOR;
-		ft_rectangle_on_image(vars, retangle, 0xFF00FFFF);
-		sprites_list = sprites_list->next;
+		if (sprite->visible)
+			ft_rectangle_on_image(vars, retangle, 0xFF00FFFF);
+		else
+			ft_rectangle_on_image(vars, retangle, 0xFF444444);
+		sprite_list = sprite_list->next;
 	}
 }
 

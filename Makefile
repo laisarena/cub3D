@@ -44,6 +44,8 @@ SRCS = main.c\
 	   game/draw.c\
 	   game/draw_line.c\
 	   game/texture.c\
+	   game/sprites.c\
+	   game/utils.c\
 	   gnl/get_next_line.c\
 	   gnl/get_next_line_utils.c\
 	   bitmap/bitmap.c\

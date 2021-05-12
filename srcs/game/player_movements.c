@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:32:50 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/28 20:34:52 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/13 00:18:06 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_move_player(t_vars *vars)
 	float	step;
 
 	vars->player.rotation_angle += vars->player.turn_direction * ROT_SPEED;
+	vars->player.rotation_angle = ft_normalize_angle(vars->player.rotation_angle);
 	step = vars->player.walk_direction * WALK_SPEED;
 	x = vars->player.x + cos(vars->player.rotation_angle) * step;
 	y = vars->player.y + sin(vars->player.rotation_angle) * step;

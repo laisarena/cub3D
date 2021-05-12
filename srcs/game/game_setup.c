@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:53:48 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 19:09:33 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 21:17:25 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ static void	ft_initialize_player_position(t_vars *vars)
 	vars->player.y = ((vars->player.y * TILE) + TILE / 2);
 }
 
-static void	ft_initialize_sprites_position(t_list *sprites_position)
+static void	ft_initialize_sprites_position(t_list *sprite_list)
 {
-	t_coord	*position;
+	t_sprite	*sprite;
 
-	while (sprites_position)
+	while (sprite_list)
 	{
-		position = sprites_position->content;
-		position->x = ((position->x * TILE) + TILE / 2);
-		position->y = ((position->y * TILE) + TILE / 2);
-		sprites_position = sprites_position->next;
+		sprite = sprite_list->content;
+		sprite->position.x = ((sprite->position.x * TILE) + TILE / 2);
+		sprite->position.y = ((sprite->position.y * TILE) + TILE / 2);
+		sprite->visible = 0;
+		sprite_list = sprite_list->next;
 	}
 }
 
@@ -59,6 +60,6 @@ void	ft_setup(t_vars *vars)
 	ft_initialize_mlx_image(vars);
 	ft_create_texture_images(vars);
 	ft_initialize_player_position(vars);
-	ft_initialize_sprites_position(vars->game.sprites.position);
+	ft_initialize_sprites_position(vars->game.sprites.list);
 	ft_reset_moviments(&vars->player);
 }

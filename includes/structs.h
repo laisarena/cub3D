@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 03:10:26 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/12 20:52:45 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,19 @@ typedef struct s_map
 	int		cols;
 }			t_map;
 
+typedef struct s_sprite
+{
+	t_coord		position;
+	float		distance;
+	float		angle;
+	int			visible;
+}				t_sprite;
+
 typedef struct s_sprites
 {
 	int			num;
-	t_list		*position;
+	t_list		*list;
+	t_list		*list_visible;
 	t_texture	texture;
 }				t_sprites;
 
