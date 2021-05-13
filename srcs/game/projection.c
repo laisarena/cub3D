@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 23:30:51 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/13 03:59:48 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static int	ft_calc_wall_height(t_ray ray, float player_angle, int win_width)
 	return ((int)((TILE / perp_distance) * distance));
 }
 
-static int	ft_calc_wall_top(int win_hight, int wall_height)
+float	ft_calc_wall_top(int win_hight, int wall_height)
 {
-	int	top;
+	float	top;
 
 	top = (win_hight / 2) - (wall_height / 2);
 	if (top < 0)
@@ -32,9 +32,9 @@ static int	ft_calc_wall_top(int win_hight, int wall_height)
 	return (top);
 }
 
-static int	ft_calc_wall_bottom(int win_height, int wall_height)
+float	ft_calc_wall_bottom(int win_height, int wall_height)
 {
-	int	bottom;
+	float	bottom;
 
 	bottom = (win_height / 2) + (wall_height / 2);
 	if (bottom > win_height)

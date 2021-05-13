@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 20:52:45 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/13 03:40:55 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_vars
 	t_map			map;
 	void			*mlx;
 	void			*window;
+	float			proj_plane_distance;
 	t_image_data	image;
 	t_player		player;
 	t_ray			*ray;

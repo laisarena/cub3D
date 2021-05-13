@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/13 02:53:57 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/13 19:15:01 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_clear_image(t_vars *vars)
 {
 	int	x;
 	int	y;
-
 	y = -1;
 	while (++y < vars->game.resolution.height)
 	{
