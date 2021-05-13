@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 21:21:09 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/13 02:53:57 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_render(t_vars *vars)
 {
 	ft_game_update(vars);
 	ft_render_3d_projection(vars);
-	//ft_render_sprites(vars);
+	ft_render_sprites(vars);
 	ft_render_minimap_grid(vars);
 	ft_render_minimap_player(vars);
 	ft_render_minimap_rays(vars);

@@ -6,11 +6,34 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:59:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/13 00:18:22 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/13 02:56:32 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_add_visible_sprite(t_list *list, t_sprite *sprite)
+{
+	t_list		*tmp;
+	t_list		*new;
+	t_list		*previous;
+	t_sprite	*sp;
+
+	new = ft_lstnew(sprite);
+	tmp = list;
+	previous = list;
+	while (tmp)
+	{
+		sp = tmp->content;
+		if (sprite->distance < sp->distance)
+		{
+			new->next = tmp;
+			previous->next = new;
+			return ;
+		}
+	}
+	ft_lstadd_back(&list, new);
+}
 
 void	ft_define_visible_sprites(t_vars *vars)
 {
@@ -42,7 +65,8 @@ void	ft_define_visible_sprites(t_vars *vars)
 					sprite->position.y,
 					vars->player.x,
 					vars->player.y);
-			//ft_add_visible_sprite(vars, sprites_list->content);
+			ft_add_visible_sprite(vars->game.sprites.list_visible,
+					sprite_list->content);
 		}
 		else
 			sprite->visible = 0;
@@ -50,4 +74,7 @@ void	ft_define_visible_sprites(t_vars *vars)
 	}
 }
 
-//void	ft_render_sprites(t_vars *vars)
+void	ft_render_sprites(t_vars *vars)
+{
+	vars->game.sprites.num = 3;
+}

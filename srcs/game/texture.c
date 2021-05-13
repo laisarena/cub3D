@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 03:03:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 21:26:58 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/13 02:55:02 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_create_texture_images(t_vars *vars)
 	ft_initialize_file_image(vars, &vars->game.south);
 	ft_initialize_file_image(vars, &vars->game.west);
 	ft_initialize_file_image(vars, &vars->game.east);
-	//ft_initialize_file_image(vars, &vars->game.sprite);
+	ft_initialize_file_image(vars, &vars->game.sprites.texture);
 }
 
 int	ft_calc_x_texture_offset(t_ray ray, t_texture *texture)
