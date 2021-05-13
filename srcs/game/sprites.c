@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:59:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/13 21:03:04 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 02:21:30 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ void	ft_add_visible_sprite(t_list **list, t_sprite *sprite)
 	while (tmp)
 	{
 		sp = tmp->content;
-		if (sprite->distance < sp->distance)
+		if (sprite->distance > sp->distance)
 		{
 			new->next = tmp;
-			previous->next = new;
+			if (previous == *list)
+				*list = new;
+			else
+				previous->next = new;
 			return ;
 		}
 		tmp = tmp->next;
@@ -90,6 +93,7 @@ void	ft_define_visible_sprites(t_vars *vars)
 
 float	ft_calc_wall_top(int win_hight, int wall_height);
 float	ft_calc_wall_bottom(int win_height, int wall_height);
+int	ft_get_color(t_image_data *image, int x, int y);
 void	ft_render_sprites(t_vars *vars)
 {
 	t_list		*list;
@@ -108,16 +112,38 @@ void	ft_render_sprites(t_vars *vars)
 		width = height;
 		top = ft_calc_wall_top(vars->game.resolution.height, height);
 		bottom = ft_calc_wall_bottom(vars->game.resolution.height, height);
-		
-		int y = top;
-		while (y < bottom)
+		float	angle = atan2(sprite->position.y - vars->player.y, 
+				sprite->position.x- vars->player.x) - vars->player.rotation_angle;
+		float sprite_pos_x = tan(angle) * vars->proj_plane_distance;
+		float sprite_left = (vars->game.resolution.width / 2) + sprite_pos_x
+			- (width / 2 );
+		float sprite_right = sprite_left + width; 
+		int offset_x;
+		int offset_y;
+		int x = sprite_left;
+		while (x < sprite_right)
 		{
-			ft_put_pixel(&vars->image, 0, y, 0xFFFF0000);
-			ft_put_pixel(&vars->image, 1, y, 0xFFFF0000);
-			ft_put_pixel(&vars->image, 2, y, 0xFFFF0000);
-			ft_put_pixel(&vars->image, 3, y, 0xFFFF0000);
-			ft_put_pixel(&vars->image, 4, y, 0xFFFF0000);
-			y++;
+			float texel_width = (vars->game.sprites.texture.width / width);
+			offset_x = (x - sprite_left) * texel_width;
+			int y = top;
+			int		distance_from_top;
+			float	stretch_factor;
+			while (y < bottom)
+			{
+				if (x > 0 && x < vars->game.resolution.width
+						&& y > 0 && vars->game.resolution.height)
+				{
+					distance_from_top = y + (height / 2) - (vars->game.resolution.height / 2);
+					stretch_factor = (float)vars->game.sprites.texture.height / height;
+					offset_y = distance_from_top * stretch_factor;
+					int color = ft_get_color(&vars->game.sprites.texture.image,
+							offset_x, offset_y);
+					if (color != 0)
+						ft_put_pixel(&vars->image, x, y, color);
+				}
+				y++;
+			}
+			x++;
 		}
 		list = list->next;	
 		width++;
