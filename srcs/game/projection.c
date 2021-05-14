@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 19:37:25 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 21:59:38 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,20 @@ static t_texture	*ft_get_texture(t_ray ray, t_vars *vars)
 	return (&vars->game.north);
 }
 
+static int	ft_change_color_intensity(int color, float factor)
+{
+	int	a;
+	int	r;
+	int	g;
+	int	b;
+
+	a = color & 0xFF000000;
+	r = (color & 0x00FF0000) * factor;
+	g = (color & 0x0000FF00) * factor;
+	b = (color & 0x000000FF) * factor;
+	return (a | (r & 0x00FF0000) | (g & 0x0000FF00) | (b & 0x000000FF));
+}
+
 static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x, t_texture *texture)
 {
 	int				y;
@@ -111,9 +125,8 @@ static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x, t_textur
 		color = ft_get_color(&texture->image, wall.texture_offset.x,
 				wall.texture_offset.y);
 		if (ray.is_hit_vertical)
-			ft_put_pixel(&vars->image, x, y, color);
-		else
-			ft_put_pixel(&vars->image, x, y, color);
+			color = ft_change_color_intensity(color, 0.7);
+		ft_put_pixel(&vars->image, x, y, color);
 		y++;
 	}
 }
