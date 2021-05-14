@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/13 00:03:58 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 20:04:39 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_render_minimap_rays(t_vars *vars);
 int		ft_is_wall_at(float x, float y, t_vars *vars);
 void	ft_render(t_vars *vars);
 void	ft_render_3d_projection(t_vars *vars);
-void	ft_render_sprites(t_vars *vars);
+void	ft_render_sprites_projection(t_vars *vars);
 int		ft_close(t_vars *vars);
 void	ft_define_visible_sprites(t_vars *vars);
 int		ft_key_press(int keycode, t_vars *vars);

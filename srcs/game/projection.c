@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:57:27 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/13 03:59:48 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:37:25 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ static int	ft_calc_wall_height(t_ray ray, float player_angle, int win_width)
 	return ((int)((TILE / perp_distance) * distance));
 }
 
-float	ft_calc_wall_top(int win_hight, int wall_height)
+float	ft_calc_top(int win_hight, int height)
 {
 	float	top;
 
-	top = (win_hight / 2) - (wall_height / 2);
+	top = (win_hight / 2) - (height / 2);
 	if (top < 0)
 		return (0);
 	return (top);
 }
 
-float	ft_calc_wall_bottom(int win_height, int wall_height)
+float	ft_calc_bottom(int win_height, int height)
 {
 	float	bottom;
 
-	bottom = (win_height / 2) + (wall_height / 2);
+	bottom = (win_height / 2) + (height / 2);
 	if (bottom > win_height)
 		return (win_height);
 	return (bottom);
@@ -130,9 +130,8 @@ void	ft_render_3d_projection(t_vars *vars)
 		wall.height = ft_calc_wall_height(vars->ray[x],
 				vars->player.rotation_angle,
 				vars->game.resolution.width);
-		wall.top = ft_calc_wall_top(vars->game.resolution.height, wall.height);
-		wall.bottom = ft_calc_wall_bottom(vars->game.resolution.height,
-				wall.height);
+		wall.top = ft_calc_top(vars->game.resolution.height, wall.height);
+		wall.bottom = ft_calc_bottom(vars->game.resolution.height, wall.height);
 		texture = ft_get_texture(vars->ray[x], vars);
 		wall.texture_offset.x = ft_calc_x_texture_offset(vars->ray[x], texture);
 		ft_render_ceiling(wall, vars, x);

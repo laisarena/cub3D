@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:59:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 02:52:42 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 20:44:39 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,38 +52,43 @@ void	ft_free_list(t_list **lst)
 	*lst = NULL;
 }
 
+static float	ft_calc_sprite_angle(t_sprite *sprite, t_player player)
+{
+	float	angle;
+	float	relative_angle;
+
+	angle = atan2(sprite->position.y - player.y,
+			sprite->position.x - player.x);
+	relative_angle = player.rotation_angle - angle;
+	sprite->angle = relative_angle;
+	if (relative_angle > PI)
+		relative_angle -= TWO_PI;
+	if (relative_angle < -PI)
+		relative_angle += TWO_PI;
+	return (fabs(relative_angle));
+}
+
 void	ft_define_visible_sprites(t_vars *vars)
 {
 	t_list		*sprite_list;
 	t_sprite	*sprite;
-	float		sprite_player_angle;	
-	
+	float		relative_angle;	
+
 	sprite_list = vars->game.sprites.list;
 	while (sprite_list)
 	{
 		sprite = sprite_list->content;
-		float ang;
-		ang = atan2(sprite->position.x - vars->player.x,
-					sprite->position.y - vars->player.y) - (PI / 2);
-		printf("sprite %f\n", ang * 180 / PI);
-		printf("player %f\n", vars->player.rotation_angle * 180 / PI);
-		sprite_player_angle = vars->player.rotation_angle + ang;
-		if (sprite_player_angle > PI)
-			sprite_player_angle -= TWO_PI;
-		if (sprite_player_angle < - PI)
-			sprite_player_angle += TWO_PI;
-		sprite_player_angle = fabs(sprite_player_angle);
-		if (sprite_player_angle < FOV_ANGLE / 2)
+		relative_angle = ft_calc_sprite_angle(sprite, vars->player);
+		if (relative_angle < (FOV_ANGLE / 2) + 0.2)
 		{
 			sprite->visible = 1;
-			sprite->angle = sprite_player_angle;
 			sprite->distance = ft_distance_between_points(
 					sprite->position.x,
 					sprite->position.y,
 					vars->player.x,
 					vars->player.y);
 			ft_add_visible_sprite(&vars->game.sprites.list_visible,
-					sprite_list->content);
+				sprite_list->content);
 		}
 		else
 			sprite->visible = 0;
@@ -91,62 +96,108 @@ void	ft_define_visible_sprites(t_vars *vars)
 	}
 }
 
-float	ft_calc_wall_top(int win_hight, int wall_height);
-float	ft_calc_wall_bottom(int win_height, int wall_height);
-int	ft_get_color(t_image_data *image, int x, int y);
-void	ft_render_sprites(t_vars *vars)
+float	ft_calc_top(int win_hight, int height);
+float	ft_calc_bottom(int win_height, int height);
+int		ft_get_color(t_image_data *image, int x, int y);
+
+typedef struct s_sprite_proj
 {
-	t_list		*list;
-	t_sprite	*sprite;
-	float		width;
-	float		height;
-	float		top;
-	float		bottom;
+	float	width;
+	float	height;
+	float	top;
+	float	bottom;
+	float	left;
+	float	right;
+	float	x_position;
+	float	pixel_width;
+	float	stretch_factor;
+	int		texture_offset_x;
+	int		texture_offset_y;
+
+}			t_sprite_proj;
+
+static t_sprite_proj	ft_calc_projection_parameters(t_sprite *sprite,
+		t_vars *vars)
+{
+	t_sprite_proj	projection;
+
+	projection.height = (TILE / sprite->distance) * vars->proj_plane_distance;
+	projection.width = projection.height;
+	projection.top = ft_calc_top(
+			vars->game.resolution.height,
+			projection.height);
+	projection.bottom = ft_calc_bottom(
+			vars->game.resolution.height,
+			projection.height);
+	projection.x_position = tan(-sprite->angle) * vars->proj_plane_distance;
+	projection.left = (vars->game.resolution.width / 2)
+		+ projection.x_position - (projection.width / 2);
+	projection.right = projection.left + projection.width;
+	projection.pixel_width = vars->game.sprites.texture.width
+		/ projection.width;
+	projection.stretch_factor = (float)vars->game.sprites.texture.height
+		/ projection.height;
+	return (projection);
+	//projection.height = (vars->game.sprites.texture.height / sprite->distance)
+	//	* vars->proj_plane_distance;
+}
+
+static void	ft_render_sprite_column(int x, t_sprite *sprite,
+		t_sprite_proj projection, t_vars *vars)
+{
+	int		y;
+	int		distance_from_top;
+	int		color;
+
+	y = projection.top;
+	while (y < projection.bottom)
+	{
+		if (x > 0 && x < vars->game.resolution.width
+			&& y > 0 && vars->game.resolution.height)
+		{
+			distance_from_top = y + (projection.height / 2)
+				- (vars->game.resolution.height / 2);
+			projection.texture_offset_y = distance_from_top
+				* projection.stretch_factor;
+			color = ft_get_color(
+					&vars->game.sprites.texture.image,
+					projection.texture_offset_x,
+					projection.texture_offset_y);
+			if (sprite->distance < vars->ray[x].distance && color != 0)
+				ft_put_pixel(&vars->image, x, y, color);
+		}
+		y++;
+	}
+}
+
+static void	ft_render_sprite(t_sprite *sprite,
+		t_sprite_proj projection, t_vars *vars)
+{
+	int		x;
+
+	x = projection.left;
+	while (x < projection.right)
+	{
+		projection.texture_offset_x = (x - projection.left)
+			* projection.pixel_width;
+		ft_render_sprite_column(x, sprite, projection, vars);
+		x++;
+	}
+}
+
+void	ft_render_sprites_projection(t_vars *vars)
+{
+	t_list			*list;
+	t_sprite		*sprite;
+	t_sprite_proj	projection;
 
 	list = vars->game.sprites.list_visible;
 	while (list)
 	{
 		sprite = list->content;
-		height = (vars->game.sprites.texture.height / sprite->distance)
-			* vars->proj_plane_distance;
-		width = height;
-		top = ft_calc_wall_top(vars->game.resolution.height, height);
-		bottom = ft_calc_wall_bottom(vars->game.resolution.height, height);
-		float	angle = atan2(sprite->position.y - vars->player.y, 
-				sprite->position.x- vars->player.x) - vars->player.rotation_angle;
-		float sprite_pos_x = tan(angle) * vars->proj_plane_distance;
-		float sprite_left = (vars->game.resolution.width / 2) + sprite_pos_x
-			- (width / 2 );
-		float sprite_right = sprite_left + width; 
-		int offset_x;
-		int offset_y;
-		int x = sprite_left;
-		while (x < sprite_right)
-		{
-			float texel_width = (vars->game.sprites.texture.width / width);
-			offset_x = (x - sprite_left) * texel_width;
-			int y = top;
-			int		distance_from_top;
-			float	stretch_factor;
-			while (y < bottom)
-			{
-				if (x > 0 && x < vars->game.resolution.width
-						&& y > 0 && vars->game.resolution.height)
-				{
-					distance_from_top = y + (height / 2) - (vars->game.resolution.height / 2);
-					stretch_factor = (float)vars->game.sprites.texture.height / height;
-					offset_y = distance_from_top * stretch_factor;
-					int color = ft_get_color(&vars->game.sprites.texture.image,
-							offset_x, offset_y);
-					if (sprite->distance < vars->ray[x].distance && color != 0)
-						ft_put_pixel(&vars->image, x, y, color);
-				}
-				y++;
-			}
-			x++;
-		}
-		list = list->next;	
-		width++;
+		projection = ft_calc_projection_parameters(sprite, vars);
+		ft_render_sprite(sprite, projection, vars);
+		list = list->next;
 	}
 	ft_free_list(&vars->game.sprites.list_visible);
 }
