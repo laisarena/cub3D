@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:59:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 02:21:30 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 02:52:42 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	ft_render_sprites(t_vars *vars)
 					offset_y = distance_from_top * stretch_factor;
 					int color = ft_get_color(&vars->game.sprites.texture.image,
 							offset_x, offset_y);
-					if (color != 0)
+					if (sprite->distance < vars->ray[x].distance && color != 0)
 						ft_put_pixel(&vars->image, x, y, color);
 				}
 				y++;
