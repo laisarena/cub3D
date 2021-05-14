@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:59:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 20:44:39 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 21:11:48 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,10 @@ static t_sprite_proj	ft_calc_projection_parameters(t_sprite *sprite,
 		t_vars *vars)
 {
 	t_sprite_proj	projection;
+	float			perp_distance;
 
-	projection.height = (TILE / sprite->distance) * vars->proj_plane_distance;
+	perp_distance = sprite->distance * cos(sprite->angle);
+	projection.height = (TILE / perp_distance) * vars->proj_plane_distance;
 	projection.width = projection.height;
 	projection.top = ft_calc_top(
 			vars->game.resolution.height,
