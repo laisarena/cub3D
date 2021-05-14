@@ -47,7 +47,7 @@ void	ft_cast_rays(t_vars *vars);
 void	ft_render_minimap_rays(t_vars *vars);
 int		ft_is_wall_at(float x, float y, t_vars *vars);
 void	ft_render(t_vars *vars);
-void	ft_render_3d_projection(t_vars *vars);
+void	ft_render_wall_projection(t_vars *vars);
 void	ft_render_sprites_projection(t_vars *vars);
 int		ft_close(t_vars *vars);
 void	ft_define_visible_sprites(t_vars *vars);

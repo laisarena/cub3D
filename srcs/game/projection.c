@@ -131,7 +131,7 @@ static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x, t_textur
 	}
 }
 
-void	ft_render_3d_projection(t_vars *vars)
+void	ft_render_wall_projection(t_vars *vars)
 {
 	int			x;
 	t_wall		wall;
