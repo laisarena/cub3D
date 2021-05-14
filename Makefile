@@ -36,9 +36,10 @@ SRCS = main.c\
 	   input_validation/validate_map_2.c\
 	   game/game.c\
 	   game/setup.c\
+	   game/rays.c\
+	   game/ray_intersection.c\
 	   game/minimap.c\
 	   game/player_movements.c\
-	   game/rays.c\
 	   game/render_rays.c\
 	   game/projection.c\
 	   game/draw.c\
