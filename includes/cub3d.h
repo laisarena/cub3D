@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 20:04:39 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 22:37:14 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ void	ft_free_resources(t_vars *vars);
 void	ft_del(void *pointer);
 void	ft_game(t_vars *vars);
 void	ft_setup(t_vars *vars);
+void	ft_loop(t_vars *vars);
 void	ft_draw_line(t_vars *vars, t_int_coord p0, t_int_coord p1, int color);
 void	ft_put_pixel(t_image_data *image, int x, int y, int color);
 void	ft_rectangle_on_image(t_vars *vars, t_retangle retangle, int color);
 void	ft_render_minimap_grid(t_vars *vars);
-void	ft_reset_moviments(t_player *player);
+void	ft_clean_direction_moviments(t_player *player);
 void	ft_move_player(t_vars *vars);
 void	ft_render_minimap_player(t_vars *vars);
 void	ft_render_minimap_sprites(t_vars *vars);

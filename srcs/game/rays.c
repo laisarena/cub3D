@@ -171,16 +171,14 @@ void	ft_cast_rays(t_vars *vars)
 	float	ray_angle;
 	int		column;
 	int		num_rays;
-	float	project_distance;
 
 	num_rays = vars->game.resolution.width;
 	vars->ray = malloc(sizeof(t_ray) * (num_rays + 1));
 	column = 0;
 	while (column < num_rays)
 	{
-		project_distance = (vars->game.resolution.width / 2) / tan(FOV_ANGLE / 2);
 		ray_angle = vars->player.rotation_angle
-			+ atan((column - num_rays / 2) / project_distance);
+			+ atan((column - (float)(num_rays / 2)) / vars->proj_plane_distance);
 		vars->ray[column].angle = ft_normalize_angle(ray_angle);
 		ft_cast_single_ray(&vars->ray[column], vars);
 		ray_angle += FOV_ANGLE / num_rays;

@@ -39,7 +39,7 @@ typedef struct s_intersection
 	t_coord	next_touch;
 	t_coord	wall_hit;
 	int		found_wall_hit;
-	int		hit_distance;
+	float	hit_distance;
 }			t_intersection;
 
 #endif

@@ -35,7 +35,7 @@ SRCS = main.c\
 	   input_validation/validate_map.c\
 	   input_validation/validate_map_2.c\
 	   game/game.c\
-	   game/game_setup.c\
+	   game/setup.c\
 	   game/minimap.c\
 	   game/player_movements.c\
 	   game/rays.c\

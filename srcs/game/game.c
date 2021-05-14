@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 20:04:10 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 22:33:39 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_clear_image(t_vars *vars)
 {
 	int	x;
 	int	y;
+
 	y = -1;
 	while (++y < vars->game.resolution.height)
 	{
@@ -46,18 +47,16 @@ void	ft_create_window(t_vars *vars)
 		ft_error("Error creating window");
 }
 
-void	ft_game_update(t_vars *vars)
+void	ft_update(t_vars *vars)
 {
 	ft_clear_image(vars);
 	ft_move_player(vars);
 	ft_define_visible_sprites(vars);
-	ft_reset_moviments(&vars->player);
 	ft_cast_rays(vars);
 }
 
 void	ft_render(t_vars *vars)
 {
-	ft_game_update(vars);
 	ft_render_3d_projection(vars);
 	ft_render_sprites_projection(vars);
 	ft_render_minimap_grid(vars);
@@ -69,11 +68,16 @@ void	ft_render(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
 
+void	ft_loop(t_vars *vars)
+{
+	ft_update(vars);
+	ft_render(vars);
+}
+
 void	ft_game(t_vars *vars)
 {
 	ft_setup(vars);
-	ft_render(vars);
-	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
+	ft_loop(vars);
 	mlx_hook(vars->window, KEYPRESS, 1L << 0, ft_key_press, vars);
 	mlx_hook(vars->window, 33, 0, ft_close, vars);
 	mlx_loop(vars->mlx);

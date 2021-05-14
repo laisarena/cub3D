@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_setup.c                                       :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:53:48 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/13 03:43:01 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 22:50:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ static void	ft_initialize_mlx_image(t_vars *vars)
 			&vars->image.endian);
 }
 
-static void	ft_initialize_player_position(t_vars *vars)
+static void	ft_initialize_player(t_player *player)
 {
-	vars->player.width = 1;
-	vars->player.height = 1;
-	vars->player.x = ((vars->player.x * TILE) + TILE / 2);
-	vars->player.y = ((vars->player.y * TILE) + TILE / 2);
+	player->width = 1;
+	player->height = 1;
+	player->x = ((player->x * TILE) + TILE / 2);
+	player->y = ((player->y * TILE) + TILE / 2);
+	ft_clean_direction_moviments(player);
 }
 
 static void	ft_initialize_sprites_position(t_list *sprite_list)
@@ -49,7 +50,6 @@ static void	ft_initialize_sprites_position(t_list *sprite_list)
 		sprite = sprite_list->content;
 		sprite->position.x = ((sprite->position.x * TILE) + TILE / 2);
 		sprite->position.y = ((sprite->position.y * TILE) + TILE / 2);
-		sprite->visible = 0;
 		sprite_list = sprite_list->next;
 	}
 }
@@ -59,9 +59,8 @@ void	ft_setup(t_vars *vars)
 	ft_initialize_mlx(vars);
 	ft_initialize_mlx_image(vars);
 	ft_create_texture_images(vars);
-	ft_initialize_player_position(vars);
+	ft_initialize_player(&vars->player);
 	ft_initialize_sprites_position(vars->game.sprites.list);
-	ft_reset_moviments(&vars->player);
 	vars->proj_plane_distance = (vars->game.resolution.width / 2)
 		/ tan(FOV_ANGLE / 2);
 }

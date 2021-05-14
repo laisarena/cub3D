@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:32:50 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/13 00:18:06 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/14 22:36:48 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	ft_key_press(int keycode, t_vars *vars)
 		vars->player.walk_direction = -1;
 	if (keycode == D_KEY)
 		vars->player.turn_direction = 1;
-	ft_render(vars);
+	ft_loop(vars);
 	return (1);
 }
 
-void	ft_reset_moviments(t_player *player)
+void	ft_clean_direction_moviments(t_player *player)
 {
 	player->turn_direction = 0;
 	player->walk_direction = 0;
@@ -50,6 +50,7 @@ void	ft_move_player(t_vars *vars)
 		vars->player.x = x;
 		vars->player.y = y;
 	}
+	ft_clean_direction_moviments(&vars->player);
 }
 
 void	ft_render_minimap_player(t_vars *vars)
