@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:53:48 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 22:50:19 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/15 23:27:53 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@ static void	ft_initialize_mlx(t_vars *vars)
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		ft_error("Error initializing minilibx");
+}
+
+static void	ft_set_resolution(t_vars *vars)
+{
+	int	win_width;
+	int	win_height;
+
+	mlx_get_screen_size(vars->mlx, &win_width, &win_height);
+	if (vars->game.resolution.width > win_width)
+		vars->game.resolution.width = win_width;
+	if (vars->game.resolution.height > win_height)
+		vars->game.resolution.height = win_height;
 }
 
 static void	ft_initialize_mlx_image(t_vars *vars)
@@ -57,6 +69,7 @@ static void	ft_initialize_sprites_position(t_list *sprite_list)
 void	ft_setup(t_vars *vars)
 {
 	ft_initialize_mlx(vars);
+	ft_set_resolution(vars);
 	ft_initialize_mlx_image(vars);
 	ft_create_texture_images(vars);
 	ft_initialize_player(&vars->player);
