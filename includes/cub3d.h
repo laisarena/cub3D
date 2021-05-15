@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 22:37:14 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/15 19:51:37 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "../minilibx-linux/mlx.h"
 # include "../srcs/gnl/get_next_line.h"
 # include "auxiliary_structs.h"
-# include "sprites.h"
 # include "structs.h"
 # include "constants.h"
 # include "input_validation.h"

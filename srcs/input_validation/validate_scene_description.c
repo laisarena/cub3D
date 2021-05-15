@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 03:40:10 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/15 19:54:26 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ static int	validate(char **split_line, t_vars *vars)
 	return (1);
 }
 
-static int	ft_identify_line(char *line,
-							t_vars *vars)
+static int	ft_identify_line(char *line, t_vars *vars)
 {
 	char	**split_line;
 	int		ret;
@@ -83,6 +82,7 @@ static int	ft_identify_line(char *line,
 	split_line = ft_split(line, ' ');
 	free(line);
 	line = NULL;
+	ret = 1;
 	if (split_line)
 		ret = validate(split_line, vars);
 	ft_free_split(split_line);

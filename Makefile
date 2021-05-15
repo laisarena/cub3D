@@ -58,13 +58,13 @@ FLAGS = -Wall -Wextra -Werror
 FLAGS_MLX = -lm -lX11 -lXext
 
 .c.o:
-	gcc -g $(FLAGS) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -I$(PATH_MLX) -c $< -o ${<:.c=.o}
+	clang -g $(FLAGS) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -I$(PATH_MLX) -c $< -o ${<:.c=.o}
 
 $(NAME): $(OBJS)
 	make bonus -C $(PATH_LIBFT)
 	make -C $(PATH_MLX)
 	#gcc  -g -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
-	gcc  -g  $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
+	clang  -g  $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 	#gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 
 all:	$(NAME)
@@ -73,7 +73,7 @@ clean:
 	make clean -C $(PATH_LIBFT)
 	make clean -C $(PATH_MLX)
 	rm -f $(OBJS)
-	rm *.bmp
+	rm -f *.bmp
 
 fclean: clean
 	make fclean -C $(PATH_LIBFT)
@@ -82,7 +82,7 @@ fclean: clean
 re: fclean all
 
 sani: $(NAME)
-	gcc  -g -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
+	clang  -g -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 
 .PHONY: all clean fclean re
 

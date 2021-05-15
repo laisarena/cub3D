@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 22:31:53 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/09 23:41:59 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/15 19:56:04 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_bmp_header	ft_create_header(long int width, long int height)
 	t_bmp_header	header;
 	long int		data_size;
 
-	data_size = abs(width * height * 4);
+	data_size = labs(width * height * 4);
 	header.file_type = BMP_TYPE;
 	header.file_size = HEADER_SIZE + data_size;
 	header.reserved1 = NOT_USED;
