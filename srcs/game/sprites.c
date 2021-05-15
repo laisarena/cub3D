@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:59:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 21:11:48 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/15 03:44:52 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ static float	ft_calc_sprite_angle(t_sprite *sprite, t_player player)
 	angle = atan2(sprite->position.y - player.y,
 			sprite->position.x - player.x);
 	relative_angle = player.rotation_angle - angle;
-	sprite->angle = relative_angle;
 	if (relative_angle > PI)
 		relative_angle -= TWO_PI;
 	if (relative_angle < -PI)
 		relative_angle += TWO_PI;
+	sprite->angle = relative_angle;
 	return (fabs(relative_angle));
 }
 
@@ -131,17 +131,15 @@ static t_sprite_proj	ft_calc_projection_parameters(t_sprite *sprite,
 	projection.bottom = ft_calc_bottom(
 			vars->game.resolution.height,
 			projection.height);
-	projection.x_position = tan(-sprite->angle) * vars->proj_plane_distance;
+	projection.x_position = tan(sprite->angle) * vars->proj_plane_distance;
 	projection.left = (vars->game.resolution.width / 2)
-		+ projection.x_position - (projection.width / 2);
+		- projection.x_position - (projection.width / 2);
 	projection.right = projection.left + projection.width;
 	projection.pixel_width = vars->game.sprites.texture.width
 		/ projection.width;
 	projection.stretch_factor = (float)vars->game.sprites.texture.height
 		/ projection.height;
 	return (projection);
-	//projection.height = (vars->game.sprites.texture.height / sprite->distance)
-	//	* vars->proj_plane_distance;
 }
 
 static void	ft_render_sprite_column(int x, t_sprite *sprite,
