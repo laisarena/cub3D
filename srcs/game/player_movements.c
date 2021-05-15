@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:32:50 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/14 22:36:48 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 00:20:51 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@ int	ft_key_press(int keycode, t_vars *vars)
 {
 	if (keycode == 0xFF1B)
 		ft_close(vars);
-	if (keycode == W_KEY)
+	if (keycode == W_KEY || keycode == UP_KEY)
 		vars->player.walk_direction = 1;
-	if (keycode == A_KEY)
+	if (keycode == A_KEY || keycode == LEFT_KEY)
 		vars->player.turn_direction = -1;
-	if (keycode == S_KEY)
+	if (keycode == S_KEY || keycode == DOWN_KEY)
 		vars->player.walk_direction = -1;
-	if (keycode == D_KEY)
+	if (keycode == D_KEY || keycode == RIGHT_KEY)
 		vars->player.turn_direction = 1;
+	if (keycode == M_KEY)
+	{
+		if (vars->minimap)
+			vars->minimap = 0;
+		else
+			vars->minimap = 1;
+	}
 	ft_loop(vars);
 	return (1);
 }
@@ -36,21 +43,23 @@ void	ft_clean_direction_moviments(t_player *player)
 
 void	ft_move_player(t_vars *vars)
 {
-	float	x;
-	float	y;
-	float	step;
+	float		x;
+	float		y;
+	float		step;
+	t_player	*player;
 
-	vars->player.rotation_angle += vars->player.turn_direction * ROT_SPEED;
-	vars->player.rotation_angle = ft_normalize_angle(vars->player.rotation_angle);
-	step = vars->player.walk_direction * WALK_SPEED;
-	x = vars->player.x + cos(vars->player.rotation_angle) * step;
-	y = vars->player.y + sin(vars->player.rotation_angle) * step;
+	player = &vars->player;
+	player->rotation_angle += player->turn_direction * ROT_SPEED;
+	player->rotation_angle = ft_normalize_angle(player->rotation_angle);
+	step = player->walk_direction * WALK_SPEED;
+	x = player->x + cos(player->rotation_angle) * step;
+	y = player->y + sin(player->rotation_angle) * step;
 	if (!ft_is_wall_at(x, y, vars))
 	{
-		vars->player.x = x;
-		vars->player.y = y;
+		player->x = x;
+		player->y = y;
 	}
-	ft_clean_direction_moviments(&vars->player);
+	ft_clean_direction_moviments(player);
 }
 
 void	ft_render_minimap_player(t_vars *vars)

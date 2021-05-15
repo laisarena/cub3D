@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 13:34:20 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/04/29 01:27:21 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 00:09:32 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@
 # define A_KEY			97
 # define S_KEY			115
 # define D_KEY			100
+# define M_KEY			109
 # define LEFT_KEY		65361
-# define RIGTH_KEY		65363
+# define UP_KEY			65362
+# define RIGHT_KEY		65363
+# define DOWN_KEY		65364
 # define MINI_FACTOR	0.2
 # define TILE			32
 # define ROT_SPEED		0.06

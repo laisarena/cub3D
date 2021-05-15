@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/15 00:29:22 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 00:14:24 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,13 @@ void	ft_update(t_vars *vars)
 
 void	ft_render_minimap(t_vars *vars)
 {
-	ft_render_minimap_grid(vars);
-	ft_render_minimap_player(vars);
-	ft_render_minimap_rays(vars);
-	ft_render_minimap_sprites(vars);
+	if (vars->minimap)
+	{
+		ft_render_minimap_grid(vars);
+		ft_render_minimap_player(vars);
+		ft_render_minimap_rays(vars);
+		ft_render_minimap_sprites(vars);
+	}
 }
 
 void	ft_render(t_vars *vars)

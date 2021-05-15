@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:53:48 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/15 23:27:53 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/15 23:34:57 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	ft_setup(t_vars *vars)
 	ft_initialize_sprites_position(vars->game.sprites.list);
 	vars->proj_plane_distance = (vars->game.resolution.width / 2)
 		/ tan(FOV_ANGLE / 2);
+	vars->minimap = 0;
 }
