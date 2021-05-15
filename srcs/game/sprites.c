@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:59:40 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/15 20:05:29 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/15 22:42:08 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_add_visible_sprite(t_list **list, t_sprite *sprite)
 				previous->next = new;
 			return ;
 		}
+		previous = tmp;
 		tmp = tmp->next;
 	}
 	ft_lstadd_back(list, new);
