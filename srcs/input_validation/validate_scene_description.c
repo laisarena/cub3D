@@ -6,52 +6,11 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/15 19:54:26 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 13:16:08 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	ft_is_string_number(char *string)
-{
-	while (*string)
-		if (!ft_isdigit(*string++))
-			return (0);
-	return (1);
-}
-
-int	ft_validate_number(char *string, int *parameter)
-{
-	if (!string || !ft_is_string_number(string))
-		return (0);
-	*parameter = ft_atoi(string);
-	return (1);
-}
-
-static int	ft_resolution(char **split_line, t_vars *vars)
-{
-	if (!(ft_validate_number(split_line[1], &vars->game.resolution.width)))
-	{
-		ft_save_error_message(
-			"Misconfiguration on resolution x render size\n", vars);
-		return (0);
-	}
-	if (!(ft_validate_number(split_line[2], &vars->game.resolution.height)))
-	{
-		ft_save_error_message(
-			"Misconfiguration on resolution y render size\n", vars);
-		return (0);
-	}
-	if (split_line[3])
-	{
-		ft_save_error_message(
-			"Misconfiguration on resolution\n", vars);
-		return (0);
-	}
-	vars->game.resolution.identifier = 1;
-	vars->game.counter++;
-	return (1);
-}
 
 static int	validate(char **split_line, t_vars *vars)
 {
@@ -80,8 +39,7 @@ static int	ft_identify_line(char *line, t_vars *vars)
 	int		ret;
 
 	split_line = ft_split(line, ' ');
-	free(line);
-	line = NULL;
+	ft_free_null(line);
 	ret = 1;
 	if (split_line)
 		ret = validate(split_line, vars);
@@ -89,7 +47,7 @@ static int	ft_identify_line(char *line, t_vars *vars)
 	return (ret);
 }
 
-int	ft_parameters(int fd, t_vars *vars)
+static int	ft_parameters(int fd, t_vars *vars)
 {
 	char	*line;
 	int		ret;
@@ -125,24 +83,4 @@ int	ft_scene_description_parameters(t_vars *vars)
 	}
 	close(fd);
 	return (0);
-}
-
-void	ft_check_parameters(t_game *game)
-{
-	if (game->resolution.identifier == 0)
-		ft_error("Missing R parameter\n");
-	if (game->north.identifier == 0)
-		ft_error("Missing NO parameter\n");
-	if (game->south.identifier == 0)
-		ft_error("Missing SO Parameter\n");
-	if (game->west.identifier == 0)
-		ft_error("Missing WE parameter\n");
-	if (game->east.identifier == 0)
-		ft_error("Missing EA parameter\n");
-	if (game->sprites.texture.identifier == 0)
-		ft_error("Missing S parameter\n");
-	if (game->floor.identifier == 0)
-		ft_error("Missing F parameter\n");
-	if (game->ceilling.identifier == 0)
-		ft_error("Missing C parameter\n");
 }

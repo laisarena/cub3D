@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/12 21:01:42 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 12:58:22 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ int	ft_close(t_vars *vars)
 	free(vars->mlx);
 	ft_free_resources(vars);
 	exit(0);
+}
+
+void	ft_free_null(void *pointer)
+{
+	if (pointer)
+		free(pointer);
+	pointer = NULL;
 }
 
 void	ft_free_split(char **split)

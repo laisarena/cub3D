@@ -30,6 +30,7 @@ SRCS = main.c\
 	   input_validation/validate_input_data.c\
 	   input_validation/initialize.c\
 	   input_validation/validate_scene_description.c\
+	   input_validation/validate_resolution.c\
 	   input_validation/validate_color.c\
 	   input_validation/validate_texture.c\
 	   input_validation/validate_map.c\
