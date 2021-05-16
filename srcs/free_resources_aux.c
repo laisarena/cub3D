@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 18:02:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 18:02:52 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 21:22:35 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_free_split(char **split)
 	int	i;
 
 	i = 0;
+	if (!split)
+		return ;
 	while (split[i])
 		ft_free_null(split[i++]);
 	ft_free_null(split);

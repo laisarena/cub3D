@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:09:22 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/07 21:01:47 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 21:35:54 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	ft_open_texture_file(char *file, t_vars *vars)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
+	close(fd);
 	if (fd > -1)
 		return (fd);
 	ft_save_error_message(NULL, vars);
@@ -44,12 +45,10 @@ static char	*ft_save_path(char *str)
 
 int	ft_texture(char **split_line, t_vars *vars, t_texture *texture)
 {
-	int	fd;
-
 	if (is_not_null(split_line[2], vars))
 		return (0);
-	fd = ft_open_texture_file(split_line[1], vars);
-	close(fd);
+	if (!ft_open_texture_file(split_line[1], vars))
+		return (0);
 	texture->path = ft_save_path(split_line[1]);
 	texture->identifier = 1;
 	vars->game.counter++;
