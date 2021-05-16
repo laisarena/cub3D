@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 00:14:24 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 16:12:46 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	ft_create_window(t_vars *vars)
 			vars->game.resolution.height,
 			"cub3D");
 	if (!vars->window)
+	{
+		ft_free_resources(vars);
 		ft_error("Error creating window");
+	}
 }
 
 void	ft_update(t_vars *vars)

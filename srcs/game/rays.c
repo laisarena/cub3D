@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 13:24:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/15 00:18:11 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 16:19:31 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_cast_rays(t_vars *vars)
 	int		num_rays;
 
 	num_rays = vars->game.resolution.width;
+	ft_free_null(vars->ray);
 	vars->ray = malloc(sizeof(t_ray) * (num_rays + 1));
 	column = 0;
 	while (column < num_rays)
