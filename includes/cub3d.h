@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 17:47:38 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 18:09:08 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,10 @@ float	ft_calc_top(int win_hight, int height);
 float	ft_calc_bottom(int win_height, int height);
 int		ft_get_color(t_image_data *image, int x, int y);
 void	ft_free_list(t_list **lst);
+int		ft_write_bmp_file(t_vars *vars);
+void	ft_clear_image(t_vars *vars);
+void	ft_save_bmp_file(t_vars *vars);
+void	ft_create_window(t_vars *vars);
+void	ft_initialize_sprites_position(t_list *sprite_list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:53:48 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/15 23:34:57 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 17:58:22 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,6 @@ static void	ft_initialize_player(t_player *player)
 	player->x = ((player->x * TILE) + TILE / 2);
 	player->y = ((player->y * TILE) + TILE / 2);
 	ft_clean_direction_moviments(player);
-}
-
-static void	ft_initialize_sprites_position(t_list *sprite_list)
-{
-	t_sprite	*sprite;
-
-	while (sprite_list)
-	{
-		sprite = sprite_list->content;
-		sprite->position.x = ((sprite->position.x * TILE) + TILE / 2);
-		sprite->position.y = ((sprite->position.y * TILE) + TILE / 2);
-		sprite_list = sprite_list->next;
-	}
 }
 
 void	ft_setup(t_vars *vars)

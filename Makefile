@@ -26,6 +26,7 @@ PATH_SRCS = ./srcs/
 SRCS = main.c\
 	   error_handler.c\
 	   free_resources.c\
+	   free_resources_aux.c\
 	   input_validation/validate_arguments.c\
 	   input_validation/validate_input_data.c\
 	   input_validation/initialize.c\
@@ -39,6 +40,7 @@ SRCS = main.c\
 	   input_validation/validate_map_edges.c\
 	   game/game.c\
 	   game/setup.c\
+	   game/setup_aux.c\
 	   game/rays.c\
 	   game/ray_intersection.c\
 	   game/minimap.c\
