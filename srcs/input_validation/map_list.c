@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:26:30 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 15:41:07 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:03:28 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_create_map_list(int fd, char *line, t_list **map_list, t_vars *vars)
 			is_map = 1;
 			column = ft_is_map_line(line);
 			if (!column)
-				ft_exit(fd, line, map_list);
+				ft_exit(fd, line, map_list, vars);
 			else if (column > vars->map.cols)
 				vars->map.cols = column;
 			ft_lstadd_back(map_list, ft_lstnew(line));
@@ -74,7 +74,7 @@ void	ft_create_map_list(int fd, char *line, t_list **map_list, t_vars *vars)
 		{
 			ft_free_null(line);
 			if (is_map && !ft_is_empty_after_map(fd, vars))
-				ft_exit(fd, line, map_list);
+				ft_exit(fd, line, map_list, vars);
 		}
 	}
 	ft_free_null(line);

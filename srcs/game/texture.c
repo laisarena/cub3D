@@ -6,21 +6,20 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 03:03:15 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 17:32:37 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:08:24 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_initialize_file_image(t_vars *vars,
-		t_texture *texture)
+static void	ft_initialize_file_image(t_vars *vars, t_texture *texture)
 {
 	texture->image.image = mlx_xpm_file_to_image(vars->mlx,
 			texture->path,
 			&texture->width,
 			&texture->height);
 	if (!texture->image.image)
-		ft_error("Error creating texture image");
+		ft_error("Error creating texture image", vars);
 	texture->image.address = mlx_get_data_addr(texture->image.image,
 			&texture->image.bits_per_pixel,
 			&texture->image.line_length,

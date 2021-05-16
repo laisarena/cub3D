@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 17:51:07 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 18:08:40 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:07:45 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_create_window(t_vars *vars)
 	if (!vars->window)
 	{
 		ft_free_resources(vars);
-		ft_error("Error creating window");
+		ft_error("Error creating window", vars);
 	}
 }
 

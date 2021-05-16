@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:53:48 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 20:45:10 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:07:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_initialize_mlx(t_vars *vars)
 {
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
-		ft_error("Error initializing minilibx");
+		ft_error("Error initializing minilibx", vars);
 }
 
 static void	ft_set_resolution(t_vars *vars)
@@ -37,7 +37,7 @@ static void	ft_initialize_mlx_image(t_vars *vars)
 			vars->game.resolution.width,
 			vars->game.resolution.height);
 	if (!vars->image.image)
-		ft_error("Error creating game image");
+		ft_error("Error creating game image", vars);
 	vars->image.address = mlx_get_data_addr(vars->image.image,
 			&vars->image.bits_per_pixel,
 			&vars->image.line_length,

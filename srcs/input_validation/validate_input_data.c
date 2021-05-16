@@ -6,30 +6,30 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 23:17:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 13:21:27 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:36:24 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_check_parameters(t_game *game)
+void	ft_check_parameters(t_game *game, t_vars *vars)
 {
 	if (game->resolution.identifier == 0)
-		ft_error("Missing R parameter\n");
+		ft_error("Missing R parameter\n", vars);
 	if (game->north.identifier == 0)
-		ft_error("Missing NO parameter\n");
+		ft_error("Missing NO parameter\n", vars);
 	if (game->south.identifier == 0)
-		ft_error("Missing SO Parameter\n");
+		ft_error("Missing SO Parameter\n", vars);
 	if (game->west.identifier == 0)
-		ft_error("Missing WE parameter\n");
+		ft_error("Missing WE parameter\n", vars);
 	if (game->east.identifier == 0)
-		ft_error("Missing EA parameter\n");
+		ft_error("Missing EA parameter\n", vars);
 	if (game->sprites.texture.identifier == 0)
-		ft_error("Missing S parameter\n");
+		ft_error("Missing S parameter\n", vars);
 	if (game->floor.identifier == 0)
-		ft_error("Missing F parameter\n");
+		ft_error("Missing F parameter\n", vars);
 	if (game->ceilling.identifier == 0)
-		ft_error("Missing C parameter\n");
+		ft_error("Missing C parameter\n", vars);
 }
 
 void	ft_initialize(t_vars *vars)
@@ -45,14 +45,15 @@ void	ft_initialize(t_vars *vars)
 	ft_initialize_map(&vars->map);
 	vars->game.counter = 0;
 	vars->player.set = 0;
+	vars->ray = NULL;
 }
 
 void	ft_validate_input_data(int argc, char **argv, t_vars *vars)
 {
-	ft_validate_arguments(argc, argv, vars);
 	ft_initialize(vars);
+	ft_validate_arguments(argc, argv, vars);
 	if (ft_scene_description_parameters(vars))
-		ft_error(vars->error_message);
-	ft_check_parameters(&vars->game);
+		ft_error(vars->error_message, vars);
+	ft_check_parameters(&vars->game, vars);
 	ft_check_map(vars);
 }

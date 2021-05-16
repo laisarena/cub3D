@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validade_map_edges.c                               :+:      :+:    :+:   */
+/*   validate_map_edges.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:47:55 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 15:49:59 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:05:00 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_is_invalid_outside(int row, int col, t_map *map)
 	return (0);
 }
 
-void	ft_validate_edges(t_map *map)
+void	ft_validate_edges(t_map *map, t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -71,9 +71,9 @@ void	ft_validate_edges(t_map *map)
 		while (j < map->cols)
 		{
 			if (ft_is_invalid_edge(i, j, map))
-				ft_error("Invalid map\n");
+				ft_error("Invalid map\n", vars);
 			if (ft_is_invalid_outside(i, j, map))
-				ft_error("Invalid map\n");
+				ft_error("Invalid map\n", vars);
 			j++;
 		}
 		i++;

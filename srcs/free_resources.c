@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 18:02:54 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:10:37 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	ft_free_map(t_vars *vars)
 	int	i;
 
 	i = 0;
+	if (!vars->map.matrix)
+		return ;
 	while (vars->map.matrix[i])
 		ft_free_null(vars->map.matrix[i++]);
 	ft_free_null(vars->map.matrix);
@@ -24,10 +26,11 @@ static void	ft_free_map(t_vars *vars)
 
 static void	ft_free_texture(t_vars *vars)
 {
-	free(vars->game.north.path);
-	free(vars->game.south.path);
-	free(vars->game.west.path);
-	free(vars->game.east.path);
+	ft_free_null(vars->game.north.path);
+	ft_free_null(vars->game.south.path);
+	ft_free_null(vars->game.west.path);
+	ft_free_null(vars->game.east.path);
+	ft_free_null(vars->game.sprites.texture.path);
 }
 
 void	ft_free_resources(t_vars *vars)

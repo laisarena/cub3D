@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map_2.c                                   :+:      :+:    :+:   */
+/*   validate_map_position.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 01:58:13 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 15:50:27 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:04:13 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_check_player(char c, int i, int j, t_vars *vars)
 	if (!ft_is_player(c))
 		return ;
 	if (vars->player.set)
-		ft_error("More then one player position\n");
+		ft_error("More then one player position\n", vars);
 	vars->player.set++;
 	vars->player.x = j;
 	vars->player.y = i;
@@ -69,5 +69,5 @@ void	ft_check_map(t_vars *vars)
 		i++;
 	}
 	if (!vars->player.set)
-		ft_error("No player position\n");
+		ft_error("No player position\n", vars);
 }

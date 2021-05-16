@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 18:02:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 21:22:35 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 21:50:13 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void	ft_close_file(int fd)
 	close(fd);
 }
 
-void	ft_exit(int fd, char *line, t_list **map_list)
+void	ft_exit(int fd, char *line, t_list **map_list, t_vars *vars)
 {
 	ft_close_file(fd);
 	ft_lstclear(map_list, &ft_del);
 	free(line);
-	ft_error("Invalid map\n");
+	ft_error("Invalid map\n", vars);
 }

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 19:12:21 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 21:51:12 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # include <string.h>
 # include <math.h>
 
-void	ft_error(char *message);
+void	ft_error(char *message, t_vars *vars);
 void	ft_save_error_message(char *message, t_vars *vars);
 void	ft_free_resources(t_vars *vars);
 void	ft_free_null(void *pointer);
-void	ft_exit(int fd, char *line, t_list **map_list);
+void	ft_exit(int fd, char *line, t_list **map_list, t_vars *vars);
 void	ft_del(void *pointer);
 void	ft_game(t_vars *vars);
 void	ft_setup(t_vars *vars);
