@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 01:58:13 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 22:04:13 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 22:41:07 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_check_map(t_vars *vars)
 	int	i;
 	int	j;
 
-	ft_validate_edges(&vars->map);
+	ft_validate_edges(&vars->map, vars);
 	i = 0;
 	while (i < vars->map.rows)
 	{
