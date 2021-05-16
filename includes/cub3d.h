@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/15 19:51:37 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 03:00:31 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_free_resources(t_vars *vars);
 void	ft_del(void *pointer);
 void	ft_game(t_vars *vars);
 void	ft_setup(t_vars *vars);
-void	ft_loop(t_vars *vars);
+int		ft_loop(t_vars *vars);
 void	ft_draw_line(t_vars *vars, t_int_coord p0, t_int_coord p1, int color);
 void	ft_put_pixel(t_image_data *image, int x, int y, int color);
 void	ft_rectangle_on_image(t_vars *vars, t_retangle retangle, int color);
