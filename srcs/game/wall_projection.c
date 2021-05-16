@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:59:04 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 17:29:05 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 19:32:58 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	ft_render_wall(t_wall wall, t_ray ray, t_vars *vars, int x)
 	while (y < wall.bottom)
 	{
 		wall.texture_offset.y = ft_calc_y_texture_offset(wall, y,
-				vars->game.resolution.height, wall.texture);
+				vars->game.resolution.height);
 		color = ft_get_color(&wall.texture->image, wall.texture_offset.x,
 				wall.texture_offset.y);
 		if (ray.is_hit_vertical)
