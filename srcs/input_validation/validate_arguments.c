@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:05:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/11 23:20:36 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 19:52:34 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_check_file_path_argument(char *scene_description_file)
 	if (!extension || ft_strncmp(extension, ".cub", 5))
 		ft_error("The scene description file must have the .cub extension\n");
 	fd = open(scene_description_file, O_RDONLY);
-	if (!fd)
+	if (fd == -1)
 		ft_error(NULL);
 	else
 		close(fd);
