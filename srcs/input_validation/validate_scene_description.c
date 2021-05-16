@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:52:29 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 13:16:08 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 15:06:13 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,7 @@ int	ft_scene_description_parameters(t_vars *vars)
 		close(fd);
 		return (1);
 	}
-	if (!(ft_map(fd, vars)))
-	{
-		close(fd);
-		return (1);
-	}
+	ft_map(fd, vars);
 	close(fd);
 	return (0);
 }

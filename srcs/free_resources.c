@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:03:44 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 12:58:22 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 15:39:24 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,31 @@ void	ft_free_split(char **split)
 
 	i = 0;
 	while (split[i])
-	{
-		free(split[i]);
-		split[i++] = NULL;
-	}
-	free(split);
-	split = NULL;
+		ft_free_null(split[i++]);
+	ft_free_null(split);
 }
+
+void	ft_del(void *pointer)
+{
+	free(pointer);
+}
+
+static void	ft_close_file(int fd)
+{
+	char	*line;
+
+	line = NULL;
+	while (get_next_line(fd, &line))
+		ft_free_null(line);
+	free(line);
+	close(fd);
+}
+
+void	ft_exit(int fd, char *line, t_list **map_list)
+{
+	ft_close_file(fd);
+	ft_lstclear(map_list, &ft_del);
+	free(line);
+	ft_error("Invalid map\n");
+}
+
