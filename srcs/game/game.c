@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 17:53:50 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 19:12:45 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	ft_render(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->image.image, 0, 0);
 }
 
-void	ft_loop(t_vars *vars)
+int	ft_loop(t_vars *vars)
 {
 	ft_update(vars);
 	ft_render(vars);
+	return (0);
 }
 
 void	ft_game(t_vars *vars)
@@ -53,5 +54,6 @@ void	ft_game(t_vars *vars)
 	ft_loop(vars);
 	mlx_hook(vars->window, KEYPRESS, 1L << 0, ft_key_press, vars);
 	mlx_hook(vars->window, 33, 0, ft_close, vars);
+	mlx_loop_hook(vars->mlx, ft_loop, vars);
 	mlx_loop(vars->mlx);
 }
