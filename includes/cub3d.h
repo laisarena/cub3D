@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 19:37:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 15:40:03 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 17:47:38 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,21 @@ void	ft_cast_rays(t_vars *vars);
 void	ft_render_minimap_rays(t_vars *vars);
 int		ft_is_wall_at(float x, float y, t_vars *vars);
 void	ft_render(t_vars *vars);
-void	ft_render_wall_projection(t_vars *vars);
+void	ft_render_projection(t_vars *vars);
 void	ft_render_sprites_projection(t_vars *vars);
 int		ft_close(t_vars *vars);
 void	ft_define_visible_sprites(t_vars *vars);
 int		ft_key_press(int keycode, t_vars *vars);
 int		ft_calc_x_texture_offset(t_ray ray, t_texture *texture);
-int		ft_calc_y_texture_offset(t_wall wall,
-			int y, int win_height, t_texture *texture);
+int		ft_calc_y_texture_offset(t_wall wall, int y, int win_height);
 void	ft_create_texture_images(t_vars *vars);
 float	ft_distance_between_points(float x1, float y1, float x2, float y2);
 float	ft_normalize_angle(float angle);
+void	ft_render_floor(t_wall wall, t_vars *vars, int x);
+void	ft_render_ceiling(t_wall wall, t_vars *vars, int x);
+float	ft_calc_top(int win_hight, int height);
+float	ft_calc_bottom(int win_height, int height);
+int		ft_get_color(t_image_data *image, int x, int y);
+void	ft_free_list(t_list **lst);
 
 #endif

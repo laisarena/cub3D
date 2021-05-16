@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 22:03:32 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/15 23:33:50 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 17:27:06 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,30 @@ typedef struct s_vars
 	int				minimap;
 	char			*error_message;
 }					t_vars;
+
+typedef struct s_wall
+{
+	int			height;
+	int			top;
+	int			bottom;
+	t_int_coord	texture_offset;
+	t_texture	*texture;
+}				t_wall;
+
+typedef struct s_sprite_proj
+{
+	float	width;
+	float	height;
+	float	top;
+	float	bottom;
+	float	left;
+	float	right;
+	float	x_position;
+	float	pixel_width;
+	float	stretch_factor;
+	int		texture_offset_x;
+	int		texture_offset_y;
+
+}			t_sprite_proj;
 
 #endif

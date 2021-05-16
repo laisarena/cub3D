@@ -45,10 +45,12 @@ SRCS = main.c\
 	   game/player_movements.c\
 	   game/render_rays.c\
 	   game/projection.c\
+	   game/wall_projection.c\
 	   game/draw.c\
 	   game/draw_line.c\
 	   game/texture.c\
 	   game/sprites.c\
+	   game/render_sprites.c\
 	   game/utils.c\
 	   gnl/get_next_line.c\
 	   gnl/get_next_line_utils.c\

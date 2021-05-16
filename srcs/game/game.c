@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:51:00 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 16:12:46 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 17:24:34 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_render_minimap(t_vars *vars)
 
 void	ft_render(t_vars *vars)
 {
-	ft_render_wall_projection(vars);
+	ft_render_projection(vars);
 	ft_render_sprites_projection(vars);
 	ft_render_minimap(vars);
 	ft_save_bmp_file(vars);
