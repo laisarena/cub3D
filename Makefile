@@ -53,7 +53,6 @@ SRCS = main.c\
 
 OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 
-#FLAGS = -Wall -Wextra
 FLAGS = -Wall -Wextra -Werror
 FLAGS_MLX = -lm -lX11 -lXext
 
@@ -63,9 +62,7 @@ FLAGS_MLX = -lm -lX11 -lXext
 $(NAME): $(OBJS)
 	make bonus -C $(PATH_LIBFT)
 	make -C $(PATH_MLX)
-	#gcc  -g -fsanitize=address $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 	clang  -g  $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
-	#gcc $(FLAGS) $(OBJS) -L$(PATH_LIBFT) -lft -I$(PATH_LIBFT) -L$(PATH_MLX) -lmlx -I$(PATH_MLX) $(FLAGS_MLX) -o $(NAME)
 
 all:	$(NAME)
 

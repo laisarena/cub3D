@@ -3,7 +3,7 @@ SO ./textures/greystone.xpm
 
 WE ./textures/purplestone.xpm
 EA ./textures/redbrick.xpm
-R 840 640 
+R 11500 11900 
 S ./textures/pillar.xpm
 F 00,153,15
 C 255,255,255
