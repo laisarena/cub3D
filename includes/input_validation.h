@@ -6,7 +6,7 @@
 /*   By: lfrasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:20:42 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/16 15:32:50 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/16 15:52:12 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_validate_number(char *string, int *parameter);
 void	ft_free_split(char **split);
 void	ft_create_map_list(int fd, char *line, t_list **map_list, t_vars *vars);
 void	ft_check_map(t_vars *vars);
+void	ft_validate_edges(t_map *map);
 void	ft_initialize_resolution(t_resolution *resolution);
 void	ft_initialize_texture(t_texture *texture);
 void	ft_initialize_color(t_color *color);

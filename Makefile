@@ -35,7 +35,8 @@ SRCS = main.c\
 	   input_validation/validate_texture.c\
 	   input_validation/validate_map.c\
 	   input_validation/map_list.c\
-	   input_validation/validate_map_2.c\
+	   input_validation/validate_map_position.c\
+	   input_validation/validate_map_edges.c\
 	   game/game.c\
 	   game/setup.c\
 	   game/rays.c\
